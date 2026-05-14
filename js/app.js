@@ -451,9 +451,9 @@ function renderStudyContent(container, secNum, type) {
   const tocItems = sections.map((s, i) => {
     const id = 'sec-' + i;
     const subs = (s.subsections || []).map((sub, j) => {
-      return '<a href="#' + id + '-' + j + '" class="sub">' + truncate(sub.title, 40) + '</a>';
+      return '<a data-scroll="' + id + '-' + j + '" class="sub">' + truncate(sub.title, 40) + '</a>';
     }).join('');
-    return '<a href="#' + id + '">' + truncate(s.title, 45) + '</a>' + subs;
+    return '<a data-scroll="' + id + '">' + truncate(s.title, 45) + '</a>' + subs;
   }).join('');
 
   const contentHtml = sections.map((s, i) => {
@@ -484,6 +484,7 @@ function renderStudyContent(container, secNum, type) {
   `;
 
   setupScrollSpy();
+  setupTocClicks();
 }
 
 function renderContentItems(items) {
@@ -547,7 +548,7 @@ function setupScrollSpy() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         tocLinks.forEach(l => l.classList.remove('active'));
-        const link = document.querySelector('.toc a[href="#' + entry.target.id + '"]');
+        const link = document.querySelector('.toc a[data-scroll="' + entry.target.id + '"]');
         if (link) link.classList.add('active');
       }
     });
@@ -555,6 +556,19 @@ function setupScrollSpy() {
 
   document.querySelectorAll('.content-area h2[id], .content-area h3[id], .content-area h4[id]').forEach(el => {
     observer.observe(el);
+  });
+}
+
+function setupTocClicks() {
+  document.querySelectorAll('.toc a[data-scroll]').forEach(link => {
+    link.style.cursor = 'pointer';
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.getElementById(link.dataset.scroll);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
 }
 
