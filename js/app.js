@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LARE Prep — Application Core
+   ASLA LARE Prep — Application Core
    ========================================================================== */
 
 const SECTIONS = [
@@ -1095,7 +1095,7 @@ window.generateStudyGuidePDF = function(secNum) {
     doc.setPage(i);
     doc.setFontSize(8);
     doc.setTextColor(150, 150, 150);
-    doc.text('LARE Prep — Section ' + secNum + ' Study Guide', margin, pageH - 10);
+    doc.text('ASLA LARE Prep — Section ' + secNum + ' Study Guide', margin, pageH - 10);
     doc.text('Page ' + i + ' of ' + totalPages, pageW - margin, pageH - 10, { align: 'right' });
   }
 
