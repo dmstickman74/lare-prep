@@ -314,6 +314,27 @@ img { max-width: 100%; height: auto; }
 }
 .google-btn:hover { border-color: var(--asla-teal); }
 
+.asla-sso-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px;
+  border: 2px solid var(--asla-teal);
+  border-radius: var(--radius-sm);
+  background: var(--asla-teal);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  cursor: pointer;
+  transition: opacity .15s;
+  margin-bottom: 8px;
+}
+.asla-sso-btn img { filter: brightness(0) invert(1); }
+.asla-sso-btn:hover { opacity: .9; }
+
 /* -- Hero ---------------------------------------------------------------- */
 .hero {
   background: var(--warm-cream);
