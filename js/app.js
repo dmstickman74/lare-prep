@@ -48,6 +48,7 @@ window.addEventListener('hashchange', route);
 window.addEventListener('DOMContentLoaded', async () => {
   await loadData();
   setupDropdown();
+  setupMobileMenu();
   route();
 });
 
@@ -63,6 +64,7 @@ function route() {
   currentView = r;
 
   closeDropdown();
+  closeMobileMenu();
 
   if (r.section === 'home' || r.section === '') {
     renderHome(app);
@@ -115,6 +117,36 @@ function setupDropdown() {
 
 function closeDropdown() {
   document.querySelector('.nav-dropdown')?.classList.remove('open');
+}
+
+/* -- Mobile menu --------------------------------------------------------- */
+function setupMobileMenu() {
+  const btn = document.getElementById('mobile-menu-btn');
+  const nav = document.getElementById('header-nav');
+  if (!btn || !nav) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'mobile-nav-overlay';
+  document.body.appendChild(overlay);
+
+  btn.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    overlay.classList.toggle('open', isOpen);
+    btn.innerHTML = isOpen
+      ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+      : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+  });
+
+  overlay.addEventListener('click', closeMobileMenu);
+}
+
+function closeMobileMenu() {
+  const nav = document.getElementById('header-nav');
+  const btn = document.getElementById('mobile-menu-btn');
+  const overlay = document.querySelector('.mobile-nav-overlay');
+  if (nav) nav.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+  if (btn) btn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
 }
 
 /* -- Auth ---------------------------------------------------------------- */
@@ -340,7 +372,7 @@ function renderHome(app) {
       <div class="container" style="max-width:800px;text-align:center">
         <div class="hero-eyebrow" style="margin-bottom:16px">How It Works</div>
         <h2 style="font-size:32px;font-weight:600;color:var(--asla-teal);margin-bottom:40px;letter-spacing:-.01em">A structured approach to exam preparation</h2>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:left">
+        <div class="how-it-works-grid">
           <div style="background:var(--white);padding:28px 24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle)">
             <div style="font-size:36px;font-weight:300;color:var(--asla-green);margin-bottom:12px">01</div>
             <h4 style="font-size:17px;font-weight:600;color:var(--asla-teal);margin-bottom:8px">Study Guide</h4>
@@ -890,7 +922,7 @@ function renderDashboard(app) {
       </div>
     </div>
     <div class="container" style="padding-top:48px;padding-bottom:96px">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px">
+      <div class="dashboard-stats-grid">
         <div style="background:var(--white);padding:24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle);text-align:center">
           <div style="font-size:36px;font-weight:600;color:var(--asla-teal)">${totalAttempts}</div>
           <div style="font-size:13px;color:var(--dark-gray)">Total Attempts</div>
