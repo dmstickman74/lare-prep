@@ -345,7 +345,7 @@ function renderHome(app) {
         <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;flex-wrap:wrap;gap:16px">
           <div>
             <div class="hero-eyebrow" style="margin-bottom:10px">Exam Sections</div>
-            <h2 style="font-size:36px;font-weight:600;color:var(--asla-teal);letter-spacing:-.015em;margin:0">Four paths to licensure</h2>
+            <h2 style="font-size:36px;font-weight:600;color:var(--asla-teal);letter-spacing:-.015em;margin:0">Four exams to licensure</h2>
           </div>
         </div>
         <div class="sections-grid">
