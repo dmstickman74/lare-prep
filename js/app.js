@@ -15,12 +15,12 @@ let currentUser = null;
 
 /* -- Firebase ------------------------------------------------------------ */
 const firebaseConfig = {
-  apiKey: "AIzaSyDemoKeyReplaceMeWithReal",
-  authDomain: "lare-prep.firebaseapp.com",
-  projectId: "lare-prep",
-  storageBucket: "lare-prep.appspot.com",
-  messagingSenderId: "000000000000",
-  appId: "1:000000000000:web:0000000000000000"
+  apiKey: "AIzaSyBJ7GVbGeRD9pKVR107YCg7ma1BardmJIE",
+  authDomain: "lare-prep-site.firebaseapp.com",
+  projectId: "lare-prep-site",
+  storageBucket: "lare-prep-site.firebasestorage.app",
+  messagingSenderId: "212173455933",
+  appId: "1:212173455933:web:9a565cb1361b0b41a76054"
 };
 
 firebase.initializeApp(firebaseConfig);
