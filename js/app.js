@@ -127,7 +127,7 @@ function setupMobileMenu() {
 
   const overlay = document.createElement('div');
   overlay.className = 'mobile-nav-overlay';
-  document.body.appendChild(overlay);
+  document.querySelector('.site-header').appendChild(overlay);
 
   btn.addEventListener('click', () => {
     const isOpen = nav.classList.toggle('open');
