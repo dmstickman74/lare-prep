@@ -11,6 +11,27 @@ const SECTIONS = [
 
 let DATA = null;
 let currentView = null;
+let currentUser = null;
+
+/* -- Firebase ------------------------------------------------------------ */
+const firebaseConfig = {
+  apiKey: "AIzaSyDemoKeyReplaceMeWithReal",
+  authDomain: "lare-prep.firebaseapp.com",
+  projectId: "lare-prep",
+  storageBucket: "lare-prep.appspot.com",
+  messagingSenderId: "000000000000",
+  appId: "1:000000000000:web:0000000000000000"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+auth.onAuthStateChanged(user => {
+  currentUser = user;
+  renderAuthArea();
+  if (user) syncProgressFromCloud();
+});
 
 /* -- Router -------------------------------------------------------------- */
 function parseHash() {
@@ -26,6 +47,7 @@ function navigate(path) {
 window.addEventListener('hashchange', route);
 window.addEventListener('DOMContentLoaded', async () => {
   await loadData();
+  setupDropdown();
   route();
 });
 
@@ -40,14 +62,16 @@ function route() {
   const oldView = currentView;
   currentView = r;
 
+  closeDropdown();
+
   if (r.section === 'home' || r.section === '') {
     renderHome(app);
   } else if (r.section.match(/^s[1-4]$/)) {
     const secNum = parseInt(r.section[1]);
-    const tab = r.sub || 'guide';
+    const tab = r.sub || 'book';
     renderSection(app, secNum, tab);
-  } else if (r.section === 'progress') {
-    renderProgress(app);
+  } else if (r.section === 'dashboard') {
+    renderDashboard(app);
   } else {
     renderHome(app);
   }
@@ -57,13 +81,199 @@ function route() {
 }
 
 function updateNav(r) {
-  document.querySelectorAll('.header-nav a').forEach(a => {
-    a.classList.toggle('active', a.dataset.route === r.section);
+  document.querySelectorAll('.header-nav > a, .header-nav [data-route]').forEach(a => {
+    const route = a.dataset.route;
+    if (!route) return;
+    if (route === r.section) a.classList.add('active');
+    else if (route.match(/^s[1-4]$/) && r.section.match(/^s[1-4]$/)) {
+      a.classList.remove('active');
+    } else {
+      a.classList.remove('active');
+    }
   });
-  document.querySelectorAll('.section-tab').forEach(t => {
-    const s = t.dataset.section;
-    t.classList.toggle('active', s === r.section);
+  const trigger = document.getElementById('sections-trigger');
+  if (trigger) {
+    trigger.classList.toggle('active', r.section.match(/^s[1-4]$/) != null);
+  }
+}
+
+/* -- Sections dropdown --------------------------------------------------- */
+function setupDropdown() {
+  const trigger = document.getElementById('sections-trigger');
+  const dropdown = trigger?.closest('.nav-dropdown');
+  if (!trigger || !dropdown) return;
+
+  trigger.addEventListener('click', e => {
+    e.stopPropagation();
+    dropdown.classList.toggle('open');
   });
+
+  document.addEventListener('click', e => {
+    if (!dropdown.contains(e.target)) closeDropdown();
+  });
+}
+
+function closeDropdown() {
+  document.querySelector('.nav-dropdown')?.classList.remove('open');
+}
+
+/* -- Auth ---------------------------------------------------------------- */
+function renderAuthArea() {
+  const area = document.getElementById('auth-area');
+  if (!area) return;
+
+  if (currentUser) {
+    const name = currentUser.displayName || currentUser.email?.split('@')[0] || 'User';
+    area.innerHTML = `
+      <span class="user-name">${escHtml(name)}</span>
+      <button class="auth-btn auth-btn-signout" onclick="signOutUser()">Sign out</button>
+    `;
+  } else {
+    area.innerHTML = `
+      <button class="auth-btn auth-btn-signin" onclick="openAuthModal()">Sign in</button>
+    `;
+  }
+}
+
+window.openAuthModal = function() {
+  const modal = document.getElementById('auth-modal');
+  modal.classList.remove('hidden');
+  renderAuthForm('signin');
+};
+
+window.closeAuthModal = function() {
+  document.getElementById('auth-modal').classList.add('hidden');
+};
+
+function renderAuthForm(mode) {
+  const title = document.getElementById('auth-modal-title');
+  const body = document.getElementById('auth-modal-body');
+  const isSignIn = mode === 'signin';
+
+  title.textContent = isSignIn ? 'Sign In' : 'Create Account';
+
+  body.innerHTML = `
+    <button class="google-btn" onclick="signInWithGoogle()">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Continue with Google
+    </button>
+    <div class="auth-divider"><span>or</span></div>
+    <form class="auth-form" onsubmit="handleEmailAuth(event, '${mode}')">
+      <input type="email" id="auth-email" placeholder="Email address" required>
+      <input type="password" id="auth-password" placeholder="Password" required minlength="6">
+      <div class="auth-error hidden" id="auth-error"></div>
+      <button type="submit" class="btn btn-primary" style="width:100%">${isSignIn ? 'Sign in' : 'Create account'}</button>
+    </form>
+    <div class="auth-toggle">
+      ${isSignIn
+        ? 'No account? <a href="#" onclick="event.preventDefault();renderAuthForm(\'signup\')">Create one</a>'
+        : 'Have an account? <a href="#" onclick="event.preventDefault();renderAuthForm(\'signin\')">Sign in</a>'
+      }
+    </div>
+  `;
+}
+window.renderAuthForm = renderAuthForm;
+
+window.handleEmailAuth = async function(e, mode) {
+  e.preventDefault();
+  const email = document.getElementById('auth-email').value;
+  const password = document.getElementById('auth-password').value;
+  const errorEl = document.getElementById('auth-error');
+  errorEl.classList.add('hidden');
+
+  try {
+    if (mode === 'signin') {
+      await auth.signInWithEmailAndPassword(email, password);
+    } else {
+      await auth.createUserWithEmailAndPassword(email, password);
+    }
+    closeAuthModal();
+  } catch (err) {
+    errorEl.textContent = err.message;
+    errorEl.classList.remove('hidden');
+  }
+};
+
+window.signInWithGoogle = async function() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  try {
+    await auth.signInWithPopup(provider);
+    closeAuthModal();
+  } catch (err) {
+    const errorEl = document.getElementById('auth-error');
+    if (errorEl) {
+      errorEl.textContent = err.message;
+      errorEl.classList.remove('hidden');
+    }
+  }
+};
+
+window.signOutUser = async function() {
+  await auth.signOut();
+};
+
+/* -- Progress persistence ------------------------------------------------ */
+function getProgress() {
+  try { return JSON.parse(localStorage.getItem('lare-progress') || '{}'); }
+  catch { return {}; }
+}
+
+function saveExamResult(secNum, pct) {
+  const progress = getProgress();
+  const key = `s${secNum}`;
+  if (!progress[key]) progress[key] = {};
+  progress[key].examAttempts = (progress[key].examAttempts || 0) + 1;
+  if (progress[key].examBest == null || pct > progress[key].examBest) {
+    progress[key].examBest = pct;
+  }
+  progress[key].lastAttempt = new Date().toISOString();
+  localStorage.setItem('lare-progress', JSON.stringify(progress));
+  if (currentUser) syncProgressToCloud(progress);
+}
+
+function clearProgress() {
+  localStorage.removeItem('lare-progress');
+  if (currentUser) {
+    db.collection('progress').doc(currentUser.uid).delete().catch(() => {});
+  }
+}
+window.clearProgress = clearProgress;
+
+async function syncProgressToCloud(progress) {
+  if (!currentUser) return;
+  try {
+    await db.collection('progress').doc(currentUser.uid).set(progress, { merge: true });
+  } catch (e) { /* silent */ }
+}
+
+async function syncProgressFromCloud() {
+  if (!currentUser) return;
+  try {
+    const doc = await db.collection('progress').doc(currentUser.uid).get();
+    if (doc.exists) {
+      const cloud = doc.data();
+      const local = getProgress();
+      const merged = mergeProgress(local, cloud);
+      localStorage.setItem('lare-progress', JSON.stringify(merged));
+      if (currentView?.section === 'dashboard') renderDashboard(document.getElementById('app'));
+    } else {
+      const local = getProgress();
+      if (Object.keys(local).length) syncProgressToCloud(local);
+    }
+  } catch (e) { /* silent */ }
+}
+
+function mergeProgress(a, b) {
+  const result = { ...a };
+  for (const key of Object.keys(b)) {
+    if (!result[key]) { result[key] = b[key]; continue; }
+    result[key] = {
+      examAttempts: Math.max(result[key].examAttempts || 0, b[key].examAttempts || 0),
+      examBest: Math.max(result[key].examBest || 0, b[key].examBest || 0),
+      lastAttempt: (result[key].lastAttempt || '') > (b[key].lastAttempt || '') ? result[key].lastAttempt : b[key].lastAttempt,
+    };
+  }
+  return result;
 }
 
 /* -- Home Page ----------------------------------------------------------- */
@@ -76,10 +286,10 @@ function renderHome(app) {
         <div>
           <div class="hero-eyebrow">LARE Exam Preparation</div>
           <h1>Master the <strong>Landscape Architect Registration Examination</strong></h1>
-          <p>Comprehensive study guides, in-depth textbooks, and interactive practice exams for all four LARE sections. Prepare with confidence.</p>
+          <p>Comprehensive study books, interactive practice exams, flashcards, and downloadable study guides for all four LARE sections. Prepare with confidence.</p>
           <div style="display:flex;gap:14px;flex-wrap:wrap">
-            <button class="btn btn-primary" onclick="navigate('s1/guide')">Start studying</button>
-            <button class="btn btn-secondary" onclick="navigate('progress')">View progress</button>
+            <button class="btn btn-primary" onclick="navigate('s1/book')">Start studying</button>
+            <button class="btn btn-secondary" onclick="navigate('dashboard')">View progress</button>
           </div>
         </div>
         <div class="hero-mosaic">
@@ -100,13 +310,13 @@ function renderHome(app) {
         </div>
         <div class="sections-grid">
           ${SECTIONS.map(s => {
-            const p = progress[`s${s.id}`] || {};
+            const p = progress['s' + s.id] || {};
             const examPct = p.examBest != null ? p.examBest + '%' : '--';
             return `
-            <div class="section-card" onclick="navigate('s${s.id}/guide')">
+            <div class="section-card" onclick="navigate('s${s.id}/book')">
               <div class="card-num">Section ${s.id}</div>
               <h3>${s.title}</h3>
-              <p>${s.items} scored items on the exam. Study guide, full textbook, and 40-question practice exam.</p>
+              <p>${s.items} scored items on the exam. Study book, practice exam, and flashcards.</p>
               <div class="card-meta">
                 <span>Best score: ${examPct}</span>
                 <span>${s.items} exam items</span>
@@ -121,7 +331,7 @@ function renderHome(app) {
       <div class="stats-grid">
         <div class="stat"><div class="stat-num">4</div><div class="stat-label">Exam Sections</div></div>
         <div class="stat"><div class="stat-num">160</div><div class="stat-label">Practice Questions</div></div>
-        <div class="stat"><div class="stat-num">12</div><div class="stat-label">Study Documents</div></div>
+        <div class="stat"><div class="stat-num">220+</div><div class="stat-label">Flashcards</div></div>
         <div class="stat"><div class="stat-num">320</div><div class="stat-label">Scored Exam Items</div></div>
       </div>
     </section>
@@ -130,11 +340,11 @@ function renderHome(app) {
       <div class="container" style="max-width:800px;text-align:center">
         <div class="hero-eyebrow" style="margin-bottom:16px">How It Works</div>
         <h2 style="font-size:32px;font-weight:600;color:var(--asla-teal);margin-bottom:40px;letter-spacing:-.01em">A structured approach to exam preparation</h2>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:left">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:left">
           <div style="background:var(--white);padding:28px 24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle)">
             <div style="font-size:36px;font-weight:300;color:var(--asla-green);margin-bottom:12px">01</div>
             <h4 style="font-size:17px;font-weight:600;color:var(--asla-teal);margin-bottom:8px">Study Guide</h4>
-            <p style="font-size:14px;color:var(--dark-gray);line-height:1.55">Concise outlines covering key concepts, reference tables, and exam strategies for each domain.</p>
+            <p style="font-size:14px;color:var(--dark-gray);line-height:1.55">Downloadable PDF outlines covering key concepts, reference tables, and exam strategies.</p>
           </div>
           <div style="background:var(--white);padding:28px 24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle)">
             <div style="font-size:36px;font-weight:300;color:var(--asla-green);margin-bottom:12px">02</div>
@@ -145,6 +355,11 @@ function renderHome(app) {
             <div style="font-size:36px;font-weight:300;color:var(--asla-green);margin-bottom:12px">03</div>
             <h4 style="font-size:17px;font-weight:600;color:var(--asla-teal);margin-bottom:8px">Practice Exam</h4>
             <p style="font-size:14px;color:var(--dark-gray);line-height:1.55">40 multiple-choice questions per section with instant scoring, detailed explanations, and progress tracking.</p>
+          </div>
+          <div style="background:var(--white);padding:28px 24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle)">
+            <div style="font-size:36px;font-weight:300;color:var(--asla-green);margin-bottom:12px">04</div>
+            <h4 style="font-size:17px;font-weight:600;color:var(--asla-teal);margin-bottom:8px">Flashcards</h4>
+            <p style="font-size:14px;color:var(--dark-gray);line-height:1.55">Interactive flip cards for quick review. Study online or print for on-the-go practice.</p>
           </div>
         </div>
       </div>
@@ -166,10 +381,16 @@ function renderSection(app, secNum, tab) {
     </div>
     <div class="content-tabs">
       <div class="content-tabs-inner">
-        <button class="content-tab ${tab === 'guide' ? 'active' : ''}" onclick="navigate('${key}/guide')">Study Guide</button>
         <button class="content-tab ${tab === 'book' ? 'active' : ''}" onclick="navigate('${key}/book')">Study Book</button>
         <button class="content-tab ${tab === 'exam' ? 'active' : ''}" onclick="navigate('${key}/exam')">Practice Exam</button>
+        <button class="content-tab ${tab === 'flash' ? 'active' : ''}" onclick="navigate('${key}/flash')">Flashcards</button>
       </div>
+    </div>
+    <div class="download-row">
+      <button class="btn btn-secondary btn-sm" onclick="generateStudyGuidePDF(${secNum})">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Study Guide PDF
+      </button>
     </div>
     <div id="section-content" class="fade-in"></div>
   `;
@@ -178,8 +399,10 @@ function renderSection(app, secNum, tab) {
 
   if (tab === 'exam') {
     renderExam(container, secNum);
+  } else if (tab === 'flash') {
+    renderFlashcards(container, secNum);
   } else {
-    renderStudyContent(container, secNum, tab);
+    renderStudyContent(container, secNum, 'book');
   }
 }
 
@@ -194,22 +417,22 @@ function renderStudyContent(container, secNum, type) {
   }
 
   const tocItems = sections.map((s, i) => {
-    const id = `sec-${i}`;
+    const id = 'sec-' + i;
     const subs = (s.subsections || []).map((sub, j) => {
-      return `<a href="#${id}-${j}" class="sub">${truncate(sub.title, 40)}</a>`;
+      return '<a href="#' + id + '-' + j + '" class="sub">' + truncate(sub.title, 40) + '</a>';
     }).join('');
-    return `<a href="#${id}">${truncate(s.title, 45)}</a>${subs}`;
+    return '<a href="#' + id + '">' + truncate(s.title, 45) + '</a>' + subs;
   }).join('');
 
   const contentHtml = sections.map((s, i) => {
-    const id = `sec-${i}`;
-    let html = `<h2 id="${id}">${escHtml(s.title)}</h2>`;
+    const id = 'sec-' + i;
+    let html = '<h2 id="' + id + '">' + escHtml(s.title) + '</h2>';
     html += renderContentItems(s.content || []);
 
     (s.subsections || []).forEach((sub, j) => {
-      const subId = `${id}-${j}`;
+      const subId = id + '-' + j;
       const tag = sub.level === 'h4' ? 'h4' : 'h3';
-      html += `<${tag} id="${subId}">${escHtml(sub.title)}</${tag}>`;
+      html += '<' + tag + ' id="' + subId + '">' + escHtml(sub.title) + '</' + tag + '>';
       html += renderContentItems(sub.content || []);
     });
 
@@ -239,7 +462,7 @@ function renderContentItems(items) {
     if (item.type === 'bullet' || item.type === 'sub_bullet') {
       if (!inList) { html += '<ul>'; inList = true; }
       const cls = item.type === 'sub_bullet' ? ' class="sub"' : '';
-      html += `<li${cls}>${escHtml(item.text)}</li>`;
+      html += '<li' + cls + '>' + escHtml(item.text) + '</li>';
     } else {
       if (inList) { html += '</ul>'; inList = false; }
 
@@ -257,7 +480,7 @@ function renderContentItems(items) {
         html += renderCallout('tip', 'Note', item.text);
       } else {
         const bold = item.bold ? ' style="font-weight:600"' : '';
-        html += `<p${bold}>${escHtml(item.text)}</p>`;
+        html += '<p' + bold + '>' + escHtml(item.text) + '</p>';
       }
     }
   }
@@ -266,14 +489,11 @@ function renderContentItems(items) {
 }
 
 function renderTable(item) {
-  const headers = (item.headers || []).map(h => `<th>${escHtml(h)}</th>`).join('');
+  const headers = (item.headers || []).map(h => '<th>' + escHtml(h) + '</th>').join('');
   const rows = (item.rows || []).map(row =>
-    `<tr>${row.map(c => `<td>${escHtml(c)}</td>`).join('')}</tr>`
+    '<tr>' + row.map(c => '<td>' + escHtml(c) + '</td>').join('') + '</tr>'
   ).join('');
-  return `<div class="table-wrap"><table class="data-table">
-    <thead><tr>${headers}</tr></thead>
-    <tbody>${rows}</tbody>
-  </table></div>`;
+  return '<div class="table-wrap"><table class="data-table"><thead><tr>' + headers + '</tr></thead><tbody>' + rows + '</tbody></table></div>';
 }
 
 function renderCallout(type, title, text) {
@@ -283,10 +503,7 @@ function renderCallout(type, title, text) {
     example: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
     summary: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
   };
-  return `<div class="callout ${type}">
-    <div class="callout-title">${icons[type] || ''}${title}</div>
-    ${escHtml(text)}
-  </div>`;
+  return '<div class="callout ' + type + '"><div class="callout-title">' + (icons[type] || '') + title + '</div>' + escHtml(text) + '</div>';
 }
 
 /* -- Scroll Spy ---------------------------------------------------------- */
@@ -298,7 +515,7 @@ function setupScrollSpy() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         tocLinks.forEach(l => l.classList.remove('active'));
-        const link = document.querySelector(`.toc a[href="#${entry.target.id}"]`);
+        const link = document.querySelector('.toc a[href="#' + entry.target.id + '"]');
         if (link) link.classList.add('active');
       }
     });
@@ -308,6 +525,121 @@ function setupScrollSpy() {
     observer.observe(el);
   });
 }
+
+/* -- Flashcards ---------------------------------------------------------- */
+function renderFlashcards(container, secNum) {
+  const key = `s${secNum}_flash`;
+  const cards = DATA[key];
+
+  if (!cards || !cards.length) {
+    container.innerHTML = '<div class="content-area"><p>No flashcards available.</p></div>';
+    return;
+  }
+
+  const state = { secNum, cards, current: 0, flipped: false, shuffled: false };
+  window.__flashState = state;
+  renderFlashcard(container, state);
+}
+
+function renderFlashcard(container, state) {
+  const { cards, current, flipped } = state;
+  const card = cards[current];
+
+  const sourceLabel = { exam: 'Practice Exam', tip: 'Exam Tip', memory: 'Memory Aid', definition: 'Key Term' };
+
+  container.innerHTML = `
+    <div class="flash-container" style="max-width:720px;margin:0 auto;padding:40px 24px 80px">
+      <div class="flash-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+        <div style="font-size:14px;color:var(--dark-gray)">
+          Card <strong>${current + 1}</strong> of <strong>${cards.length}</strong>
+          <span style="margin-left:12px;padding:3px 10px;background:var(--soft-sage);border-radius:12px;font-size:12px">${sourceLabel[card.source] || card.source}</span>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-sm btn-secondary" onclick="shuffleFlashcards()">${state.shuffled ? 'Unshuffle' : 'Shuffle'}</button>
+          <button class="btn btn-sm btn-secondary" onclick="printFlashcards(${state.secNum})">Print all</button>
+        </div>
+      </div>
+
+      <div class="flashcard-wrapper" onclick="flipCard()">
+        <div class="flashcard ${flipped ? 'flipped' : ''}">
+          <div class="flashcard-face flashcard-front">
+            <div class="flashcard-label">Question</div>
+            <div class="flashcard-text">${escHtml(card.front)}</div>
+          </div>
+          <div class="flashcard-face flashcard-back">
+            <div class="flashcard-label">Answer</div>
+            <div class="flashcard-text">${escHtml(card.back)}</div>
+            ${card.detail ? '<div class="flashcard-detail">' + escHtml(card.detail) + '</div>' : ''}
+          </div>
+        </div>
+      </div>
+
+      <div class="flash-hint" style="text-align:center;margin-top:12px;font-size:13px;color:var(--placeholder-gray)">Click the card to flip</div>
+
+      <div class="flash-nav" style="display:flex;justify-content:center;gap:12px;margin-top:24px">
+        <button class="btn btn-secondary btn-sm" onclick="prevFlashcard()" ${current === 0 ? 'disabled' : ''}>Previous</button>
+        <button class="btn btn-primary btn-sm" onclick="nextFlashcard()" ${current === cards.length - 1 ? 'disabled' : ''}>Next</button>
+      </div>
+    </div>
+
+    <div class="flash-print-grid" id="flash-print-grid">
+      ${cards.map((c, i) => `
+        <div class="flash-print-card">
+          <div class="fp-label">#${i + 1}</div>
+          <div class="fp-front">${escHtml(c.front)}</div>
+          <div class="fp-back">${escHtml(c.back)}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+window.flipCard = function() {
+  const state = window.__flashState;
+  state.flipped = !state.flipped;
+  renderFlashcard(document.getElementById('section-content'), state);
+};
+
+window.prevFlashcard = function() {
+  const state = window.__flashState;
+  if (state.current > 0) {
+    state.current--;
+    state.flipped = false;
+    renderFlashcard(document.getElementById('section-content'), state);
+  }
+};
+
+window.nextFlashcard = function() {
+  const state = window.__flashState;
+  if (state.current < state.cards.length - 1) {
+    state.current++;
+    state.flipped = false;
+    renderFlashcard(document.getElementById('section-content'), state);
+  }
+};
+
+window.shuffleFlashcards = function() {
+  const state = window.__flashState;
+  const key = `s${state.secNum}_flash`;
+  if (state.shuffled) {
+    state.cards = [...DATA[key]];
+    state.shuffled = false;
+  } else {
+    state.cards = [...DATA[key]];
+    for (let i = state.cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [state.cards[i], state.cards[j]] = [state.cards[j], state.cards[i]];
+    }
+    state.shuffled = true;
+  }
+  state.current = 0;
+  state.flipped = false;
+  renderFlashcard(document.getElementById('section-content'), state);
+};
+
+window.printFlashcards = function(secNum) {
+  window.print();
+};
 
 /* -- Practice Exam ------------------------------------------------------- */
 function renderExam(container, secNum) {
@@ -345,7 +677,7 @@ function renderQuestion(container, state) {
     else if (submitted && answers[i] !== null) {
       cls += questions[i].answer === answers[i] ? ' correct-dot' : ' incorrect-dot';
     } else if (answers[i] !== null) cls += ' answered';
-    return `<button class="${cls}" onclick="goToQuestion(${i})">${i + 1}</button>`;
+    return '<button class="' + cls + '" onclick="goToQuestion(' + i + ')">' + (i + 1) + '</button>';
   }).join('');
 
   const choicesHtml = (q.choices || []).map(c => {
@@ -358,19 +690,17 @@ function renderQuestion(container, state) {
     } else {
       if (c.letter === selected) cls += ' selected';
     }
-    return `
-      <div class="${cls}" onclick="selectChoice('${c.letter}')">
-        <div class="choice-letter">${c.letter}</div>
-        <div>${escHtml(c.text)}</div>
-      </div>`;
+    return '<div class="' + cls + '" onclick="selectChoice(\'' + c.letter + '\')">' +
+      '<div class="choice-letter">' + c.letter + '</div>' +
+      '<div>' + escHtml(c.text) + '</div></div>';
   }).join('');
 
   const explanationHtml = isRevealed && q.explanation
-    ? `<div class="explanation"><strong>Explanation:</strong> ${escHtml(q.explanation)}</div>`
+    ? '<div class="explanation"><strong>Explanation:</strong> ' + escHtml(q.explanation) + '</div>'
     : '';
 
   const checkBtnHtml = selected !== null && !isRevealed
-    ? `<button class="btn btn-green" onclick="checkAnswer()">Check answer</button>`
+    ? '<button class="btn btn-green" onclick="checkAnswer()">Check answer</button>'
     : '';
 
   container.innerHTML = `
@@ -396,7 +726,7 @@ function renderQuestion(container, state) {
         <button class="btn btn-secondary btn-sm" onclick="prevQuestion()" ${current === 0 ? 'disabled' : ''}>Previous</button>
         <div style="display:flex;gap:10px">
           ${checkBtnHtml}
-          ${!submitted && totalAnswered === questions.length ? `<button class="btn btn-primary" onclick="submitExam()">Submit exam</button>` : ''}
+          ${!submitted && totalAnswered === questions.length ? '<button class="btn btn-primary" onclick="submitExam()">Submit exam</button>' : ''}
         </div>
         <button class="btn btn-secondary btn-sm" onclick="nextQuestion()" ${current === questions.length - 1 ? 'disabled' : ''}>Next</button>
       </div>
@@ -414,8 +744,8 @@ function renderResults(container, state) {
 
   const dotsHtml = questions.map((q, i) => {
     const isCorrect = q.answer === answers[i];
-    const cls = `q-dot ${isCorrect ? 'correct-dot' : 'incorrect-dot'}`;
-    return `<button class="${cls}" onclick="goToQuestion(${i})">${i + 1}</button>`;
+    const cls = 'q-dot ' + (isCorrect ? 'correct-dot' : 'incorrect-dot');
+    return '<button class="' + cls + '" onclick="goToQuestion(' + i + ')">' + (i + 1) + '</button>';
   }).join('');
 
   container.innerHTML = `
@@ -463,10 +793,8 @@ window.goToQuestion = function(i) {
   const container = document.getElementById('section-content');
   if (state.submitted) {
     state.revealed[i] = true;
-    renderQuestion(container, state);
-  } else {
-    renderQuestion(container, state);
   }
+  renderQuestion(container, state);
 };
 
 window.prevQuestion = function() {
@@ -520,15 +848,16 @@ window.setExamMode = function(mode) {
   }
 };
 
-/* -- Progress Page ------------------------------------------------------- */
-function renderProgress(app) {
+/* -- Dashboard ----------------------------------------------------------- */
+function renderDashboard(app) {
   const progress = getProgress();
 
   const cardsHtml = SECTIONS.map(s => {
-    const key = `s${s.id}`;
+    const key = 's' + s.id;
     const p = progress[key] || {};
     const bestPct = p.examBest != null ? p.examBest : null;
     const attempts = p.examAttempts || 0;
+    const lastDate = p.lastAttempt ? new Date(p.lastAttempt).toLocaleDateString() : '--';
 
     return `
       <div class="progress-card">
@@ -536,52 +865,190 @@ function renderProgress(app) {
         <p style="font-size:13px;color:var(--dark-gray);margin:4px 0 12px">${s.title}</p>
         <div class="pct">${bestPct != null ? bestPct + '%' : '--'}</div>
         <div class="progress-bar"><div class="progress-fill" style="width:${bestPct || 0}%"></div></div>
-        <div style="font-size:12px;color:var(--placeholder-gray);margin-top:8px">${attempts} attempt${attempts !== 1 ? 's' : ''}</div>
+        <div style="font-size:12px;color:var(--placeholder-gray);margin-top:8px">${attempts} attempt${attempts !== 1 ? 's' : ''} · Last: ${lastDate}</div>
         <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-sm btn-primary" onclick="navigate('${key}/exam')">Take exam</button>
-          <button class="btn btn-sm btn-secondary" onclick="navigate('${key}/guide')">Study</button>
+          <button class="btn btn-sm btn-secondary" onclick="navigate('${key}/book')">Study</button>
+          <button class="btn btn-sm btn-secondary" onclick="navigate('${key}/flash')">Flashcards</button>
         </div>
       </div>`;
   }).join('');
 
+  const totalAttempts = SECTIONS.reduce((sum, s) => sum + ((progress['s' + s.id] || {}).examAttempts || 0), 0);
+  const avgBest = SECTIONS.reduce((sum, s) => {
+    const b = (progress['s' + s.id] || {}).examBest;
+    return sum + (b != null ? b : 0);
+  }, 0);
+  const sectionsAttempted = SECTIONS.filter(s => (progress['s' + s.id] || {}).examBest != null).length;
+  const avgDisplay = sectionsAttempted > 0 ? Math.round(avgBest / sectionsAttempted) + '%' : '--';
+
   app.innerHTML = `
     <div class="page-header">
       <div class="container">
-        <h1><strong>Your Progress</strong></h1>
-        <div class="subtitle">Track your exam preparation across all four sections</div>
+        <h1><strong>Dashboard</strong></h1>
+        <div class="subtitle">Track your exam preparation across all four sections${currentUser ? ' — synced to your account' : ''}</div>
       </div>
     </div>
     <div class="container" style="padding-top:48px;padding-bottom:96px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:40px">
+        <div style="background:var(--white);padding:24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle);text-align:center">
+          <div style="font-size:36px;font-weight:600;color:var(--asla-teal)">${totalAttempts}</div>
+          <div style="font-size:13px;color:var(--dark-gray)">Total Attempts</div>
+        </div>
+        <div style="background:var(--white);padding:24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle);text-align:center">
+          <div style="font-size:36px;font-weight:600;color:var(--asla-teal)">${avgDisplay}</div>
+          <div style="font-size:13px;color:var(--dark-gray)">Average Best Score</div>
+        </div>
+        <div style="background:var(--white);padding:24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle);text-align:center">
+          <div style="font-size:36px;font-weight:600;color:var(--asla-teal)">${sectionsAttempted}/4</div>
+          <div style="font-size:13px;color:var(--dark-gray)">Sections Attempted</div>
+        </div>
+      </div>
       <div class="progress-grid">${cardsHtml}</div>
-      <div style="margin-top:40px;text-align:center">
+      <div style="margin-top:40px;text-align:center;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        ${!currentUser ? '<button class="btn btn-primary" onclick="openAuthModal()">Sign in to sync progress</button>' : ''}
         <button class="btn btn-secondary" onclick="if(confirm('Clear all progress data?')){clearProgress();route();}">Reset all progress</button>
       </div>
     </div>
   `;
 }
 
-/* -- Progress persistence ------------------------------------------------ */
-function getProgress() {
-  try { return JSON.parse(localStorage.getItem('lare-progress') || '{}'); }
-  catch { return {}; }
-}
+/* -- PDF Generation ------------------------------------------------------ */
+window.generateStudyGuidePDF = function(secNum) {
+  const key = `s${secNum}_guide`;
+  const sections = DATA[key];
+  const sec = SECTIONS[secNum - 1];
 
-function saveExamResult(secNum, pct) {
-  const progress = getProgress();
-  const key = `s${secNum}`;
-  if (!progress[key]) progress[key] = {};
-  progress[key].examAttempts = (progress[key].examAttempts || 0) + 1;
-  if (progress[key].examBest == null || pct > progress[key].examBest) {
-    progress[key].examBest = pct;
+  if (!sections || !sections.length) {
+    alert('Study guide content not available.');
+    return;
   }
-  progress[key].lastAttempt = new Date().toISOString();
-  localStorage.setItem('lare-progress', JSON.stringify(progress));
-}
 
-function clearProgress() {
-  localStorage.removeItem('lare-progress');
-}
-window.clearProgress = clearProgress;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 20;
+  const contentW = pageW - margin * 2;
+  let y = margin;
+
+  function checkPage(needed) {
+    if (y + needed > pageH - margin) {
+      doc.addPage();
+      y = margin;
+    }
+  }
+
+  doc.setFillColor(0, 58, 73);
+  doc.rect(0, 0, pageW, 50, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(22);
+  doc.setTextColor(255, 255, 255);
+  doc.text('LARE Study Guide', margin, 28);
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Section ' + secNum + ': ' + sec.title, margin, 40);
+
+  y = 60;
+  doc.setTextColor(0, 0, 0);
+
+  for (const section of sections) {
+    checkPage(20);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.setTextColor(0, 58, 73);
+    const titleLines = doc.splitTextToSize(section.title, contentW);
+    doc.text(titleLines, margin, y);
+    y += titleLines.length * 7 + 4;
+
+    doc.setTextColor(50, 50, 50);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+
+    function renderItems(items) {
+      for (const item of items) {
+        if (item.type === 'table') {
+          checkPage(20);
+          try {
+            doc.autoTable({
+              startY: y,
+              margin: { left: margin, right: margin },
+              head: [item.headers || []],
+              body: item.rows || [],
+              styles: { fontSize: 8, cellPadding: 2 },
+              headStyles: { fillColor: [0, 58, 73], textColor: 255 },
+              theme: 'grid',
+            });
+            y = doc.lastAutoTable.finalY + 6;
+          } catch (e) { /* skip table on error */ }
+        } else if (item.type === 'bullet' || item.type === 'sub_bullet') {
+          checkPage(8);
+          const indent = item.type === 'sub_bullet' ? margin + 8 : margin + 4;
+          const bullet = item.type === 'sub_bullet' ? '–' : '•';
+          const bw = contentW - (indent - margin) - 4;
+          const lines = doc.splitTextToSize(bullet + '  ' + (item.text || ''), bw);
+          doc.text(lines, indent, y);
+          y += lines.length * 4.5 + 1.5;
+        } else if (item.type === 'tip' || item.type === 'memory' || item.type === 'example' || item.type === 'summary' || item.type === 'callout') {
+          checkPage(12);
+          const labels = { tip: 'Exam Tip', memory: 'Memory Aid', example: 'Example', summary: 'Summary', callout: 'Note' };
+          doc.setFillColor(231, 237, 218);
+          const boxLines = doc.splitTextToSize((item.text || ''), contentW - 8);
+          const boxH = boxLines.length * 4.5 + 12;
+          checkPage(boxH);
+          doc.roundedRect(margin, y - 2, contentW, boxH, 2, 2, 'F');
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.setTextColor(0, 58, 73);
+          doc.text(labels[item.type] || 'Note', margin + 4, y + 4);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9);
+          doc.setTextColor(50, 50, 50);
+          doc.text(boxLines, margin + 4, y + 10);
+          y += boxH + 4;
+          doc.setFontSize(10);
+        } else if (item.text) {
+          checkPage(8);
+          const lines = doc.splitTextToSize(item.text, contentW);
+          if (item.bold) doc.setFont('helvetica', 'bold');
+          doc.text(lines, margin, y);
+          if (item.bold) doc.setFont('helvetica', 'normal');
+          y += lines.length * 4.5 + 2;
+        }
+      }
+    }
+
+    renderItems(section.content || []);
+
+    (section.subsections || []).forEach(sub => {
+      checkPage(14);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      doc.setTextColor(0, 58, 73);
+      const subLines = doc.splitTextToSize(sub.title, contentW);
+      doc.text(subLines, margin, y);
+      y += subLines.length * 6 + 3;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(50, 50, 50);
+      renderItems(sub.content || []);
+    });
+
+    y += 6;
+  }
+
+  const totalPages = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= totalPages; i++) {
+    doc.setPage(i);
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    doc.text('LARE Prep — Section ' + secNum + ' Study Guide', margin, pageH - 10);
+    doc.text('Page ' + i + ' of ' + totalPages, pageW - margin, pageH - 10, { align: 'right' });
+  }
+
+  doc.save('LARE_Section' + secNum + '_Study_Guide.pdf');
+};
 
 /* -- Helpers ------------------------------------------------------------- */
 function escHtml(str) {

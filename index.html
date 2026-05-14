@@ -7,6 +7,11 @@
   <meta name="description" content="Comprehensive LARE exam preparation with study guides, textbooks, and interactive practice exams for all four sections.">
   <link rel="icon" href="assets/logos/asla-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 
@@ -19,21 +24,20 @@
       </a>
       <nav class="header-nav">
         <a href="#home" data-route="home">Home</a>
-        <a href="#s1/guide" data-route="s1">Section 1</a>
-        <a href="#s2/guide" data-route="s2">Section 2</a>
-        <a href="#s3/guide" data-route="s3">Section 3</a>
-        <a href="#s4/guide" data-route="s4">Section 4</a>
-        <a href="#progress" data-route="progress">Progress</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger" id="sections-trigger">
+            Sections <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="nav-dropdown-menu" id="sections-menu">
+            <a href="#s1/book" data-route="s1">Section 1: Project Management</a>
+            <a href="#s2/book" data-route="s2">Section 2: Planning &amp; Design</a>
+            <a href="#s3/book" data-route="s3">Section 3: Construction Docs</a>
+            <a href="#s4/book" data-route="s4">Section 4: Grading &amp; Drainage</a>
+          </div>
+        </div>
+        <a href="#dashboard" data-route="dashboard">Dashboard</a>
+        <div class="auth-area" id="auth-area"></div>
       </nav>
-    </div>
-    <div class="explore-bar">
-      <div class="explore-bar-inner">
-        <span class="label">Sections</span>
-        <button class="section-tab" data-section="s1" onclick="navigate('s1/guide')">1 &middot; Project Management</button>
-        <button class="section-tab" data-section="s2" onclick="navigate('s2/guide')">2 &middot; Planning &amp; Design</button>
-        <button class="section-tab" data-section="s3" onclick="navigate('s3/guide')">3 &middot; Construction Docs</button>
-        <button class="section-tab" data-section="s4" onclick="navigate('s4/guide')">4 &middot; Grading &amp; Drainage</button>
-      </div>
     </div>
   </header>
 
@@ -55,19 +59,19 @@
         <div class="footer-col">
           <h5>Study Materials</h5>
           <ul>
-            <li><a href="#s1/guide">Section 1 Guide</a></li>
-            <li><a href="#s2/guide">Section 2 Guide</a></li>
-            <li><a href="#s3/guide">Section 3 Guide</a></li>
-            <li><a href="#s4/guide">Section 4 Guide</a></li>
+            <li><a href="#s1/book">Section 1 Study Book</a></li>
+            <li><a href="#s2/book">Section 2 Study Book</a></li>
+            <li><a href="#s3/book">Section 3 Study Book</a></li>
+            <li><a href="#s4/book">Section 4 Study Book</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h5>Practice Exams</h5>
+          <h5>Practice &amp; Review</h5>
           <ul>
             <li><a href="#s1/exam">Section 1 Exam</a></li>
             <li><a href="#s2/exam">Section 2 Exam</a></li>
-            <li><a href="#s3/exam">Section 3 Exam</a></li>
-            <li><a href="#s4/exam">Section 4 Exam</a></li>
+            <li><a href="#s1/flash">Section 1 Flashcards</a></li>
+            <li><a href="#s2/flash">Section 2 Flashcards</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -75,7 +79,7 @@
           <ul>
             <li><a href="https://www.clarb.org" target="_blank" rel="noopener">CLARB</a></li>
             <li><a href="https://www.asla.org" target="_blank" rel="noopener">ASLA</a></li>
-            <li><a href="#progress">Your Progress</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
           </ul>
         </div>
       </div>
@@ -88,6 +92,16 @@
       </div>
     </div>
   </footer>
+
+  <!-- Auth Modal -->
+  <div class="modal-overlay hidden" id="auth-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+      <h2 id="auth-modal-title">Sign In</h2>
+      <p class="text-muted" style="margin-bottom:24px">Save your progress across devices</p>
+      <div id="auth-modal-body"></div>
+    </div>
+  </div>
 
   <script src="js/app.js"></script>
 </body>

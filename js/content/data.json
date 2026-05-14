@@ -5434,8 +5434,8 @@
      "text": "Ensure the contractor's work is free from all defects"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Landscape architects are held to a standard of reasonable skill and care, not perfection or guarantees."
   },
   {
    "num": 2,
@@ -5458,8 +5458,8 @@
      "text": "Cost plus a fixed fee"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Hourly with a not-to-exceed cap protects the LA when scope is undefined, limiting client exposure while compensating for actual time spent."
   },
   {
    "num": 3,
@@ -5482,8 +5482,8 @@
      "text": "Construction administration site visits"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Expert witness testimony is typically an additional service; schematic design, CD preparation, and CA are basic services."
   },
   {
    "num": 4,
@@ -5506,8 +5506,8 @@
      "text": "Design-Build"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Design-Build provides a single entity responsible for both design and construction."
   },
   {
    "num": 5,
@@ -5530,8 +5530,8 @@
      "text": "The surety company"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Under a lump sum contract, the contractor assumes the risk of unforeseen conditions since the price is fixed."
   },
   {
    "num": 6,
@@ -5554,8 +5554,8 @@
      "text": "Notify the contractor of the discrepancy and document the observation"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "The LA should first notify the contractor of the observed discrepancy and document it. The LA typically does not have stop-work authority."
   },
   {
    "num": 7,
@@ -5578,8 +5578,8 @@
      "text": "Issue a change order to address the RFI"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "RFIs should be responded to in writing within the timeframe established in the contract to maintain a proper project record."
   },
   {
    "num": 8,
@@ -5602,8 +5602,8 @@
      "text": "To confirm that materials and products are consistent with the design intent"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Submittal review confirms materials are consistent with design intent, not a guarantee of quality or review of means and methods."
   },
   {
    "num": 9,
@@ -5626,8 +5626,8 @@
      "text": "Require the contractor to find the originally specified species regardless of availability"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "The LA should evaluate the substitution against design intent, quality, and suitability before making a decision."
   },
   {
    "num": 10,
@@ -5650,8 +5650,8 @@
      "text": "Document the incomplete items and establish a timeline for completion before final payment"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Document incomplete items and establish a timeline for completion; retainage is typically held to cover punch list work."
   },
   {
    "num": 11,
@@ -5674,8 +5674,8 @@
      "text": "The landscape architect should request more time for this activity"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Zero float on a CPM schedule means the activity is on the critical path; any delay will delay the project."
   },
   {
    "num": 12,
@@ -5698,8 +5698,8 @@
      "text": "Monitoring hours and expenses against budget at regular intervals"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Regular monitoring of hours and expenses against budget allows for timely adjustments."
   },
   {
    "num": 13,
@@ -5722,8 +5722,8 @@
      "text": "Reduce the quality of other deliverables to compensate for the extra work"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Scope changes should be documented and the contract amended through proper negotiation."
   },
   {
    "num": 14,
@@ -5746,8 +5746,8 @@
      "text": "It reduces the landscape architect's liability exposure"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Phasing allows partial occupancy or use while other portions are still under construction."
   },
   {
    "num": 15,
@@ -5770,8 +5770,8 @@
      "text": "The landscape architect has reduced responsibility during construction"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Fast-tracking overlaps design and construction phases, beginning construction before design is fully complete."
   },
   {
    "num": 16,
@@ -5794,8 +5794,8 @@
      "text": "1:15"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "ADA requires a maximum running slope of 1:20 (5%) for accessible routes. Ramps (which are steeper portions) may be up to 1:12."
   },
   {
    "num": 17,
@@ -5818,8 +5818,8 @@
      "text": "Warranting that no changes will be needed during construction"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Sealing documents certifies they were prepared under the LA's responsible charge; it does not guarantee outcomes."
   },
   {
    "num": 18,
@@ -5842,8 +5842,8 @@
      "text": "Specifying an irrigation controller brand"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Parking lot landscaping requirements are typically regulated through local zoning ordinances."
   },
   {
    "num": 19,
@@ -5866,8 +5866,8 @@
      "text": "Recommend the client hire a lawyer before any design work begins"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Early coordination with regulatory agencies regarding wetland impacts is essential and a professional responsibility."
   },
   {
    "num": 20,
@@ -5890,8 +5890,8 @@
      "text": "Refusing to take on a project outside their area of expertise"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Practicing outside the scope of licensure or professional misconduct are grounds for license revocation or suspension."
   },
   {
    "num": 21,
@@ -5914,8 +5914,8 @@
      "text": "Certify the project with a disclaimer noting the areas of concern"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "The LA has an ethical and legal obligation to refuse to certify non-compliant work and inform the client of deficiencies."
   },
   {
    "num": 22,
@@ -5938,8 +5938,8 @@
      "text": "Sell the stock before specifying the product"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Conflicts of interest must be disclosed to the client, who can then make an informed decision."
   },
   {
    "num": 23,
@@ -5962,8 +5962,8 @@
      "text": "Provide the documents in accordance with the terms of the original contract regarding document ownership"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Document ownership and distribution rights are governed by the original contract terms."
   },
   {
    "num": 24,
@@ -5986,8 +5986,8 @@
      "text": "Recommend the bidder include an allowance for the unclear item"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "In public bidding, all clarifications must be issued as addenda to all bidders to ensure fairness."
   },
   {
    "num": 25,
@@ -6010,8 +6010,8 @@
      "text": "Maintenance bond"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "A performance bond guarantees the contractor will complete the work per the contract."
   },
   {
    "num": 26,
@@ -6034,8 +6034,8 @@
      "text": "Competitive sealed proposal"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Directly negotiating with a single contractor is a negotiated contract approach."
   },
   {
    "num": 27,
@@ -6058,8 +6058,8 @@
      "text": "The point at which the landscape architect completes the final site inspection"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Substantial completion is when the work is sufficiently complete for the owner to use it for its intended purpose."
   },
   {
    "num": 28,
@@ -6082,8 +6082,8 @@
      "text": "Document agreed-upon changes to the contract sum, contract time, or scope of work"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Change orders document agreed-upon changes to contract sum, time, or scope."
   },
   {
    "num": 29,
@@ -6106,8 +6106,8 @@
      "text": "Performance specification"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Performance specifications define required outcomes, giving the contractor maximum flexibility in product selection."
   },
   {
    "num": 30,
@@ -6130,8 +6130,8 @@
      "text": "Funds set aside for warranty repairs after project completion"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Retainage is a percentage of each payment withheld until project completion to ensure the contractor completes all work."
   },
   {
    "num": 31,
@@ -6154,8 +6154,8 @@
      "text": "Environmental contamination caused by construction activities"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Professional liability (E&O) insurance covers claims arising from negligent professional services."
   },
   {
    "num": 32,
@@ -6178,8 +6178,8 @@
      "text": "Maintain thorough documentation throughout all project phases"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Thorough documentation is the most effective risk management strategy for design professionals."
   },
   {
    "num": 33,
@@ -6202,8 +6202,8 @@
      "text": "Parametric or unit-cost estimate"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Order-of-magnitude estimates are appropriate for schematic design when limited detail is available."
   },
   {
    "num": 34,
@@ -6226,8 +6226,8 @@
      "text": "Recommend the client increase the budget without exploring alternatives"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Value engineering explores cost reductions while maintaining design intent, which is the appropriate professional response."
   },
   {
    "num": 35,
@@ -6250,8 +6250,8 @@
      "text": "Building envelope insulation"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Exterior lighting design to reduce light pollution (Sustainable Sites credit) falls within the LA's scope of work."
   },
   {
    "num": 36,
@@ -6274,8 +6274,8 @@
      "text": "ANSI elevator safety codes"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "ASTM F1487 and CPSC Publication 325 are the primary playground safety standards."
   },
   {
    "num": 37,
@@ -6298,8 +6298,8 @@
      "text": "Using the least expensive construction materials"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Stormwater facilities in public spaces must balance function with safe public access through appropriate design measures."
   },
   {
    "num": 38,
@@ -6322,8 +6322,8 @@
      "text": "Issue both plans and include a note that the contractor should follow whichever plan they prefer"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Conflicts between disciplines should be resolved through coordination before issuing documents."
   },
   {
    "num": 39,
@@ -6346,8 +6346,8 @@
      "text": "Key decisions, action items, responsible parties, and deadlines"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Effective meeting minutes capture key decisions, action items, responsible parties, and deadlines."
   },
   {
    "num": 40,
@@ -6370,8 +6370,8 @@
      "text": "Tell the contractor to take the issue up with the owner directly"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "The LA should review the original documents to determine if the claimed extra work was already included before responding."
   }
  ],
  "s2_guide": [
@@ -10966,8 +10966,8 @@
      "text": "Preparing a preliminary grading plan"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Reviewing existing data is the most efficient first step before conducting field work."
   },
   {
    "num": 2,
@@ -10990,8 +10990,8 @@
      "text": "The elevation is higher on the western portion"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Closely spaced contours indicate steep slopes; widely spaced contours indicate gentle slopes."
   },
   {
    "num": 3,
@@ -11014,8 +11014,8 @@
      "text": "Species, size (DBH), condition, and canopy spread"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Species, DBH, condition, and canopy spread are essential for evaluating tree preservation and design."
   },
   {
    "num": 4,
@@ -11038,8 +11038,8 @@
      "text": "Identify potential environmental contamination liabilities through records review, site reconnaissance, and interviews"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "A Phase I ESA identifies potential contamination through records review, site reconnaissance, and interviews without intrusive testing."
   },
   {
    "num": 5,
@@ -11062,8 +11062,8 @@
      "text": "Soil pH"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Soil texture and permeability directly determine infiltration rates and stormwater management feasibility."
   },
   {
    "num": 6,
@@ -11086,8 +11086,8 @@
      "text": "South-facing slope"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "In the Northern Hemisphere, south-facing slopes receive the most direct sunlight throughout the year."
   },
   {
    "num": 7,
@@ -11110,8 +11110,8 @@
      "text": "Install deciduous trees to the northwest of the seating area"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "A dense evergreen windbreak to the northwest provides year-round protection from prevailing winter winds."
   },
   {
    "num": 8,
@@ -11134,8 +11134,8 @@
      "text": "GIS-based terrain modeling and line-of-sight analysis"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "GIS-based terrain modeling with line-of-sight analysis is the standard method for viewshed assessment."
   },
   {
    "num": 9,
@@ -11158,8 +11158,8 @@
      "text": "An area that will never flood if properly graded"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "The 100-year floodplain has a 1% annual chance of flooding, not a literal 100-year cycle."
   },
   {
    "num": 10,
@@ -11182,8 +11182,8 @@
      "text": "Foundation design, plant selection, and subsurface drainage"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "A high water table directly affects foundations, plant selection, and subsurface drainage design."
   },
   {
    "num": 11,
@@ -11206,8 +11206,8 @@
      "text": "The rate at which water moves through the soil"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Percolation tests measure the rate water moves through soil, important for septic and infiltration design."
   },
   {
    "num": 12,
@@ -11230,8 +11230,8 @@
      "text": "Sand"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Sandy soils have the largest particle size and highest infiltration rate among the options."
   },
   {
    "num": 13,
@@ -11254,8 +11254,8 @@
      "text": "The soil is contaminated with heavy metals"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Hydric soils formed under saturated conditions and are one of three indicators of wetlands."
   },
   {
    "num": 14,
@@ -11278,8 +11278,8 @@
      "text": "The soil is too acidic for most plants"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Expansive clays shrink and swell with moisture changes, causing structural damage."
   },
   {
    "num": 15,
@@ -11302,8 +11302,8 @@
      "text": "A wetland or hydric soil conditions"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Cattails, sedges, and rushes are hydrophytic plants that indicate wetland or hydric conditions."
   },
   {
    "num": 16,
@@ -11326,8 +11326,8 @@
      "text": "The seasonal changes in leaf color"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Ecological succession is the predictable, sequential change in plant community composition over time."
   },
   {
    "num": 17,
@@ -11350,8 +11350,8 @@
      "text": "Removing all existing vegetation and starting with a new plant palette"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Preserving habitat for endemic species is critical to maintaining regional biodiversity and ecosystem function."
   },
   {
    "num": 18,
@@ -11374,8 +11374,8 @@
      "text": "Creating space for recreational sports fields"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Riparian buffers filter pollutants, stabilize banks, and provide habitat along waterways."
   },
   {
    "num": 19,
@@ -11398,8 +11398,8 @@
      "text": "Increased rainfall in urban areas compared to surrounding areas"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Impervious surfaces absorb and re-radiate heat, and reduced vegetation decreases cooling, creating heat islands."
   },
   {
    "num": 20,
@@ -11422,8 +11422,8 @@
      "text": "Enclosing the space with tall walls to block all air movement"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Shade trees, light-colored paving, and water features work together to reduce microclimate temperatures."
   },
   {
    "num": 21,
@@ -11446,8 +11446,8 @@
      "text": "Asking the city council to decide all programming elements"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Stakeholder engagement through multiple methods is the most effective way to identify community needs."
   },
   {
    "num": 22,
@@ -11470,8 +11470,8 @@
      "text": "Recommending two separate projects on different sites"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Zoning the site for different use types with transitions is the best strategy for accommodating multiple needs."
   },
   {
    "num": 23,
@@ -11494,8 +11494,8 @@
      "text": "Recommend the client purchase additional adjacent property"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Present a site capacity analysis and help the client prioritize program elements within the site's constraints."
   },
   {
    "num": 24,
@@ -11518,8 +11518,8 @@
      "text": "Demolish all existing site features to start fresh"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Historic district designation affects site design; coordination with preservation authorities is required."
   },
   {
    "num": 25,
@@ -11542,8 +11542,8 @@
      "text": "Federal Emergency Management Agency (FEMA)"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "The U.S. Army Corps of Engineers issues Section 404 permits for activities in jurisdictional wetlands."
   },
   {
    "num": 26,
@@ -11566,8 +11566,8 @@
      "text": "The color of proposed building materials"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Coastal projects must address erosion, storm surge, sea level rise, and state coastal management programs."
   },
   {
    "num": 27,
@@ -11590,8 +11590,8 @@
      "text": "Ignore the finding since it is not the landscape architect's responsibility"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Archaeological resources require notification and consultation with appropriate authorities before proceeding."
   },
   {
    "num": 28,
@@ -11614,8 +11614,8 @@
      "text": "Maximizing the number of features in the space"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Memorial spaces require deep stakeholder engagement to understand significance and desired emotional qualities."
   },
   {
    "num": 29,
@@ -11638,8 +11638,8 @@
      "text": "Preparing contract specifications"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "GIS excels at layering and analyzing spatial data for planning and site analysis decisions."
   },
   {
    "num": 30,
@@ -11662,8 +11662,8 @@
      "text": "Slope, Wetlands, Open space, Transportation"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "SWOT stands for Strengths, Weaknesses, Opportunities, and Threats."
   },
   {
    "num": 31,
@@ -11686,8 +11686,8 @@
      "text": "The maximum height of buildings allowed by zoning"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Carrying capacity is the maximum use level a site can sustain without unacceptable degradation."
   },
   {
    "num": 32,
@@ -11710,8 +11710,8 @@
      "text": "Preserve and integrate the natural drainage feature into the site design"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Preserving natural drainage features is both ecologically and functionally preferable."
   },
   {
    "num": 33,
@@ -11734,8 +11734,8 @@
      "text": "Only areas within the same political jurisdiction"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Watershed analysis must consider the entire upstream contributing area and downstream receiving waters."
   },
   {
    "num": 34,
@@ -11758,8 +11758,8 @@
      "text": "Textures"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Lynch's five elements are Paths, Edges, Districts, Nodes, and Landmarks. Textures is not one of them."
   },
   {
    "num": 35,
@@ -11782,8 +11782,8 @@
      "text": "Establish property boundaries"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Figure-ground analysis examines the relationship between built form and open space in an urban context."
   },
   {
    "num": 36,
@@ -11806,8 +11806,8 @@
      "text": "Ensure vehicles have priority over pedestrians in all areas"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Circulation analysis identifies conflicts and opportunities for appropriate separation between modes."
   },
   {
    "num": 37,
@@ -11830,8 +11830,8 @@
      "text": "Increasing the posted speed limit"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Speed tables, chicanes, and lane narrowing are established traffic calming measures."
   },
   {
    "num": 38,
@@ -11854,8 +11854,8 @@
      "text": "To determine the site's zoning classification"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Accurate utility locations prevent conflicts, ensure safety during construction, and inform easement planning."
   },
   {
    "num": 39,
@@ -11878,8 +11878,8 @@
      "text": "Calculate the volume of cut and fill for a grading plan"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "The Rational Method estimates peak stormwater runoff rate from a drainage area."
   },
   {
    "num": 40,
@@ -11902,8 +11902,8 @@
      "text": "The circumference of the drainage pipe"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "The \"C\" coefficient represents the runoff coefficient -- the proportion of rainfall that becomes surface runoff."
   }
  ],
  "s3_guide": [
@@ -15434,8 +15434,8 @@
      "text": "Exclusive use of native meadow plantings"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Formal gardens are characterized by symmetry, axial organization, and geometric forms."
   },
   {
    "num": 2,
@@ -15458,8 +15458,8 @@
      "text": "Repeating design elements such as materials, forms, colors, and textures to create visual coherence"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Unity is achieved through repetition and consistency of design elements throughout the site."
   },
   {
    "num": 3,
@@ -15482,8 +15482,8 @@
      "text": "The number of elements in a design"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Scale refers to the perceived size of elements relative to the human body and surrounding context."
   },
   {
    "num": 4,
@@ -15506,8 +15506,8 @@
      "text": "A sense of spatial compression and release that enhances the experience of movement through the landscape"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Alternating spatial compression and release creates a dynamic experience of movement through landscape."
   },
   {
    "num": 5,
@@ -15530,8 +15530,8 @@
      "text": "The IQ of the designer"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Genius loci refers to the unique spirit or character of a place."
   },
   {
    "num": 6,
@@ -15554,8 +15554,8 @@
      "text": "10 feet or wider"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Primary pedestrian walkways in plazas should be 10 feet or wider to accommodate multiple users and ADA requirements."
   },
   {
    "num": 7,
@@ -15578,8 +15578,8 @@
      "text": "The drop-off eliminates all pedestrian crossings"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Drop-offs should allow one-way flow with queuing space and a clear pedestrian connection to the entrance."
   },
   {
    "num": 8,
@@ -15602,8 +15602,8 @@
      "text": "The audience faces north or northeast to minimize sun glare during evening performances"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Orienting the audience north or northeast minimizes sun glare during afternoon and evening events."
   },
   {
    "num": 9,
@@ -15626,8 +15626,8 @@
      "text": "Eliminating all shade to ensure maximum sun exposure"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Clear sight lines for supervision, age-appropriate zones, and safety surfacing are the most critical safety considerations."
   },
   {
    "num": 10,
@@ -15650,8 +15650,8 @@
      "text": "Incorporating bioswales, shade trees, permeable paving, and landscape islands to reduce heat island effect and manage stormwater"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Bioswales, shade trees, permeable paving, and landscape islands reduce environmental impact through stormwater management and heat island mitigation."
   },
   {
    "num": 11,
@@ -15674,8 +15674,8 @@
      "text": "The tree should require frequent pruning to maintain shape"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Street trees must tolerate urban conditions including compacted soils, limited root space, heat, and pollution."
   },
   {
    "num": 12,
@@ -15698,8 +15698,8 @@
      "text": "Arranging plants in vertical layers (canopy, understory, shrub, groundcover) to create spatial complexity and ecological function"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Layering creates vertical plant structure from canopy to groundcover for spatial and ecological complexity."
   },
   {
    "num": 13,
@@ -15722,8 +15722,8 @@
      "text": "Plants that require daily irrigation"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Rain garden plants must tolerate alternating wet and dry conditions."
   },
   {
    "num": 14,
@@ -15746,8 +15746,8 @@
      "text": "Placing all shrubs at uniform spacing regardless of species"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Foundation plantings must account for mature size, building scale, maintenance access, and clearances."
   },
   {
    "num": 15,
@@ -15770,8 +15770,8 @@
      "text": "It ensures all plants flower at the same time"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Mixing deciduous and evergreen plants provides seasonal variety and year-round structure."
   },
   {
    "num": 16,
@@ -15794,8 +15794,8 @@
      "text": "Greater than 33%"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Slopes of 0.5% to 3% provide adequate drainage while remaining comfortable for passive recreation."
   },
   {
    "num": 17,
@@ -15818,8 +15818,8 @@
      "text": "Slopes steeper than 1:1 to minimize the footprint"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Berms with mowable turf should have slopes no steeper than 3:1 for maintenance and stability."
   },
   {
    "num": 18,
@@ -15842,8 +15842,8 @@
      "text": "Using only gravity walls regardless of the height requirement"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Terracing should use appropriately sized walls with drainage and create usable spaces between terraces."
   },
   {
    "num": 19,
@@ -15866,8 +15866,8 @@
      "text": "Country of origin"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "In freeze-thaw climates, low absorption and freeze-thaw resistance prevent material deterioration."
   },
   {
    "num": 20,
@@ -15890,8 +15890,8 @@
      "text": "Stacked railroad ties"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Walls 6 feet or taller require engineered solutions like reinforced concrete or MSE for structural safety."
   },
   {
    "num": 21,
@@ -15914,8 +15914,8 @@
      "text": "Unit pavers are structurally stronger than concrete"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Unit pavers allow individual repair, accommodate ground movement, and can be installed as permeable systems."
   },
   {
    "num": 22,
@@ -15938,8 +15938,8 @@
      "text": "Any wood species regardless of durability"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Naturally durable or sustainably sourced exterior-grade wood is appropriate for outdoor furniture."
   },
   {
    "num": 23,
@@ -15962,8 +15962,8 @@
      "text": "Handrails only at the top landing"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "ADA requires handrails on both sides of ramps with a rise greater than 6 inches."
   },
   {
    "num": 24,
@@ -15986,8 +15986,8 @@
      "text": "Universal design applies only to interior spaces"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Universal design creates environments usable by all people, going beyond minimum ADA compliance."
   },
   {
    "num": 25,
@@ -16010,8 +16010,8 @@
      "text": "36 inches"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "ADA requires a minimum clear width of 36 inches for accessible routes."
   },
   {
    "num": 26,
@@ -16034,8 +16034,8 @@
      "text": "Eliminated if the parking space is wider than standard"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Access aisles must be at least 60 inches wide and marked to prevent parking."
   },
   {
    "num": 27,
@@ -16058,8 +16058,8 @@
      "text": "Using untreated water for ecological purposes"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Public water features must limit depth, define edges, and maintain water quality for safety."
   },
   {
    "num": 28,
@@ -16082,8 +16082,8 @@
      "text": "Separate zones based on plant water requirements, sun exposure, and soil conditions (hydrozoning)"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Hydrozoning groups plants with similar water needs into separate irrigation zones for efficiency."
   },
   {
    "num": 29,
@@ -16106,8 +16106,8 @@
      "text": "Directing all light fixtures upward for decorative effect"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Pathway lighting should provide adequate, uniform illumination while minimizing pollution and glare."
   },
   {
    "num": 30,
@@ -16130,8 +16130,8 @@
      "text": "Lighting athletic fields"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Bollard lights provide low-level illumination appropriate for pathways and edge definition."
   },
   {
    "num": 31,
@@ -16154,8 +16154,8 @@
      "text": "It reduces stormwater runoff, mitigates heat island effect, and provides habitat"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Green roofs reduce stormwater runoff, mitigate heat island effect, and provide habitat value."
   },
   {
    "num": 32,
@@ -16178,8 +16178,8 @@
      "text": "Eliminating all vegetation from the site"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "LID strategies include bioretention, permeable paving, green roofs, and rainwater harvesting."
   },
   {
    "num": 33,
@@ -16202,8 +16202,8 @@
      "text": "Selecting tropical species for their visual appeal"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Xeriscape designs prioritize drought-tolerant, climate-adapted plants that minimize water use once established."
   },
   {
    "num": 34,
@@ -16226,8 +16226,8 @@
      "text": "Convey and filter stormwater runoff through vegetation and engineered soil media"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Bioswales convey and filter stormwater through vegetation and engineered soil media."
   },
   {
    "num": 35,
@@ -16250,8 +16250,8 @@
      "text": "The basin is fenced off with no public access"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Detention basins need safe side slopes, outlet structures, and emergency overflows."
   },
   {
    "num": 36,
@@ -16274,8 +16274,8 @@
      "text": "Construction administration"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Concept plans are typically presented during schematic design."
   },
   {
    "num": 37,
@@ -16298,8 +16298,8 @@
      "text": "Underground utility locations only"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Section drawings communicate vertical relationships, elevation changes, and spatial proportions."
   },
   {
    "num": 38,
@@ -16322,8 +16322,8 @@
      "text": "Block all views from the garden"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Pergolas define space, provide filtered shade, and support climbing plants without full weather protection."
   },
   {
    "num": 39,
@@ -16346,8 +16346,8 @@
      "text": "42 inches"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Approximately 18 inches is the most comfortable seat wall height for adults."
   },
   {
    "num": 40,
@@ -16370,8 +16370,8 @@
      "text": "The landscape architect administers the construction contract"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Design development refines spatial relationships, selects specific materials, and develops detailed solutions."
   }
  ],
  "s4_guide": [
@@ -19954,8 +19954,8 @@
      "text": "10%"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Slope = (102.0 - 98.0) / 80 = 4/80 = 0.05 = 5%."
   },
   {
    "num": 2,
@@ -19978,8 +19978,8 @@
      "text": "A valley or swale"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Contour lines forming a \"V\" pointing uphill indicate a valley or swale where water collects."
   },
   {
    "num": 3,
@@ -20002,8 +20002,8 @@
      "text": "0% -- flat grades are acceptable against buildings"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "A minimum 2% slope away from a building for at least 10 feet (or per local code) ensures positive drainage away from the foundation."
   },
   {
    "num": 4,
@@ -20026,8 +20026,8 @@
      "text": "Interpolation"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Interpolation estimates values between two known points (contour lines)."
   },
   {
    "num": 5,
@@ -20050,8 +20050,8 @@
      "text": "1:20 (5%)"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "ADA requires a maximum ramp slope of 1:12 (8.33%)."
   },
   {
    "num": 6,
@@ -20074,8 +20074,8 @@
      "text": "99.5 (6 inches below the FFE)"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "The grade at the building perimeter should be at least 6 inches below the FFE to prevent water entry."
   },
   {
    "num": 7,
@@ -20098,8 +20098,8 @@
      "text": "10%"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Parking lots typically require 1% to 2% minimum slope for surface drainage."
   },
   {
    "num": 8,
@@ -20122,8 +20122,8 @@
      "text": "1% to 2%"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Grass-lined swales typically require a minimum 1% to 2% slope for positive drainage."
   },
   {
    "num": 9,
@@ -20146,8 +20146,8 @@
      "text": "Importing topsoil from off-site"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Cut is the removal of soil to lower the existing grade."
   },
   {
    "num": 10,
@@ -20170,8 +20170,8 @@
      "text": "Minimize the need for importing or exporting soil, reducing cost and environmental impact"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Balancing cut and fill minimizes the need for import or export, reducing cost and environmental impact."
   },
   {
    "num": 11,
@@ -20194,8 +20194,8 @@
      "text": "Estimate the cost of landscaping materials"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "The average end area method calculates earthwork volume between two cross-sections."
   },
   {
    "num": 12,
@@ -20218,8 +20218,8 @@
      "text": "The excavated soil occupies more volume in a loose state than it did in its undisturbed state"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Excavated soil is loosened and occupies more volume than in its undisturbed state (swell)."
   },
   {
    "num": 13,
@@ -20242,8 +20242,8 @@
      "text": "A subsurface trench filled with gravel and perforated pipe to collect and redirect groundwater"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "A French drain is a subsurface trench with gravel and perforated pipe for groundwater collection."
   },
   {
    "num": 14,
@@ -20266,8 +20266,8 @@
      "text": "The compaction rate of soil"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Manning's equation calculates flow velocity and capacity in open channels and pipes."
   },
   {
    "num": 15,
@@ -20290,8 +20290,8 @@
      "text": "The drainage area has no effect on pipe size"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Larger drainage areas produce more runoff, requiring larger pipes."
   },
   {
    "num": 16,
@@ -20314,8 +20314,8 @@
      "text": "Directly against the building foundation"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Area drains are placed at low points where surface water collects."
   },
   {
    "num": 17,
@@ -20338,8 +20338,8 @@
      "text": "The time required to empty a detention basin"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Time of concentration is the time for runoff to travel from the most distant point to the outlet."
   },
   {
    "num": 18,
@@ -20362,8 +20362,8 @@
      "text": "Provide water for a fountain on the opposite side"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Drainage behind retaining walls relieves hydrostatic pressure that could cause wall failure."
   },
   {
    "num": 19,
@@ -20386,8 +20386,8 @@
      "text": "Determine the number of parking spaces required"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Pre/post analysis ensures development does not increase runoff rates and volumes beyond pre-development levels."
   },
   {
    "num": 20,
@@ -20410,8 +20410,8 @@
      "text": "Eliminate the need for any downstream stormwater infrastructure"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Detention basins temporarily store water and release it at controlled rates to reduce peak discharge."
   },
   {
    "num": 21,
@@ -20434,8 +20434,8 @@
      "text": "A retention basin releases water faster than a detention basin"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Detention temporarily stores and releases water; retention permanently holds water (like a pond)."
   },
   {
    "num": 22,
@@ -20458,8 +20458,8 @@
      "text": "It is impervious like conventional concrete"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "PICP allows stormwater to infiltrate through joints into the aggregate base, reducing runoff volume."
   },
   {
    "num": 23,
@@ -20482,8 +20482,8 @@
      "text": "Only the color of the concrete"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "A complete walkway detail shows subgrade, base, concrete thickness, reinforcement, joints, and finish."
   },
   {
    "num": 24,
@@ -20506,8 +20506,8 @@
      "text": "Provide a decorative pattern only"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Control joints create a weakened plane to control where shrinkage cracking occurs."
   },
   {
    "num": 25,
@@ -20530,8 +20530,8 @@
      "text": "8 to 10 feet (approximately 2 to 3 times the slab thickness in feet)"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Control joint spacing should be approximately 2 to 3 times the slab thickness in feet. For 4-inch slabs, 8-10 feet is typical."
   },
   {
    "num": 26,
@@ -20554,8 +20554,8 @@
      "text": "Only the height of the wall"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "A complete stone veneer detail shows the structural backing, mortar, veneer, cap, footing, and drainage."
   },
   {
    "num": 27,
@@ -20578,8 +20578,8 @@
      "text": "Untreated lumber for all structural members"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "Deck posts require concrete footings below the frost line with proper fasteners and flashing."
   },
   {
    "num": 28,
@@ -20602,8 +20602,8 @@
      "text": "A ramp slope not exceeding 1:12, detectable warning surfaces, flared sides, and proper alignment with the crosswalk"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Accessible curb ramps need 1:12 max slope, detectable warnings, flared sides, and crosswalk alignment."
   },
   {
    "num": 29,
@@ -20626,8 +20626,8 @@
      "text": "Electrical systems"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "CSI MasterFormat Division 32 covers Exterior Improvements including paving, planting, and site elements."
   },
   {
    "num": 30,
@@ -20650,8 +20650,8 @@
      "text": "Only the project schedule"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Prescriptive specifications define specific materials, products, methods, and installation requirements."
   },
   {
    "num": 31,
@@ -20674,8 +20674,8 @@
      "text": "Materials, Labor, Equipment"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "CSI specification sections have three parts: General, Products, and Execution."
   },
   {
    "num": 32,
@@ -20698,8 +20698,8 @@
      "text": "The landscape architect must specify at least 10 alternatives"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "\"Or approved equal\" allows the contractor to propose alternatives meeting the same criteria, subject to approval."
   },
   {
    "num": 33,
@@ -20722,8 +20722,8 @@
      "text": "Only specifications without any drawings"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "A complete CD set includes title, demolition, layout, grading, drainage, planting, irrigation, and details."
   },
   {
    "num": 34,
@@ -20746,8 +20746,8 @@
      "text": "Approximate locations with the note \"contractor to verify all dimensions\""
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "Layout dimensions should reference baselines, property lines, building faces, or control points."
   },
   {
    "num": 35,
@@ -20770,8 +20770,8 @@
      "text": "Only the price of each plant"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "A",
+   "explanation": "A plant schedule includes botanical name, common name, quantity, size, spacing, root condition, and notes."
   },
   {
    "num": 36,
@@ -20794,8 +20794,8 @@
      "text": "A cantilevered footing"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Gravity walls resist lateral soil pressure through their own mass and weight."
   },
   {
    "num": 37,
@@ -20818,8 +20818,8 @@
      "text": "The footing"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "The area behind a retaining wall where soil is placed is the backfill zone."
   },
   {
    "num": 38,
@@ -20842,8 +20842,8 @@
      "text": "Below the frost line to prevent heaving"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "D",
+   "explanation": "Freestanding wall footings must extend below the frost line to prevent frost heave."
   },
   {
    "num": 39,
@@ -20866,8 +20866,8 @@
      "text": "Increase the velocity of stormwater runoff"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "B",
+   "explanation": "Silt fences temporarily trap sediment during construction to prevent it from leaving the site."
   },
   {
    "num": 40,
@@ -20890,8 +20890,1354 @@
      "text": "Only projects on government-owned land"
     }
    ],
-   "answer": "",
-   "explanation": ""
+   "answer": "C",
+   "explanation": "SWPPP is required for construction disturbing one acre or more under EPA NPDES requirements."
+  }
+ ],
+ "s1_flash": [
+  {
+   "front": "A landscape architect enters into a contract with a client using AIA or ASLA standard form agreements. Which of the following is the landscape architect's PRIMARY obligation under such agreements?",
+   "back": "A) Provide professional services with reasonable skill and care",
+   "detail": "Landscape architects are held to a standard of reasonable skill and care, not perfection or guarantees.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is negotiating fees for a public park project. Which fee structure would BEST protect the landscape architect when the scope of work is not clearly defined?",
+   "back": "C) Hourly with a not-to-exceed cap",
+   "detail": "Hourly with a not-to-exceed cap protects the LA when scope is undefined, limiting client exposure while compensating for actual time spent.",
+   "source": "exam"
+  },
+  {
+   "front": "In a standard owner-landscape architect agreement, \"Additional Services\" typically includes which of the following?",
+   "back": "B) Expert witness testimony",
+   "detail": "Expert witness testimony is typically an additional service; schematic design, CD preparation, and CA are basic services.",
+   "source": "exam"
+  },
+  {
+   "front": "Which contract delivery method gives the owner a single point of responsibility for both design and construction?",
+   "back": "D) Design-Build",
+   "detail": "Design-Build provides a single entity responsible for both design and construction.",
+   "source": "exam"
+  },
+  {
+   "front": "Under a stipulated sum (lump sum) contract, who bears the greatest financial risk if unforeseen conditions arise?",
+   "back": "A) The contractor",
+   "detail": "Under a lump sum contract, the contractor assumes the risk of unforeseen conditions since the price is fixed.",
+   "source": "exam"
+  },
+  {
+   "front": "During construction administration, a landscape architect observes that the contractor is installing a retaining wall foundation at a depth shallower than shown on the construction documents. The landscape architect should FIRST:",
+   "back": "D) Notify the contractor of the discrepancy and document the observation",
+   "detail": "The LA should first notify the contractor of the observed discrepancy and document it. The LA typically does not have stop-work authority.",
+   "source": "exam"
+  },
+  {
+   "front": "A contractor submits a Request for Information (RFI) asking for clarification on a grading detail. The landscape architect should:",
+   "back": "B) Provide a written response within a reasonable time as defined in the contract",
+   "detail": "RFIs should be responded to in writing within the timeframe established in the contract to maintain a proper project record.",
+   "source": "exam"
+  },
+  {
+   "front": "Which of the following is the PRIMARY purpose of a submittal review during construction?",
+   "back": "D) To confirm that materials and products are consistent with the design intent",
+   "detail": "Submittal review confirms materials are consistent with design intent, not a guarantee of quality or review of means and methods.",
+   "source": "exam"
+  },
+  {
+   "front": "A contractor requests a substitution for a specified tree species, claiming the specified species is unavailable. The landscape architect should:",
+   "back": "A) Evaluate the proposed substitution for design intent, quality, and suitability before responding",
+   "detail": "The LA should evaluate the substitution against design intent, quality, and suitability before making a decision.",
+   "source": "exam"
+  },
+  {
+   "front": "During a punch list walkthrough, the landscape architect identifies several items of incomplete work. The landscape architect should:",
+   "back": "D) Document the incomplete items and establish a timeline for completion before final payment",
+   "detail": "Document incomplete items and establish a timeline for completion; retainage is typically held to cover punch list work.",
+   "source": "exam"
+  },
+  {
+   "front": "A critical path method (CPM) schedule shows that landscape installation has zero float. This means:",
+   "back": "B) Any delay in landscape installation will delay the overall project completion",
+   "detail": "Zero float on a CPM schedule means the activity is on the critical path; any delay will delay the project.",
+   "source": "exam"
+  },
+  {
+   "front": "Which of the following is the BEST method for tracking project budget during the design phase?",
+   "back": "D) Monitoring hours and expenses against budget at regular intervals",
+   "detail": "Regular monitoring of hours and expenses against budget allows for timely adjustments.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect discovers that the scope of a project has significantly expanded beyond the original agreement. The MOST appropriate action is to:",
+   "back": "B) Notify the client, document the scope change, and negotiate an amendment to the contract",
+   "detail": "Scope changes should be documented and the contract amended through proper negotiation.",
+   "source": "exam"
+  },
+  {
+   "front": "Which of the following is a PRIMARY benefit of phasing a large construction project?",
+   "back": "B) It allows portions of the project to be used while other portions are still under construction",
+   "detail": "Phasing allows partial occupancy or use while other portions are still under construction.",
+   "source": "exam"
+  },
+  {
+   "front": "A project has a fast-track schedule. Which of the following is a characteristic of fast-tracking?",
+   "back": "A) Design and construction phases overlap, with construction beginning before design is fully complete",
+   "detail": "Fast-tracking overlaps design and construction phases, beginning construction before design is fully complete.",
+   "source": "exam"
+  },
+  {
+   "front": "Under the Americans with Disabilities Act (ADA), which of the following is the MAXIMUM allowable running slope for an accessible route?",
+   "back": "B) 1:20",
+   "detail": "ADA requires a maximum running slope of 1:20 (5%) for accessible routes. Ramps (which are steeper portions) may be up to 1:12.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect seals and signs a set of construction documents. By doing so, the landscape architect is:",
+   "back": "A) Certifying that the documents were prepared under their responsible charge",
+   "detail": "Sealing documents certifies they were prepared under the LA's responsible charge; it does not guarantee outcomes.",
+   "source": "exam"
+  },
+  {
+   "front": "Which of the following activities would MOST LIKELY require the landscape architect to coordinate with a local zoning authority?",
+   "back": "B) Designing a parking lot layout that must meet minimum landscaping requirements",
+   "detail": "Parking lot landscaping requirements are typically regulated through local zoning ordinances.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect learns that a proposed project may impact wetlands regulated under the Clean Water Act. The MOST appropriate action is to:",
+   "back": "C) Advise the client of the regulatory requirements and coordinate with appropriate agencies early in the process",
+   "detail": "Early coordination with regulatory agencies regarding wetland impacts is essential and a professional responsibility.",
+   "source": "exam"
+  },
+  {
+   "front": "In most jurisdictions, a landscape architect's license can be revoked or suspended for which of the following?",
+   "back": "C) Practicing outside the scope of licensure or professional misconduct",
+   "detail": "Practicing outside the scope of licensure or professional misconduct are grounds for license revocation or suspension.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is asked by a developer to certify that a project meets local tree preservation ordinance requirements. Upon review, the landscape architect determines the project does NOT fully comply. The landscape architect should:",
+   "back": "A) Refuse to certify and inform the client of the specific areas of non-compliance",
+   "detail": "The LA has an ethical and legal obligation to refuse to certify non-compliant work and inform the client of deficiencies.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect discovers a potential conflict of interest because they own stock in a company that manufactures a product they intend to specify. The landscape architect should:",
+   "back": "C) Disclose the conflict of interest to the client and allow the client to decide how to proceed",
+   "detail": "Conflicts of interest must be disclosed to the client, who can then make an informed decision.",
+   "source": "exam"
+  },
+  {
+   "front": "A former client asks a landscape architect for copies of construction documents from a completed project to give to a new designer. The landscape architect should:",
+   "back": "D) Provide the documents in accordance with the terms of the original contract regarding document ownership",
+   "detail": "Document ownership and distribution rights are governed by the original contract terms.",
+   "source": "exam"
+  },
+  {
+   "front": "During a public bidding process, a landscape architect receives a question from one bidder requesting clarification on the specifications. The landscape architect should:",
+   "back": "A) Issue an addendum with the clarification to all bidders",
+   "detail": "In public bidding, all clarifications must be issued as addenda to all bidders to ensure fairness.",
+   "source": "exam"
+  },
+  {
+   "front": "Which of the following bond types protects the owner in the event the contractor fails to complete the project?",
+   "back": "C) Performance bond",
+   "detail": "A performance bond guarantees the contractor will complete the work per the contract.",
+   "source": "exam"
+  },
+  {
+   "front": "An owner on a private project wants to negotiate directly with a single contractor rather than competitively bid the project. This approach is known as:",
+   "back": "C) Negotiated contract",
+   "detail": "Directly negotiating with a single contractor is a negotiated contract approach.",
+   "source": "exam"
+  },
+  {
+   "front": "\"Substantial completion\" in a construction project is BEST defined as:",
+   "back": "B) The stage at which the work is sufficiently complete that the owner can occupy or use the project for its intended purpose",
+   "detail": "Substantial completion is when the work is sufficiently complete for the owner to use it for its intended purpose.",
+   "source": "exam"
+  },
+  {
+   "front": "A change order is typically used to:",
+   "back": "D) Document agreed-upon changes to the contract sum, contract time, or scope of work",
+   "detail": "Change orders document agreed-upon changes to contract sum, time, or scope.",
+   "source": "exam"
+  },
+  {
+   "front": "Which of the following types of specifications gives the contractor the MOST flexibility in selecting products?",
+   "back": "D) Performance specification",
+   "detail": "Performance specifications define required outcomes, giving the contractor maximum flexibility in product selection.",
+   "source": "exam"
+  },
+  {
+   "front": "Retainage in a construction contract refers to:",
+   "back": "C) A percentage of each progress payment withheld by the owner until project completion",
+   "detail": "Retainage is a percentage of each payment withheld until project completion to ensure the contractor completes all work.",
+   "source": "exam"
+  },
+  {
+   "front": "Professional liability insurance (errors and omissions insurance) for a landscape architect covers:",
+   "back": "C) Claims arising from negligent professional services",
+   "detail": "Professional liability (E&O) insurance covers claims arising from negligent professional services.",
+   "source": "exam"
+  },
+  {
+   "front": "Which of the following is the MOST effective way for a landscape architect to manage risk on a project?",
+   "back": "D) Maintain thorough documentation throughout all project phases",
+   "detail": "Thorough documentation is the most effective risk management strategy for design professionals.",
+   "source": "exam"
+  },
+  {
+   "front": "During the schematic design phase, which type of cost estimate is MOST appropriate?",
+   "back": "B) Order-of-magnitude estimate",
+   "detail": "Order-of-magnitude estimates are appropriate for schematic design when limited detail is available.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect's construction cost estimate exceeds the client's budget. The MOST appropriate course of action is to:",
+   "back": "C) Discuss value engineering options with the client to reduce costs while maintaining design intent",
+   "detail": "Value engineering explores cost reductions while maintaining design intent, which is the appropriate professional response.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a project seeking LEED certification. Which of the following site-related credits would the landscape architect MOST likely be responsible for?",
+   "back": "A) Reducing light pollution through exterior lighting design",
+   "detail": "Exterior lighting design to reduce light pollution (Sustainable Sites credit) falls within the LA's scope of work.",
+   "source": "exam"
+  },
+  {
+   "front": "When designing a public playground, which of the following standards should the landscape architect reference for safety compliance?",
+   "back": "A) ASTM and CPSC playground safety guidelines",
+   "detail": "ASTM F1487 and CPSC Publication 325 are the primary playground safety standards.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a stormwater management facility for a public park. The PRIMARY consideration for public safety is:",
+   "back": "C) Balancing stormwater function with safe public access, including appropriate grading, signage, and barriers where needed",
+   "detail": "Stormwater facilities in public spaces must balance function with safe public access through appropriate design measures.",
+   "source": "exam"
+  },
+  {
+   "front": "During a multi-disciplinary project, the landscape architect discovers a conflict between the civil engineer's grading plan and the landscape planting plan. The landscape architect should:",
+   "back": "B) Coordinate with the civil engineer to resolve the conflict before issuing construction documents",
+   "detail": "Conflicts between disciplines should be resolved through coordination before issuing documents.",
+   "source": "exam"
+  },
+  {
+   "front": "Meeting minutes from a client meeting should include which of the following?",
+   "back": "D) Key decisions, action items, responsible parties, and deadlines",
+   "detail": "Effective meeting minutes capture key decisions, action items, responsible parties, and deadlines.",
+   "source": "exam"
+  },
+  {
+   "front": "A contractor claims additional compensation for work they say was not included in the original contract documents. The landscape architect should:",
+   "back": "A) Review the original contract documents to determine if the work was included and respond accordingly",
+   "detail": "The LA should review the original documents to determine if the claimed extra work was already included before responding.",
+   "source": "exam"
+  },
+  {
+   "front": "EXAM FORMAT:  Section 1 uses both standard multiple-choice questions and graphic Advanced Item Types (AITs).",
+   "back": "AITs present you with maps, diagrams, or images and ask you to interpret them. Practice reading topographic maps, soil surveys, FIRM maps, and aerial photographs before exam day. The free CLARB demo exam lets you practice the testing interface.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "CLORPT: Climate, Living organisms, O (relief/topography), Rock (parent material), Time. Think \"CLORox Plus Time\" \u2014 these five factors bleach the rock into soil over time.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "When the exam describes soil behavior, you should be able to work backward to identify the probable texture.",
+   "back": "If a question says the soil drains rapidly and does not hold moisture, think sand. If it says the soil cracks when dry and is sticky when wet, think clay. If it says the soil feels smooth and erodes easily when wet, think silt.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Think of the HSGs as a grading scale from best to worst infiltration: A is the best (like getting an A grade), D is the worst (failing at infiltration). A = Awesome drainage, D = Dreadful drainage.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "The exam may present soil survey data and ask you to interpret it.",
+   "back": "Practice using the Web Soil Survey before the exam. Navigate to a site, generate a soil report, and review the properties tables. Pay special attention to drainage class, HSG, depth to restrictive features, and hydric ratings.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "If the exam describes a soil as hydric, it is telling you the site may contain jurisdictional wetlands requiring Section 404 permits from the Army Corps of Engineers.",
+   "back": "Hydric soil = potential regulatory constraint. Always recommend further investigation.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Key slope thresholds: 1-2% = minimum drainage; 5% = max ADA accessible route; 8.33% (1:12) = max ADA ramp; 25% = max practical constructed slope; 33% (3:1) = max mowable turf. Write these five numbers on your scratch paper when the exam begins.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "If a question asks which slope orientation is warmest and driest, the answer is south-facing.",
+   "back": "If it asks which is coolest and most moist, the answer is north-facing. If it asks which receives the most intense heat, the answer is west-facing (afternoon sun).",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "The exam loves to test the concept that development increases runoff.",
+   "back": "The key mechanism is simple: replacing pervious surfaces (forest, meadow) with impervious surfaces (roofs, pavement) increases the runoff coefficient C, which directly increases Q. This is the fundamental justification for stormwater management requirements.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "The \"100-year flood\" has a 1% chance of occurring in any given year. It does NOT mean it floods once every 100 years. Over a 30-year mortgage, a property in the 100-year floodplain has approximately a 26% chance of experiencing at least one flood \u2014 a much higher risk than most people realize. This is a commonly tested misconception.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "The exam may describe vegetation and ask you to infer site conditions.",
+   "back": "If a question mentions cattails and sedges, the answer almost certainly involves wetlands, hydric soils, or regulatory constraints. If it mentions oaks and hickories, think well-drained upland.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "If a question asks about reducing urban temperatures or mitigating the heat island effect, look for answers involving trees, vegetation, high-albedo materials, green roofs, or reduced impervious surfaces.",
+   "back": "Answers involving more pavement, removing trees, or dark materials are always wrong.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Match the data to the source: Topo = USGS. Soils = NRCS. Floods = FEMA. Wetlands = USFWS. Demographics = Census. Climate = NOAA. Contamination = EPA. History = SHPO. Zoning = Local Planning. Property = County Recorder.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "The exam may present a project scenario and ask which level of participation is most appropriate.",
+   "back": "Match the level to the public's role: if the decision is made and you are sharing information, that is Inform. If you are seeking feedback, that is Consult. If stakeholders are co-designing, that is Collaborate. A design charrette = Involve or Collaborate level.",
+   "detail": "",
+   "source": "tip"
+  }
+ ],
+ "s2_flash": [
+  {
+   "front": "A landscape architect is conducting a site inventory for a 50-acre park project. Which of the following should be the FIRST step in the inventory process?",
+   "back": "B) Reviewing existing data including surveys, aerial photographs, GIS data, and public records",
+   "detail": "Reviewing existing data is the most efficient first step before conducting field work.",
+   "source": "exam"
+  },
+  {
+   "front": "A topographic survey of a project site shows contour lines that are closely spaced on the western portion and widely spaced on the eastern portion. This indicates:",
+   "back": "B) The western portion has steep slopes and the eastern portion has gentle slopes",
+   "detail": "Closely spaced contours indicate steep slopes; widely spaced contours indicate gentle slopes.",
+   "source": "exam"
+  },
+  {
+   "front": "When evaluating an existing site, a landscape architect identifies a stand of mature trees. Which of the following data is MOST important to collect for each tree?",
+   "back": "D) Species, size (DBH), condition, and canopy spread",
+   "detail": "Species, DBH, condition, and canopy spread are essential for evaluating tree preservation and design.",
+   "source": "exam"
+  },
+  {
+   "front": "A Phase I Environmental Site Assessment (ESA) is conducted to:",
+   "back": "D) Identify potential environmental contamination liabilities through records review, site reconnaissance, and interviews",
+   "detail": "A Phase I ESA identifies potential contamination through records review, site reconnaissance, and interviews without intrusive testing.",
+   "source": "exam"
+  },
+  {
+   "front": "Which of the following soil characteristics is MOST critical for determining the suitability of a site for stormwater infiltration?",
+   "back": "C) Soil texture and permeability (infiltration rate)",
+   "detail": "Soil texture and permeability directly determine infiltration rates and stormwater management feasibility.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is analyzing a site in the Northern Hemisphere for solar exposure. Which slope orientation receives the MOST direct sunlight throughout the year?",
+   "back": "D) South-facing slope",
+   "detail": "In the Northern Hemisphere, south-facing slopes receive the most direct sunlight throughout the year.",
+   "source": "exam"
+  },
+  {
+   "front": "A site analysis reveals that prevailing winter winds come from the northwest. Which design strategy would BEST mitigate wind exposure for an outdoor seating area?",
+   "back": "C) Plant a dense evergreen windbreak to the northwest of the seating area",
+   "detail": "A dense evergreen windbreak to the northwest provides year-round protection from prevailing winter winds.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is assessing viewsheds from a proposed hilltop overlook. A viewshed analysis would BEST be conducted using:",
+   "back": "D) GIS-based terrain modeling and line-of-sight analysis",
+   "detail": "GIS-based terrain modeling with line-of-sight analysis is the standard method for viewshed assessment.",
+   "source": "exam"
+  },
+  {
+   "front": "When analyzing a site's hydrology, the landscape architect identifies a 100-year floodplain boundary. This boundary indicates:",
+   "back": "A) An area that has a 1% chance of flooding in any given year",
+   "detail": "The 100-year floodplain has a 1% annual chance of flooding, not a literal 100-year cycle.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is analyzing a site with a high water table. Which of the following design considerations is MOST directly affected?",
+   "back": "D) Foundation design, plant selection, and subsurface drainage",
+   "detail": "A high water table directly affects foundations, plant selection, and subsurface drainage design.",
+   "source": "exam"
+  },
+  {
+   "front": "A soil percolation test is PRIMARILY used to determine:",
+   "back": "D) The rate at which water moves through the soil",
+   "detail": "Percolation tests measure the rate water moves through soil, important for septic and infiltration design.",
+   "source": "exam"
+  },
+  {
+   "front": "Which USDA soil texture has the HIGHEST infiltration rate?",
+   "back": "D) Sand",
+   "detail": "Sandy soils have the largest particle size and highest infiltration rate among the options.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect reviews a USDA Web Soil Survey report for a project site. The report classifies the soil as \"hydric.\" This classification indicates:",
+   "back": "C) The soil formed under conditions of saturation and may indicate the presence of wetlands",
+   "detail": "Hydric soils formed under saturated conditions and are one of three indicators of wetlands.",
+   "source": "exam"
+  },
+  {
+   "front": "A site has expansive clay soils. Which of the following is the PRIMARY concern for site development?",
+   "back": "C) The soil will shrink and swell with changes in moisture content, potentially damaging structures",
+   "detail": "Expansive clays shrink and swell with moisture changes, causing structural damage.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect identifies a plant community dominated by cattails, sedges, and rushes during a site inventory. This plant community MOST likely indicates:",
+   "back": "D) A wetland or hydric soil conditions",
+   "detail": "Cattails, sedges, and rushes are hydrophytic plants that indicate wetland or hydric conditions.",
+   "source": "exam"
+  },
+  {
+   "front": "The concept of ecological succession refers to:",
+   "back": "C) The predictable, sequential change in plant community composition over time",
+   "detail": "Ecological succession is the predictable, sequential change in plant community composition over time.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a project in a region with endemic species. Which of the following is the MOST important consideration?",
+   "back": "A) Preserving habitat for endemic species and incorporating native plant communities",
+   "detail": "Preserving habitat for endemic species is critical to maintaining regional biodiversity and ecosystem function.",
+   "source": "exam"
+  },
+  {
+   "front": "A riparian buffer zone serves which PRIMARY ecological function?",
+   "back": "A) Filtering pollutants, stabilizing stream banks, and providing wildlife habitat",
+   "detail": "Riparian buffers filter pollutants, stabilize banks, and provide habitat along waterways.",
+   "source": "exam"
+  },
+  {
+   "front": "The urban heat island effect is PRIMARILY caused by:",
+   "back": "C) Large areas of impervious surfaces and reduced vegetation that absorb and re-radiate heat",
+   "detail": "Impervious surfaces absorb and re-radiate heat, and reduced vegetation decreases cooling, creating heat islands.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing an outdoor plaza in a hot, arid climate. Which strategy would MOST effectively reduce the microclimate temperature?",
+   "back": "B) Incorporating shade trees, light-colored paving, and water features",
+   "detail": "Shade trees, light-colored paving, and water features work together to reduce microclimate temperatures.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is developing a program for a community park. The MOST effective method for identifying community needs and priorities is:",
+   "back": "A) Conducting stakeholder engagement, including public meetings, surveys, and interviews",
+   "detail": "Stakeholder engagement through multiple methods is the most effective way to identify community needs.",
+   "source": "exam"
+  },
+  {
+   "front": "A program for a new public space identifies a need for both active recreation and passive contemplation. Which programming strategy BEST addresses both needs?",
+   "back": "C) Creating distinct zones within the site that accommodate both active and passive uses with appropriate transitions",
+   "detail": "Zoning the site for different use types with transitions is the best strategy for accommodating multiple needs.",
+   "source": "exam"
+  },
+  {
+   "front": "During programming, a landscape architect discovers that the client's desired program exceeds the capacity of the site. The MOST appropriate response is to:",
+   "back": "A) Present the client with an analysis showing site capacity and recommend prioritization of program elements",
+   "detail": "Present a site capacity analysis and help the client prioritize program elements within the site's constraints.",
+   "source": "exam"
+  },
+  {
+   "front": "A site is located within a designated historic district. Before proceeding with design, the landscape architect should:",
+   "back": "C) Research applicable preservation guidelines and coordinate with the appropriate historic preservation authority",
+   "detail": "Historic district designation affects site design; coordination with preservation authorities is required.",
+   "source": "exam"
+  },
+  {
+   "front": "A project site contains jurisdictional wetlands. Under Section 404 of the Clean Water Act, which federal agency is responsible for issuing permits for discharging dredged or fill material into wetlands?",
+   "back": "B) U.S. Army Corps of Engineers",
+   "detail": "The U.S. Army Corps of Engineers issues Section 404 permits for activities in jurisdictional wetlands.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a project on a coastal site subject to the Coastal Zone Management Act. Which of the following is MOST important to consider?",
+   "back": "B) Coastal erosion, storm surge, sea level rise, and consistency with the state's coastal management program",
+   "detail": "Coastal projects must address erosion, storm surge, sea level rise, and state coastal management programs.",
+   "source": "exam"
+  },
+  {
+   "front": "When conducting a site analysis, a landscape architect discovers potential archaeological resources on the site. The landscape architect should:",
+   "back": "A) Notify the client and recommend consultation with appropriate authorities before design proceeds",
+   "detail": "Archaeological resources require notification and consultation with appropriate authorities before proceeding.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a memorial space. Which of the following is the MOST critical aspect of the programming process?",
+   "back": "B) Engaging stakeholders to understand the significance, narrative, and emotional qualities desired for the space",
+   "detail": "Memorial spaces require deep stakeholder engagement to understand significance and desired emotional qualities.",
+   "source": "exam"
+  },
+  {
+   "front": "Geographic Information Systems (GIS) are MOST useful for:",
+   "back": "A) Layering, analyzing, and visualizing spatial data to support site analysis and planning decisions",
+   "detail": "GIS excels at layering and analyzing spatial data for planning and site analysis decisions.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect uses a SWOT analysis during the planning process. SWOT stands for:",
+   "back": "A) Strengths, Weaknesses, Opportunities, Threats",
+   "detail": "SWOT stands for Strengths, Weaknesses, Opportunities, and Threats.",
+   "source": "exam"
+  },
+  {
+   "front": "The carrying capacity of a site refers to:",
+   "back": "B) The maximum level of use or development a site can sustain without unacceptable degradation",
+   "detail": "Carrying capacity is the maximum use level a site can sustain without unacceptable degradation.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect analyzes a site's existing drainage patterns and identifies a natural swale that collects runoff from a 10-acre area. The BEST approach for site development is to:",
+   "back": "D) Preserve and integrate the natural drainage feature into the site design",
+   "detail": "Preserving natural drainage features is both ecologically and functionally preferable.",
+   "source": "exam"
+  },
+  {
+   "front": "A watershed analysis for a development project should consider which of the following?",
+   "back": "A) The entire upstream contributing drainage area and downstream receiving waters",
+   "detail": "Watershed analysis must consider the entire upstream contributing area and downstream receiving waters.",
+   "source": "exam"
+  },
+  {
+   "front": "Kevin Lynch's \"The Image of the City\" identifies five elements of urban form. Which of the following is NOT one of Lynch's five elements?",
+   "back": "D) Textures",
+   "detail": "Lynch's five elements are Paths, Edges, Districts, Nodes, and Landmarks. Textures is not one of them.",
+   "source": "exam"
+  },
+  {
+   "front": "A figure-ground analysis of an urban site is PRIMARILY used to:",
+   "back": "A) Analyze the relationship between built form (figure) and open space (ground)",
+   "detail": "Figure-ground analysis examines the relationship between built form and open space in an urban context.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is analyzing vehicular and pedestrian circulation patterns on a site. The PRIMARY goal of this analysis is to:",
+   "back": "B) Identify conflicts, opportunities, and appropriate separation between modes of circulation",
+   "detail": "Circulation analysis identifies conflicts and opportunities for appropriate separation between modes.",
+   "source": "exam"
+  },
+  {
+   "front": "A traffic calming strategy for a residential neighborhood might include which of the following?",
+   "back": "C) Installing speed tables, chicanes, and narrowing travel lanes",
+   "detail": "Speed tables, chicanes, and lane narrowing are established traffic calming measures.",
+   "source": "exam"
+  },
+  {
+   "front": "During site inventory, the landscape architect identifies existing underground utilities. Why is the accurate location of utilities CRITICAL to the design process?",
+   "back": "B) To avoid conflicts with proposed site features and ensure safe construction, as well as to plan for required easements and setbacks",
+   "detail": "Accurate utility locations prevent conflicts, ensure safety during construction, and inform easement planning.",
+   "source": "exam"
+  },
+  {
+   "front": "The Rational Method (Q = CiA) is used to:",
+   "back": "C) Estimate peak stormwater runoff from a drainage area",
+   "detail": "The Rational Method estimates peak stormwater runoff rate from a drainage area.",
+   "source": "exam"
+  },
+  {
+   "front": "In the Rational Method, the \"C\" coefficient represents:",
+   "back": "B) The runoff coefficient, reflecting the proportion of rainfall that becomes surface runoff",
+   "detail": "The \"C\" coefficient represents the runoff coefficient -- the proportion of rainfall that becomes surface runoff.",
+   "source": "exam"
+  },
+  {
+   "front": "EXAM FORMAT:  Section 2 uses both standard multiple-choice questions and multiple-response questions.",
+   "back": "Multiple-response questions ask you to select ALL correct answers from a list. You must select every correct option and no incorrect options to receive full credit. Read each question carefully to determine if it asks for the single best answer or all that apply.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Triple Bottom Line = People, Planet, Profit. A truly sustainable project scores well on all three. If any leg of the stool is missing, the project will eventually fail.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Know the difference between SITES and LEED.",
+   "back": "SITES is landscape-focused and can certify projects without buildings. LEED is building-focused but includes site-related credits. On the exam, if a question asks about certifying a park, plaza, or streetscape, SITES is the correct framework \u2014 not LEED.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "LID = Little Individual Devices everywhere, instead of one Big Pipe to somewhere else. Distribute, don't concentrate.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "D/H ratio: think of it as the room you are standing in. A 1:1 ratio feels like a narrow hallway \u2014 the walls are as tall as the room is wide. A 4:1 ratio feels like standing in a field \u2014 the edges are too far away to define the space.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Lynch's 5 elements: PEDAL \u2014 Paths, Edges, Districts, nodes (And), Landmarks. Or think PEDNL: People Enter Districts Near Landmarks.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "The exam frequently tests Lynch's elements.",
+   "back": "If a question describes a major intersection where several paths converge, the answer is NODE. If it describes a distinctive tower visible from across a park, the answer is LANDMARK. If it describes a linear boundary between two neighborhoods, the answer is EDGE.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Secretary's Standards: P-R-R-R. Preservation (keep it), Rehabilitation (adapt it), Restoration (return it to a specific period), Reconstruction (rebuild what's gone). Rehabilitation is the most commonly used because it allows new uses while respecting historic character.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Memorize ADA parking requirements.",
+   "back": "They appear frequently. Know: 1 accessible space per 25 total, van-accessible spaces need 8' access aisles, and all accessible spaces must be on the shortest accessible route to the building entrance.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "The transect goes from trees to towers: T1 (Nature) \u2192 T2 (Rural) \u2192 T3 (Suburban) \u2192 T4 (Urban) \u2192 T5 (Center) \u2192 T6 (Core). Each zone gets progressively denser and more urban.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "If the exam asks what tool shows spatial relationships and adjacencies between program elements at the earliest design stage, the answer is bubble diagram.",
+   "back": "If it asks what comes next, the answer is concept diagram or functional diagram.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "ADA slopes: 5-2-8. Maximum running slope = 5%. Maximum cross slope = 2%. Maximum ramp slope = 8.33% (1:12). These three numbers answer most ADA slope questions on the exam.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "When the exam mentions a walking surface that exceeds 5% running slope, it is no longer an accessible route \u2014 it becomes a ramp.",
+   "back": "Ramps require handrails, landings, and edge protection. If a surface exceeds 8.33%, it does not comply with ADA at all.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Slope limits to memorize: Athletic fields = 1-2%. Parking = 1-5%. Accessible route = max 5%. Ramps = max 8.33%. Mowed turf = max 25% (3:1). Unmowed = max 50% (2:1). Building perimeter = min 2% away for 10 feet.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "When an exam question asks which BMP is appropriate for a clay soil (HSG D) site, eliminate infiltration-based practices (rain garden without underdrain, infiltration trench, permeable pavement without underdrain).",
+   "back": "Choose detention-based or evapotranspiration-based practices (constructed wetland, green roof, cistern, or bioretention with underdrain).",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Xeriscape 7 principles: P-S-T-P-I-M-M. Planning, Soil improvement, Turf limits, Plant selection, Irrigation efficiency, Mulch, Maintenance. Think: \"Pretty Smart To Plant In Mulched Meadows.\"",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "If the exam asks how to reduce energy costs for a building in a cold climate, the answer involves deciduous shade trees on the south and west (summer cooling) plus an evergreen windbreak on the north and northwest (winter wind protection).",
+   "back": "Deciduous trees allow solar gain in winter when their leaves drop.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Know the accuracy ranges for each design phase.",
+   "back": "If the exam asks about the accuracy of a schematic-level cost estimate, the answer is \u00b115-25%. These ranges are commonly tested.",
+   "detail": "",
+   "source": "tip"
+  }
+ ],
+ "s3_flash": [
+  {
+   "front": "A landscape architect is designing a formal garden. Which of the following design principles is MOST characteristic of formal design?",
+   "back": "B) Symmetrical balance with strong axial organization",
+   "detail": "Formal gardens are characterized by symmetry, axial organization, and geometric forms.",
+   "source": "exam"
+  },
+  {
+   "front": "The principle of \"unity\" in landscape design is BEST achieved by:",
+   "back": "D) Repeating design elements such as materials, forms, colors, and textures to create visual coherence",
+   "detail": "Unity is achieved through repetition and consistency of design elements throughout the site.",
+   "source": "exam"
+  },
+  {
+   "front": "In design, the concept of \"scale\" refers to:",
+   "back": "A) The perceived size of elements in relation to the human body and surrounding context",
+   "detail": "Scale refers to the perceived size of elements relative to the human body and surrounding context.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect uses a sequence of spaces that transition from large and open to small and enclosed. This design technique creates:",
+   "back": "D) A sense of spatial compression and release that enhances the experience of movement through the landscape",
+   "detail": "Alternating spatial compression and release creates a dynamic experience of movement through landscape.",
+   "source": "exam"
+  },
+  {
+   "front": "The \"genius loci\" of a site refers to:",
+   "back": "C) The unique spirit, character, or sense of place inherent to a specific location",
+   "detail": "Genius loci refers to the unique spirit or character of a place.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a pedestrian plaza. Which of the following dimensions would provide the MOST comfortable width for a primary pedestrian walkway?",
+   "back": "D) 10 feet or wider",
+   "detail": "Primary pedestrian walkways in plazas should be 10 feet or wider to accommodate multiple users and ADA requirements.",
+   "source": "exam"
+  },
+  {
+   "front": "When designing a vehicular drop-off area at a public building entrance, the landscape architect should ensure:",
+   "back": "B) The drop-off allows one-way circulation with adequate queuing and a clear connection to the building entrance",
+   "detail": "Drop-offs should allow one-way flow with queuing space and a clear pedestrian connection to the entrance.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing an amphitheater. The seating area should be oriented so that:",
+   "back": "D) The audience faces north or northeast to minimize sun glare during evening performances",
+   "detail": "Orienting the audience north or northeast minimizes sun glare during afternoon and evening events.",
+   "source": "exam"
+  },
+  {
+   "front": "When designing a children's play area within a public park, which of the following is the MOST important consideration?",
+   "back": "A) Providing clear sight lines for caregiver supervision, age-appropriate equipment zones, and appropriate safety surfacing",
+   "detail": "Clear sight lines for supervision, age-appropriate zones, and safety surfacing are the most critical safety considerations.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a parking lot for 200 vehicles. Which of the following strategies BEST reduces the environmental impact of the parking area?",
+   "back": "D) Incorporating bioswales, shade trees, permeable paving, and landscape islands to reduce heat island effect and manage stormwater",
+   "detail": "Bioswales, shade trees, permeable paving, and landscape islands reduce environmental impact through stormwater management and heat island mitigation.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is selecting trees for a streetscape design. Which of the following characteristics is MOST important for street tree selection?",
+   "back": "C) The tree should have a form and root structure compatible with the urban environment, including tolerance for compacted soils, limited root space, and urban heat",
+   "detail": "Street trees must tolerate urban conditions including compacted soils, limited root space, heat, and pollution.",
+   "source": "exam"
+  },
+  {
+   "front": "In a planting design, \"layering\" refers to:",
+   "back": "D) Arranging plants in vertical layers (canopy, understory, shrub, groundcover) to create spatial complexity and ecological function",
+   "detail": "Layering creates vertical plant structure from canopy to groundcover for spatial and ecological complexity.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a rain garden. Which of the following plant characteristics is MOST important for plant selection?",
+   "back": "C) Plants that tolerate both periodic inundation and dry periods",
+   "detail": "Rain garden plants must tolerate alternating wet and dry conditions.",
+   "source": "exam"
+  },
+  {
+   "front": "When designing a foundation planting for a building, the landscape architect should consider:",
+   "back": "B) Mature plant size, building scale, maintenance access, window locations, and structural clearances",
+   "detail": "Foundation plantings must account for mature size, building scale, maintenance access, and clearances.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect specifies a mix of deciduous and evergreen plants in a design. Which of the following is the PRIMARY design benefit of this approach?",
+   "back": "B) It provides year-round visual interest, with seasonal variety from deciduous plants and winter structure from evergreens",
+   "detail": "Mixing deciduous and evergreen plants provides seasonal variety and year-round structure.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a lawn area for passive recreation. Which slope range is MOST appropriate for comfortable use?",
+   "back": "C) 0.5% to 3%",
+   "detail": "Slopes of 0.5% to 3% provide adequate drainage while remaining comfortable for passive recreation.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect designs a berm to screen a parking lot from an adjacent residential area. The berm should be designed with:",
+   "back": "A) Slopes no steeper than 3:1 (horizontal to vertical) for mowable turf and adequate height to screen views",
+   "detail": "Berms with mowable turf should have slopes no steeper than 3:1 for maintenance and stability.",
+   "source": "exam"
+  },
+  {
+   "front": "When designing a terrace on a hillside site, the landscape architect should consider:",
+   "back": "B) Using a series of walls with appropriate heights, incorporating proper drainage behind walls, and creating usable spaces between terraces",
+   "detail": "Terracing should use appropriately sized walls with drainage and create usable spaces between terraces.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is selecting paving materials for a public plaza in a climate with freeze-thaw cycles. Which of the following is the MOST important material property to consider?",
+   "back": "C) Absorption rate and freeze-thaw resistance",
+   "detail": "In freeze-thaw climates, low absorption and freeze-thaw resistance prevent material deterioration.",
+   "source": "exam"
+  },
+  {
+   "front": "Which of the following wall types is MOST appropriate for a retaining wall with a height of 6 feet or more?",
+   "back": "B) Engineered reinforced concrete or mechanically stabilized earth (MSE) wall",
+   "detail": "Walls 6 feet or taller require engineered solutions like reinforced concrete or MSE for structural safety.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect specifies unit pavers for a pedestrian area. The PRIMARY advantage of unit pavers over poured-in-place concrete is:",
+   "back": "A) Unit pavers allow for easier repair of individual sections, accommodate minor ground movement, and can be permeable",
+   "detail": "Unit pavers allow individual repair, accommodate ground movement, and can be installed as permeable systems.",
+   "source": "exam"
+  },
+  {
+   "front": "When selecting wood for an outdoor bench, the landscape architect should specify:",
+   "back": "C) Naturally durable or sustainably sourced species (e.g., black locust, FSC-certified ipe) appropriate for exterior exposure",
+   "detail": "Naturally durable or sustainably sourced exterior-grade wood is appropriate for outdoor furniture.",
+   "source": "exam"
+  },
+  {
+   "front": "According to ADA guidelines, an accessible ramp with a rise greater than 6 inches requires:",
+   "back": "A) Handrails on both sides",
+   "detail": "ADA requires handrails on both sides of ramps with a rise greater than 6 inches.",
+   "source": "exam"
+  },
+  {
+   "front": "Universal design differs from ADA compliance in that:",
+   "back": "A) Universal design aims to create environments usable by all people to the greatest extent possible, going beyond minimum code requirements",
+   "detail": "Universal design creates environments usable by all people, going beyond minimum ADA compliance.",
+   "source": "exam"
+  },
+  {
+   "front": "An accessible route must have a minimum clear width of:",
+   "back": "D) 36 inches",
+   "detail": "ADA requires a minimum clear width of 36 inches for accessible routes.",
+   "source": "exam"
+  },
+  {
+   "front": "At an accessible parking space, an access aisle must be provided. The access aisle must be:",
+   "back": "A) At least 60 inches wide and marked to discourage parking",
+   "detail": "Access aisles must be at least 60 inches wide and marked to prevent parking.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a reflecting pool for a civic plaza. The MOST important design consideration for public safety is:",
+   "back": "C) Limiting water depth, providing visible edges, and ensuring proper water treatment to prevent health hazards",
+   "detail": "Public water features must limit depth, define edges, and maintain water quality for safety.",
+   "source": "exam"
+  },
+  {
+   "front": "When designing an irrigation system for a public landscape, the landscape architect should specify:",
+   "back": "D) Separate zones based on plant water requirements, sun exposure, and soil conditions (hydrozoning)",
+   "detail": "Hydrozoning groups plants with similar water needs into separate irrigation zones for efficiency.",
+   "source": "exam"
+  },
+  {
+   "front": "When designing exterior lighting for a pedestrian pathway, the landscape architect should consider:",
+   "back": "C) Providing adequate and uniform illumination levels for safety while minimizing light pollution and glare",
+   "detail": "Pathway lighting should provide adequate, uniform illumination while minimizing pollution and glare.",
+   "source": "exam"
+  },
+  {
+   "front": "Bollard lighting is MOST appropriate for:",
+   "back": "A) Providing low-level pathway lighting and defining edges",
+   "detail": "Bollard lights provide low-level illumination appropriate for pathways and edge definition.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a green roof for a commercial building. Which of the following is a PRIMARY benefit of a green roof?",
+   "back": "D) It reduces stormwater runoff, mitigates heat island effect, and provides habitat",
+   "detail": "Green roofs reduce stormwater runoff, mitigate heat island effect, and provide habitat value.",
+   "source": "exam"
+  },
+  {
+   "front": "Low Impact Development (LID) strategies include which of the following?",
+   "back": "C) Bioretention cells, permeable paving, green roofs, and rainwater harvesting",
+   "detail": "LID strategies include bioretention, permeable paving, green roofs, and rainwater harvesting.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is selecting plants for a xeriscape design. Which of the following is the MOST important criterion?",
+   "back": "C) Selecting drought-tolerant plants adapted to the local climate that minimize water use once established",
+   "detail": "Xeriscape designs prioritize drought-tolerant, climate-adapted plants that minimize water use once established.",
+   "source": "exam"
+  },
+  {
+   "front": "A bioswale is designed to:",
+   "back": "D) Convey and filter stormwater runoff through vegetation and engineered soil media",
+   "detail": "Bioswales convey and filter stormwater through vegetation and engineered soil media.",
+   "source": "exam"
+  },
+  {
+   "front": "When designing a detention basin for a development, the landscape architect should ensure:",
+   "back": "A) The basin has appropriate side slopes for safety and maintenance, an outlet structure to control discharge, and an emergency overflow",
+   "detail": "Detention basins need safe side slopes, outlet structures, and emergency overflows.",
+   "source": "exam"
+  },
+  {
+   "front": "A concept plan is typically presented during which phase of the design process?",
+   "back": "B) Schematic design",
+   "detail": "Concept plans are typically presented during schematic design.",
+   "source": "exam"
+  },
+  {
+   "front": "A section drawing is MOST useful for communicating:",
+   "back": "A) Vertical relationships, elevation changes, spatial proportions, and the relationship between ground plane and vertical elements",
+   "detail": "Section drawings communicate vertical relationships, elevation changes, and spatial proportions.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a pergola for a garden. The PRIMARY function of a pergola is to:",
+   "back": "B) Define space, provide filtered shade, and support climbing plants",
+   "detail": "Pergolas define space, provide filtered shade, and support climbing plants without full weather protection.",
+   "source": "exam"
+  },
+  {
+   "front": "When designing a freestanding seat wall, the MOST comfortable seat height for adults is approximately:",
+   "back": "B) 18 inches",
+   "detail": "Approximately 18 inches is the most comfortable seat wall height for adults.",
+   "source": "exam"
+  },
+  {
+   "front": "During design development, the landscape architect refines the approved schematic design. Which of the following is typically accomplished during this phase?",
+   "back": "B) The landscape architect refines spatial relationships, selects specific materials and furnishings, and develops detailed design solutions",
+   "detail": "Design development refines spatial relationships, selects specific materials, and develops detailed solutions.",
+   "source": "exam"
+  },
+  {
+   "front": "EXAM FORMAT:  Section 3 uses four question types: standard multiple choice, select all that apply (multiple correct answers), drag and drop (place items in the correct order or location), and hotspot (click on a specific location in an image).",
+   "back": "Hotspot questions may ask you to identify components in a construction detail or locate features on a plan. Practice reading details carefully before the exam.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "The exam may show a construction drawing and ask you to interpret line types.",
+   "back": "Remember: solid = visible, dashed = hidden/underground/existing contours, dot-dash = centerline. If a plan shows a dashed circle around a tree, it represents the drip line (canopy edge) used for tree protection.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Pavement layers from bottom to top: Subgrade \u2192 Subbase (optional) \u2192 Base \u2192 Surface. Think of it as a sandwich: the bread (surface) gets all the wear, but the filling (base and subbase) provides the structural support.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Control joint spacing is one of the most tested construction topics.",
+   "back": "The rule: maximum 10-12 feet in each direction, keep panels roughly square. If an exam question shows a 5-foot-wide sidewalk, control joints should be spaced every 5-10 feet to keep panels square.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "In most jurisdictions, retaining walls over 4 feet in exposed height (measured from the bottom of the footing to the top of the wall) require structural engineering.",
+   "back": "The landscape architect designs walls up to 4 feet; taller walls require a structural engineer's stamp. Know this threshold.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Wall drainage checklist: GPFW \u2014 Gravel backfill, Perforated pipe, Filter fabric, Weep holes. Every retaining wall needs all four. If one is missing, water will build up and the wall will eventually fail.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Step formula: 2R + T = 26. A 6\" riser: 2(6) + T = 26, so T = 14\". A 7\" riser: 2(7) + T = 26, so T = 12\". These are the two most common outdoor combinations.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Fewer than 3 risers is a tripping hazard \u2014 people do not notice a single step or two-step change.",
+   "back": "If the elevation change requires only 1-2 risers, consider a ramp instead, or add a visual contrast strip to make the steps obvious.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Tree planting critical rules: Wide hole (2-3\u00d7 root ball), shallow depth (flare at grade), native backfill, NO mulch volcano, stakes removed after 1-2 years. Remember: \"Wide, Shallow, Native, No Volcano, Temporary Stakes.\"",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Never mix spray heads and rotors in the same zone \u2014 this is one of the most common exam questions about irrigation design.",
+   "back": "The reason is matched precipitation rates: spray heads apply 1.5-2.0 in/hr while rotors apply 0.5-1.0 in/hr. Mixing them in one zone makes uniform watering impossible.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Dark sky compliance = full cutoff fixtures (no uplight) + warm color temperature (\u22643000K) + minimized light trespass.",
+   "back": "If the exam asks how to reduce light pollution, these are the key strategies.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Key CSI divisions for landscape architecture: 31-32-33. Division 31 = Earthwork (what you move). Division 32 = Exterior Improvements (what you build and plant on the surface). Division 33 = Utilities (what goes underground). Know these three division numbers.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Public projects often require open competition and may not allow proprietary (sole-source) specifications.",
+   "back": "Performance and \"or equal\" specifications are preferred for public work to allow multiple manufacturers to bid, keeping costs competitive.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Bidding sequence: A-P-A-B-E-N-C-N. Advertise \u2192 Pre-bid conference \u2192 Addenda \u2192 Bid opening \u2192 Evaluation \u2192 Notice of Award \u2192 Contract execution \u2192 Notice to Proceed. The contract time starts at NTP, not at award.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "The distinction between \"observation\" and \"inspection\" is critical.",
+   "back": "The LA OBSERVES work for general conformance with design intent. \"Inspection\" implies a guarantee that the work meets every requirement \u2014 a liability trap. If the exam uses \"inspection,\" it is often the wrong answer.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Closeout documents: AOWLS + T. As-builts, O&M manuals, Warranties, Lien releases, Spare parts, Training. The contractor owes you AOWLS and Training before getting final payment.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "The warranty period starts at substantial completion, not final completion.",
+   "back": "This is a frequently tested distinction. If the exam asks when the warranty clock starts, the answer is substantial completion.",
+   "detail": "",
+   "source": "tip"
+  }
+ ],
+ "s4_flash": [
+  {
+   "front": "A landscape architect needs to determine the slope between two points. Point A is at elevation 102.0 and Point B is at elevation 98.0. The horizontal distance between them is 80 feet. What is the slope percentage?",
+   "back": "C) 5%",
+   "detail": "Slope = (102.0 - 98.0) / 80 = 4/80 = 0.05 = 5%.",
+   "source": "exam"
+  },
+  {
+   "front": "Contour lines on a grading plan that form a \"V\" shape pointing uphill indicate:",
+   "back": "D) A valley or swale",
+   "detail": "Contour lines forming a \"V\" pointing uphill indicate a valley or swale where water collects.",
+   "source": "exam"
+  },
+  {
+   "front": "When grading around a building, the finished grade should slope AWAY from the building at a minimum of:",
+   "back": "A) 2% for 10 feet (or per code)",
+   "detail": "A minimum 2% slope away from a building for at least 10 feet (or per local code) ensures positive drainage away from the foundation.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a grading plan and needs to calculate the elevation at a point between two contour lines. This process is called:",
+   "back": "D) Interpolation",
+   "detail": "Interpolation estimates values between two known points (contour lines).",
+   "source": "exam"
+  },
+  {
+   "front": "The maximum slope for an ADA-compliant ramp is:",
+   "back": "B) 1:12 (8.33%)",
+   "detail": "ADA requires a maximum ramp slope of 1:12 (8.33%).",
+   "source": "exam"
+  },
+  {
+   "front": "A proposed grading plan shows a finished floor elevation (FFE) of 100.0. The landscape architect should ensure the grade at the building perimeter is at LEAST:",
+   "back": "D) 99.5 (6 inches below the FFE)",
+   "detail": "The grade at the building perimeter should be at least 6 inches below the FFE to prevent water entry.",
+   "source": "exam"
+  },
+  {
+   "front": "When grading a parking lot, the MINIMUM slope for adequate surface drainage is typically:",
+   "back": "C) 1% to 2%",
+   "detail": "Parking lots typically require 1% to 2% minimum slope for surface drainage.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a swale to convey stormwater. The minimum longitudinal slope for a grass-lined swale to ensure positive drainage is typically:",
+   "back": "D) 1% to 2%",
+   "detail": "Grass-lined swales typically require a minimum 1% to 2% slope for positive drainage.",
+   "source": "exam"
+  },
+  {
+   "front": "In earthwork calculations, \"cut\" refers to:",
+   "back": "A) Removing soil to lower the grade",
+   "detail": "Cut is the removal of soil to lower the existing grade.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is balancing cut and fill on a project site. The PRIMARY goal of balancing cut and fill is to:",
+   "back": "D) Minimize the need for importing or exporting soil, reducing cost and environmental impact",
+   "detail": "Balancing cut and fill minimizes the need for import or export, reducing cost and environmental impact.",
+   "source": "exam"
+  },
+  {
+   "front": "When estimating earthwork quantities, the average end area method is used to:",
+   "back": "A) Calculate the volume of earth between two cross-sections",
+   "detail": "The average end area method calculates earthwork volume between two cross-sections.",
+   "source": "exam"
+  },
+  {
+   "front": "Soil that has been excavated and placed as fill typically requires a \"swell factor\" because:",
+   "back": "D) The excavated soil occupies more volume in a loose state than it did in its undisturbed state",
+   "detail": "Excavated soil is loosened and occupies more volume than in its undisturbed state (swell).",
+   "source": "exam"
+  },
+  {
+   "front": "A French drain is BEST described as:",
+   "back": "D) A subsurface trench filled with gravel and perforated pipe to collect and redirect groundwater",
+   "detail": "A French drain is a subsurface trench with gravel and perforated pipe for groundwater collection.",
+   "source": "exam"
+  },
+  {
+   "front": "Manning's equation is used in drainage design to calculate:",
+   "back": "A) The flow velocity and capacity of open channels and pipes",
+   "detail": "Manning's equation calculates flow velocity and capacity in open channels and pipes.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is sizing a storm drain pipe. If the contributing drainage area increases, the pipe size should:",
+   "back": "A) Increase",
+   "detail": "Larger drainage areas produce more runoff, requiring larger pipes.",
+   "source": "exam"
+  },
+  {
+   "front": "An area drain (catch basin) is typically placed at:",
+   "back": "B) Low points where surface water collects",
+   "detail": "Area drains are placed at low points where surface water collects.",
+   "source": "exam"
+  },
+  {
+   "front": "The time of concentration for a watershed is:",
+   "back": "B) The time it takes for runoff to travel from the hydraulically most distant point in the watershed to the outlet",
+   "detail": "Time of concentration is the time for runoff to travel from the most distant point to the outlet.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect designs a subsurface drainage system behind a retaining wall. The PRIMARY purpose of this drainage is to:",
+   "back": "C) Relieve hydrostatic pressure that could cause wall failure",
+   "detail": "Drainage behind retaining walls relieves hydrostatic pressure that could cause wall failure.",
+   "source": "exam"
+  },
+  {
+   "front": "Pre-development versus post-development runoff analysis is conducted to:",
+   "back": "C) Ensure that stormwater runoff rates and volumes after development do not exceed pre-development conditions",
+   "detail": "Pre/post analysis ensures development does not increase runoff rates and volumes beyond pre-development levels.",
+   "source": "exam"
+  },
+  {
+   "front": "A detention basin is designed to:",
+   "back": "B) Temporarily store stormwater and release it at a controlled rate to reduce peak discharge",
+   "detail": "Detention basins temporarily store water and release it at controlled rates to reduce peak discharge.",
+   "source": "exam"
+  },
+  {
+   "front": "The difference between a detention basin and a retention basin is:",
+   "back": "C) A detention basin temporarily stores and slowly releases water; a retention basin permanently holds water",
+   "detail": "Detention temporarily stores and releases water; retention permanently holds water (like a pond).",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect specifies permeable interlocking concrete pavers (PICP) for a parking area. The PRIMARY stormwater benefit of PICP is:",
+   "back": "C) It allows stormwater to infiltrate through the paver joints into an aggregate base, reducing runoff volume",
+   "detail": "PICP allows stormwater to infiltrate through joints into the aggregate base, reducing runoff volume.",
+   "source": "exam"
+  },
+  {
+   "front": "A typical construction detail for a concrete walkway should include:",
+   "back": "A) Cross-section showing subgrade preparation, aggregate base depth, concrete thickness, reinforcement, joints, and finish",
+   "detail": "A complete walkway detail shows subgrade, base, concrete thickness, reinforcement, joints, and finish.",
+   "source": "exam"
+  },
+  {
+   "front": "Control joints in concrete flatwork are provided to:",
+   "back": "B) Control the location of cracking due to shrinkage",
+   "detail": "Control joints create a weakened plane to control where shrinkage cracking occurs.",
+   "source": "exam"
+  },
+  {
+   "front": "The spacing of control joints in a 4-inch-thick concrete walkway should typically not exceed:",
+   "back": "D) 8 to 10 feet (approximately 2 to 3 times the slab thickness in feet)",
+   "detail": "Control joint spacing should be approximately 2 to 3 times the slab thickness in feet. For 4-inch slabs, 8-10 feet is typical.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is detailing a stone veneer wall. The detail should show:",
+   "back": "A) The structural backing (CMU or concrete), mortar bed, veneer stone, cap, footing, and drainage provisions",
+   "detail": "A complete stone veneer detail shows the structural backing, mortar, veneer, cap, footing, and drainage.",
+   "source": "exam"
+  },
+  {
+   "front": "When detailing a timber deck, the landscape architect should specify:",
+   "back": "A) Posts supported on concrete footings extending below the frost line, with appropriate fasteners and flashing",
+   "detail": "Deck posts require concrete footings below the frost line with proper fasteners and flashing.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect details an accessible curb ramp at a street crossing. The detail should include:",
+   "back": "D) A ramp slope not exceeding 1:12, detectable warning surfaces, flared sides, and proper alignment with the crosswalk",
+   "detail": "Accessible curb ramps need 1:12 max slope, detectable warnings, flared sides, and crosswalk alignment.",
+   "source": "exam"
+  },
+  {
+   "front": "In the CSI MasterFormat system, Division 32 covers:",
+   "back": "A) Exterior Improvements (site work including paving, planting, and site furnishings)",
+   "detail": "CSI MasterFormat Division 32 covers Exterior Improvements including paving, planting, and site elements.",
+   "source": "exam"
+  },
+  {
+   "front": "A prescriptive specification defines:",
+   "back": "C) The specific materials, products, methods, and installation requirements",
+   "detail": "Prescriptive specifications define specific materials, products, methods, and installation requirements.",
+   "source": "exam"
+  },
+  {
+   "front": "The THREE parts of a CSI specification section are:",
+   "back": "C) General, Products, Execution",
+   "detail": "CSI specification sections have three parts: General, Products, and Execution.",
+   "source": "exam"
+  },
+  {
+   "front": "When a specification includes the phrase \"or approved equal,\" it means:",
+   "back": "B) The contractor may propose an alternative product that meets the same performance criteria, subject to the landscape architect's approval",
+   "detail": "\"Or approved equal\" allows the contractor to propose alternatives meeting the same criteria, subject to approval.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect's construction document set typically includes which of the following sheets?",
+   "back": "B) Title sheet, demolition plan, layout plan, grading plan, drainage plan, planting plan, irrigation plan, and construction details",
+   "detail": "A complete CD set includes title, demolition, layout, grading, drainage, planting, irrigation, and details.",
+   "source": "exam"
+  },
+  {
+   "front": "Dimensions on a layout plan should reference:",
+   "back": "C) Established baselines, property lines, building faces, or control points for accurate field layout",
+   "detail": "Layout dimensions should reference baselines, property lines, building faces, or control points.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect includes a plant schedule on the planting plan. The schedule should include:",
+   "back": "A) Botanical name, common name, quantity, size at installation, spacing (if applicable), root condition, and any special notes",
+   "detail": "A plant schedule includes botanical name, common name, quantity, size, spacing, root condition, and notes.",
+   "source": "exam"
+  },
+  {
+   "front": "A gravity retaining wall relies on which principle for stability?",
+   "back": "B) Its own mass and weight to resist the lateral pressure of the retained soil",
+   "detail": "Gravity walls resist lateral soil pressure through their own mass and weight.",
+   "source": "exam"
+  },
+  {
+   "front": "The area behind a retaining wall where soil is placed is called:",
+   "back": "B) The backfill zone",
+   "detail": "The area behind a retaining wall where soil is placed is the backfill zone.",
+   "source": "exam"
+  },
+  {
+   "front": "A landscape architect is designing a freestanding garden wall (not retaining soil). The wall requires a footing that extends:",
+   "back": "D) Below the frost line to prevent heaving",
+   "detail": "Freestanding wall footings must extend below the frost line to prevent frost heave.",
+   "source": "exam"
+  },
+  {
+   "front": "During construction, a silt fence is installed to:",
+   "back": "B) Temporarily trap sediment from disturbed areas and prevent it from leaving the site during construction",
+   "detail": "Silt fences temporarily trap sediment during construction to prevent it from leaving the site.",
+   "source": "exam"
+  },
+  {
+   "front": "A Stormwater Pollution Prevention Plan (SWPPP) is typically required for:",
+   "back": "C) Construction activities that disturb one acre or more of land (per EPA NPDES requirements)",
+   "detail": "SWPPP is required for construction disturbing one acre or more under EPA NPDES requirements.",
+   "source": "exam"
+  },
+  {
+   "front": "EXAM FORMAT:  Section 4 uses all four question types: standard multiple choice, select all that apply, drag and drop (arranging items in sequence), and hotspot (clicking on a location in a plan or detail).",
+   "back": "Hotspot questions may ask you to place contour lines on a grading plan, locate the correct position for a drainage inlet, or identify the high point in a drainage area. Practice interpreting topographic plans before the exam.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Streams and ridges: V's point UP for streams (water flows down, contours point up). V's point DOWN for ridges (land rises, contours point down). Remember: \"V's point opposite to what the feature does.\"",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Hotspot questions may ask you to identify the location of a stream, ridge, or drainage divide on a contour map.",
+   "back": "Look for the V-pattern in the contour lines. V's pointing uphill = stream. V's pointing downhill = ridge/drainage divide.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "When the exam shows a contour map and asks for the elevation at a specific point, use linear interpolation between the two nearest contour lines.",
+   "back": "Measure the point's proportional distance between the contours, then multiply by the contour interval and add to the lower contour elevation.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Contour spacing = Interval \u00f7 Slope. Bigger slope = closer contours. A 2% slope with 1' interval has contours every 50 feet. A 5% slope has contours every 20 feet. Double the slope = half the spacing.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "If a hotspot question asks you to draw contours around a building, remember: contours BEND AWAY from the building on all sides.",
+   "back": "This is the graphic representation of positive drainage. The highest point is at the building; the lowest point is away from it.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Soil swell/shrink: Bank soil EXPANDS when you dig it up (loose) and SHRINKS when you compact it (compacted fill). To balance a site, you need about 10-15% more bank-measure cut volume than the fill volume you need to place.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "If the exam asks for earthwork volume, pay attention to whether the answer should be in bank, loose, or compacted cubic yards.",
+   "back": "The same volume of earth has different measurements depending on its state. Always use bank cubic yards for cut/fill comparisons unless told otherwise.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Rational Method: Q = CIA. Think \"CIA agents handle the flow\" \u2014 C is the character of the surface, I is the intensity of the storm, A is the area of the watershed. Multiply all three to get the flow rate Q.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "When calculating composite C, make sure all areas sum to the total drainage area.",
+   "back": "It is easy to forget a surface type or double-count an area. Double-check: \u03a3 An = total area. Also verify your units \u2014 A must be in acres, i in inches/hour.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "This table is one of the most important for Section 4.",
+   "back": "If the exam describes clay soils (HSG D), eliminate all infiltration-only BMPs. Choose detention, retention, or practices with underdrains. If the exam describes sandy soils (HSG A), infiltration practices are ideal.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Erosion control = keep the soil WHERE IT IS (source control). Sediment control = catch the soil AFTER it moves (treatment). Erosion control is always the first priority because it is more effective and cheaper.",
+   "detail": "",
+   "source": "memory"
+  },
+  {
+   "front": "Silt fence is the most commonly misunderstood ESC practice.",
+   "back": "It is a SEDIMENT control device (captures eroded soil), NOT an erosion control device (does not prevent erosion). Silt fence must be installed along the contour \u2014 never run silt fence downhill, or water will flow around the ends and the fence will fail.",
+   "detail": "",
+   "source": "tip"
+  },
+  {
+   "front": "Memory Aid",
+   "back": "Manning's equation: V = (1.49/n) \u00d7 R^(2/3) \u00d7 S^(1/2). Think \"Velma runs slowly\" \u2014 Velocity depends on Roughness (n) and Slope (S). Smoother surface (lower n) = faster. Steeper slope (higher S) = faster. The 1.49 is a unit conversion factor for US customary units.",
+   "detail": "",
+   "source": "memory"
   }
  ]
 }
