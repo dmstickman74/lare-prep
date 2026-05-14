@@ -80,6 +80,8 @@ function route() {
     renderSection(app, secNum, tab);
   } else if (r.section === 'dashboard') {
     renderDashboard(app);
+  } else if (r.section === 'books' || r.section === 'exams' || r.section === 'flashcards') {
+    renderResourceLanding(app, r.section);
   } else {
     renderHome(app);
   }
@@ -899,6 +901,73 @@ window.setExamMode = function(mode) {
     renderQuestion(document.getElementById('section-content'), state);
   }
 };
+
+/* -- Resource Landing Pages ----------------------------------------------- */
+function renderResourceLanding(app, type) {
+  const config = {
+    books: {
+      title: 'Study Books',
+      subtitle: 'In-depth textbook coverage for every LARE section',
+      tab: 'book',
+      icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+      description: 'Each study book provides comprehensive, chapter-by-chapter coverage with teaching narratives, memory aids, real-world examples, and review questions.',
+    },
+    exams: {
+      title: 'Practice Exams',
+      subtitle: '160 multiple-choice questions across all four sections',
+      tab: 'exam',
+      icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+      description: '40 questions per section with instant scoring, detailed explanations, and progress tracking. Practice mode lets you check answers one at a time.',
+    },
+    flashcards: {
+      title: 'Flashcards',
+      subtitle: '220+ interactive cards for quick review',
+      tab: 'flash',
+      icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>',
+      description: 'Flip cards generated from exam questions, exam tips, memory aids, and key term definitions. Study online with shuffle mode or print for on-the-go review.',
+    },
+  };
+
+  const c = config[type];
+  const progress = getProgress();
+
+  const cardsHtml = SECTIONS.map(s => {
+    const p = progress['s' + s.id] || {};
+    const examPct = p.examBest != null ? p.examBest + '%' : '--';
+    const flashCount = DATA['s' + s.id + '_flash']?.length || 0;
+    const examCount = DATA['s' + s.id + '_exam']?.length || 0;
+    const bookCount = DATA['s' + s.id + '_book']?.length || 0;
+
+    let meta = '';
+    if (type === 'books') meta = bookCount + ' chapters';
+    else if (type === 'exams') meta = examCount + ' questions · Best: ' + examPct;
+    else meta = flashCount + ' cards';
+
+    return `
+      <div class="section-card" onclick="navigate('s${s.id}/${c.tab}')">
+        <div class="card-num">Section ${s.id}</div>
+        <h3>${s.title}</h3>
+        <p>${s.items} scored items on the LARE</p>
+        <div class="card-meta">
+          <span>${meta}</span>
+        </div>
+      </div>`;
+  }).join('');
+
+  app.innerHTML = `
+    <div class="page-header">
+      <div class="container">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;color:var(--asla-green)">${c.icon}</div>
+        <h1><strong>${c.title}</strong></h1>
+        <div class="subtitle">${c.subtitle}</div>
+      </div>
+    </div>
+    <div class="container" style="padding-top:48px;padding-bottom:96px">
+      <p style="max-width:680px;margin-bottom:40px;color:var(--dark-gray);line-height:1.7">${c.description}</p>
+      <div class="sections-grid">${cardsHtml}</div>
+    </div>
+  `;
+}
 
 /* -- Dashboard ----------------------------------------------------------- */
 function renderDashboard(app) {
