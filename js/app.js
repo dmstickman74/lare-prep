@@ -30,7 +30,13 @@ const db = firebase.firestore();
 auth.onAuthStateChanged(user => {
   currentUser = user;
   renderAuthArea();
-  if (user) syncProgressFromCloud();
+  if (user) {
+    syncProgressFromCloud();
+    const r = parseHash();
+    if (r.section === 'home' || r.section === '') {
+      navigate('dashboard');
+    }
+  }
 });
 
 /* -- Router -------------------------------------------------------------- */
