@@ -353,13 +353,13 @@ function renderHome(app) {
           </div>
           <div style="background:var(--white);padding:28px 24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle)">
             <div style="font-size:36px;font-weight:300;color:var(--asla-green);margin-bottom:12px">03</div>
-            <h4 style="font-size:17px;font-weight:600;color:var(--asla-teal);margin-bottom:8px">Practice Exam</h4>
-            <p style="font-size:14px;color:var(--dark-gray);line-height:1.55">40 multiple-choice questions per section with instant scoring, detailed explanations, and progress tracking.</p>
+            <h4 style="font-size:17px;font-weight:600;color:var(--asla-teal);margin-bottom:8px">Flashcards</h4>
+            <p style="font-size:14px;color:var(--dark-gray);line-height:1.55">Interactive flip cards for quick review. Study online or print for on-the-go practice.</p>
           </div>
           <div style="background:var(--white);padding:28px 24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle)">
             <div style="font-size:36px;font-weight:300;color:var(--asla-green);margin-bottom:12px">04</div>
-            <h4 style="font-size:17px;font-weight:600;color:var(--asla-teal);margin-bottom:8px">Flashcards</h4>
-            <p style="font-size:14px;color:var(--dark-gray);line-height:1.55">Interactive flip cards for quick review. Study online or print for on-the-go practice.</p>
+            <h4 style="font-size:17px;font-weight:600;color:var(--asla-teal);margin-bottom:8px">Practice Exam</h4>
+            <p style="font-size:14px;color:var(--dark-gray);line-height:1.55">40 multiple-choice questions per section with instant scoring, detailed explanations, and progress tracking.</p>
           </div>
         </div>
       </div>
