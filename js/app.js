@@ -48,7 +48,8 @@ auth.onAuthStateChanged(user => {
 
 (function checkSsoCallback() {
   const params = new URLSearchParams(window.location.search);
-  const ssoToken = params.get('ssoToken') || params.get('ssotoken') || params.get('SSOToken');
+  const ssoToken = params.get('sso') || params.get('ssoToken') || params.get('SSOToken');
+  const userId = params.get('UserId');
   if (!ssoToken) {
     const stored = localStorage.getItem('aslaProfile');
     if (stored) {
@@ -57,18 +58,28 @@ auth.onAuthStateChanged(user => {
     return;
   }
   window.history.replaceState({}, '', window.location.pathname + window.location.hash);
-  verifyAslaSSO(ssoToken);
+  verifyAslaSSO(ssoToken, userId);
 })();
 
-async function verifyAslaSSO(ssoToken) {
+async function verifyAslaSSO(ssoToken, userId) {
   try {
-    const res = await fetch(`${IMPEXIUM_API}/Individuals/FindBySsoToken/${encodeURIComponent(ssoToken)}`, {
-      headers: { 'AppToken': IMPEXIUM_APP_TOKEN, 'UserToken': IMPEXIUM_USER_TOKEN }
-    });
-    if (!res.ok) throw new Error('Invalid SSO token');
-    const data = await res.json();
-    const individual = data.dataList ? data.dataList[0] : data;
-    if (!individual) throw new Error('No user found');
+    let individual = null;
+    const headers = { 'AppToken': IMPEXIUM_APP_TOKEN, 'UserToken': IMPEXIUM_USER_TOKEN };
+
+    const ssoRes = await fetch(`${IMPEXIUM_API}/Individuals/FindBySsoToken/${encodeURIComponent(ssoToken)}`, { headers });
+    if (ssoRes.ok) {
+      const data = await ssoRes.json();
+      individual = data.dataList ? data.dataList[0] : data;
+    }
+
+    if (!individual && userId) {
+      const idRes = await fetch(`${IMPEXIUM_API}/Individuals/${encodeURIComponent(userId)}`, { headers });
+      if (idRes.ok) {
+        individual = await idRes.json();
+      }
+    }
+
+    if (!individual) throw new Error('Could not verify ASLA account');
 
     aslaProfile = {
       id: individual.id,
