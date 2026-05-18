@@ -779,7 +779,7 @@ function renderSlide(state) {
   container.innerHTML = `
     <div class="ml-player">
       <div class="ml-player-header">
-        <button class="ml-back-btn" onclick="navigate('s${secNum}/learn')">
+        <button class="ml-back-btn" onclick="location.hash='#s${secNum}/learn';route()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
           All Lessons
         </button>
@@ -821,7 +821,8 @@ window.completeLesson = function(secNum, lessonIdx) {
     progress[mlKey].push(lessonIdx);
     saveProgress(progress);
   }
-  navigate(`s${secNum}/learn`);
+  location.hash = `#s${secNum}/learn`;
+  route();
 };
 
 /* -- Flashcards ---------------------------------------------------------- */
