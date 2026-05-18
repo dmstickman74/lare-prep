@@ -819,7 +819,8 @@ window.completeLesson = function(secNum, lessonIdx) {
   if (!progress[mlKey]) progress[mlKey] = [];
   if (!progress[mlKey].includes(lessonIdx)) {
     progress[mlKey].push(lessonIdx);
-    saveProgress(progress);
+    localStorage.setItem('lare-progress', JSON.stringify(progress));
+    if (currentUser) syncProgressToCloud(progress);
   }
   location.hash = `#s${secNum}/learn`;
   route();
@@ -1225,6 +1226,10 @@ function renderDashboard(app) {
     const attempts = p.examAttempts || 0;
     const lastDate = p.lastAttempt ? new Date(p.lastAttempt).toLocaleDateString() : '--';
 
+    const mlCompleted = progress[`s${s.id}_microlearn`] || [];
+    const mlTotal = buildLessons(s.id).length;
+    const mlPct = mlTotal > 0 ? Math.round(mlCompleted.length / mlTotal * 100) : 0;
+
     return `
       <div class="progress-card">
         <h4>Section ${s.id}</h4>
@@ -1232,8 +1237,15 @@ function renderDashboard(app) {
         <div class="pct">${bestPct != null ? bestPct + '%' : '--'}</div>
         <div class="progress-bar"><div class="progress-fill" style="width:${bestPct || 0}%"></div></div>
         <div style="font-size:12px;color:var(--placeholder-gray);margin-top:8px">${attempts} attempt${attempts !== 1 ? 's' : ''} · Last: ${lastDate}</div>
+        <div style="margin-top:12px;font-size:12px;color:var(--dark-gray)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span>Microlearning: ${mlCompleted.length}/${mlTotal} lessons</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${mlPct}%;background:var(--asla-green)"></div></div>
+        </div>
         <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
           <button class="btn btn-sm btn-primary" onclick="navigate('${key}/exam')">Take exam</button>
+          <button class="btn btn-sm btn-secondary" onclick="navigate('${key}/learn')">Lessons</button>
           <button class="btn btn-sm btn-secondary" onclick="navigate('${key}/book')">Study</button>
           <button class="btn btn-sm btn-secondary" onclick="navigate('${key}/flash')">Flashcards</button>
         </div>
@@ -1247,6 +1259,9 @@ function renderDashboard(app) {
   }, 0);
   const sectionsAttempted = SECTIONS.filter(s => (progress['s' + s.id] || {}).examBest != null).length;
   const avgDisplay = sectionsAttempted > 0 ? Math.round(avgBest / sectionsAttempted) + '%' : '--';
+
+  const totalLessonsCompleted = SECTIONS.reduce((sum, s) => sum + (progress[`s${s.id}_microlearn`] || []).length, 0);
+  const totalLessons = SECTIONS.reduce((sum, s) => sum + buildLessons(s.id).length, 0);
 
   app.innerHTML = `
     <div class="page-header">
@@ -1268,6 +1283,10 @@ function renderDashboard(app) {
         <div style="background:var(--white);padding:24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle);text-align:center">
           <div style="font-size:36px;font-weight:600;color:var(--asla-teal)">${sectionsAttempted}/4</div>
           <div style="font-size:13px;color:var(--dark-gray)">Sections Attempted</div>
+        </div>
+        <div style="background:var(--white);padding:24px;border-radius:var(--radius-lg);box-shadow:var(--shadow-subtle);text-align:center">
+          <div style="font-size:36px;font-weight:600;color:var(--asla-green)">${totalLessonsCompleted}/${totalLessons}</div>
+          <div style="font-size:13px;color:var(--dark-gray)">Lessons Completed</div>
         </div>
       </div>
       <div class="progress-grid">${cardsHtml}</div>
