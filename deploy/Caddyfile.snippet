@@ -1,0 +1,28 @@
+# Drop this into your Caddyfile and adjust the host + paths to match your VM.
+# Assumes the static site lives at /var/www/lareprep and the Node API listens
+# on 127.0.0.1:4001 (set by server/.env).
+
+lareprep.asla.org {
+    encode zstd gzip
+
+    # Progress sync API — reverse proxy to the Node service
+    handle /api/* {
+        reverse_proxy 127.0.0.1:4001
+    }
+
+    # Everything else: serve the static site
+    handle {
+        root * /var/www/lareprep
+        try_files {path} /index.html
+        file_server
+    }
+
+    # Long-cache versioned assets, no-cache the HTML entry
+    @assets path /assets/* /css/* /js/* /fonts/*
+    header @assets Cache-Control "public, max-age=604800, must-revalidate"
+    header /index.html Cache-Control "no-cache"
+
+    log {
+        output file /var/log/caddy/lareprep.log
+    }
+}

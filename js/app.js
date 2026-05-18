@@ -11,7 +11,6 @@ const SECTIONS = [
 
 let DATA = null;
 let currentView = null;
-let currentUser = null;
 let aslaProfile = null;
 
 /* -- Impexium SSO -------------------------------------------------------- */
@@ -20,31 +19,21 @@ const IMPEXIUM_APP_TOKEN = 'a42a8800-fc03-46c6-9049-08deb0a1c0c9';
 const IMPEXIUM_USER_TOKEN = 'fc8aadb0-d5e7-4c37-b576-08deb0a1c148';
 const ASLA_LOGIN_URL = 'https://your.asla.org/account/login.aspx';
 
-/* -- Firebase ------------------------------------------------------------ */
-const firebaseConfig = {
-  apiKey: "AIzaSyBJ7GVbGeRD9pKVR107YCg7ma1BardmJIE",
-  authDomain: "lare-prep-site.firebaseapp.com",
-  projectId: "lare-prep-site",
-  storageBucket: "lare-prep-site.firebasestorage.app",
-  messagingSenderId: "212173455933",
-  appId: "1:212173455933:web:9a565cb1361b0b41a76054"
-};
+/* -- Progress API -------------------------------------------------------- */
+const API_BASE = '/api';
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-
-auth.onAuthStateChanged(user => {
-  currentUser = user;
-  renderAuthArea();
-  if (user || aslaProfile) {
-    syncProgressFromCloud();
-    const r = parseHash();
-    if (r.section === 'home' || r.section === '') {
-      navigate('dashboard');
-    }
+function getDeviceId() {
+  let id = localStorage.getItem('lare-device-id');
+  if (!id) {
+    id = (crypto.randomUUID && crypto.randomUUID()) ||
+      'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random() * 16 | 0;
+        return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+      });
+    localStorage.setItem('lare-device-id', id);
   }
-});
+  return id;
+}
 
 (function checkSsoCallback() {
   const params = new URLSearchParams(window.location.search);
@@ -143,14 +132,31 @@ function navigate(path) {
 
 window.addEventListener('hashchange', route);
 window.addEventListener('DOMContentLoaded', async () => {
-  await loadData();
+  try {
+    await loadData();
+  } catch (err) {
+    console.error('Failed to load study materials:', err);
+    const app = document.getElementById('app');
+    app.textContent = '';
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'padding:64px 24px;text-align:center;color:var(--dark-gray)';
+    const h2 = document.createElement('h2');
+    h2.textContent = 'Could not load study materials';
+    const p = document.createElement('p');
+    p.textContent = 'Please refresh the page. If this keeps happening, try again later.';
+    wrap.append(h2, p);
+    app.append(wrap);
+    return;
+  }
   setupDropdown();
   setupMobileMenu();
+  syncProgressFromCloud();
   route();
 });
 
 async function loadData() {
   const resp = await fetch('js/content/data.json');
+  if (!resp.ok) throw new Error('data.json fetch failed: ' + resp.status);
   DATA = await resp.json();
 }
 
@@ -253,13 +259,7 @@ function renderAuthArea() {
   const area = document.getElementById('auth-area');
   if (!area) return;
 
-  if (currentUser) {
-    const name = currentUser.displayName || currentUser.email?.split('@')[0] || 'User';
-    area.innerHTML = `
-      <span class="user-name">${escHtml(name)}</span>
-      <button class="auth-btn auth-btn-signout" onclick="signOutUser()">Sign out</button>
-    `;
-  } else if (aslaProfile) {
+  if (aslaProfile) {
     area.innerHTML = `
       <span class="user-name">${escHtml(aslaProfile.name || 'ASLA Member')}</span>
       <button class="auth-btn auth-btn-signout" onclick="signOutASLA()">Sign out</button>
@@ -284,76 +284,20 @@ window.closeAuthModal = function() {
 function renderAuthForm(mode) {
   const title = document.getElementById('auth-modal-title');
   const body = document.getElementById('auth-modal-body');
-  const isSignIn = mode === 'signin';
 
-  title.textContent = isSignIn ? 'Sign In' : 'Create Account';
+  title.textContent = 'Sign In';
 
   body.innerHTML = `
     <button class="asla-sso-btn" onclick="signInWithASLA()">
       <img src="assets/logos/asla-mark-green-black.png" alt="ASLA" width="20" height="20">
       Sign in with ASLA Account
     </button>
-    <div class="auth-divider"><span>or</span></div>
-    <button class="google-btn" onclick="signInWithGoogle()">
-      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      Continue with Google
-    </button>
-    <div class="auth-divider"><span>or</span></div>
-    <form class="auth-form" onsubmit="handleEmailAuth(event, '${mode}')">
-      <input type="email" id="auth-email" placeholder="Email address" required>
-      <input type="password" id="auth-password" placeholder="Password" required minlength="6">
-      <div class="auth-error hidden" id="auth-error"></div>
-      <button type="submit" class="btn btn-primary" style="width:100%">${isSignIn ? 'Sign in' : 'Create account'}</button>
-    </form>
-    <div class="auth-toggle">
-      ${isSignIn
-        ? 'No account? <a href="#" onclick="event.preventDefault();renderAuthForm(\'signup\')">Create one</a>'
-        : 'Have an account? <a href="#" onclick="event.preventDefault();renderAuthForm(\'signin\')">Sign in</a>'
-      }
-    </div>
+    <p class="text-muted" style="margin-top:16px;font-size:13px">
+      Your exam progress is saved on this device automatically. Sign in with your ASLA account to identify yourself across devices.
+    </p>
   `;
 }
 window.renderAuthForm = renderAuthForm;
-
-window.handleEmailAuth = async function(e, mode) {
-  e.preventDefault();
-  const email = document.getElementById('auth-email').value;
-  const password = document.getElementById('auth-password').value;
-  const errorEl = document.getElementById('auth-error');
-  errorEl.classList.add('hidden');
-
-  try {
-    if (mode === 'signin') {
-      await auth.signInWithEmailAndPassword(email, password);
-    } else {
-      await auth.createUserWithEmailAndPassword(email, password);
-    }
-    closeAuthModal();
-  } catch (err) {
-    errorEl.textContent = err.message;
-    errorEl.classList.remove('hidden');
-  }
-};
-
-window.signInWithGoogle = async function() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-  try {
-    await auth.signInWithPopup(provider);
-    closeAuthModal();
-  } catch (err) {
-    const errorEl = document.getElementById('auth-error');
-    if (errorEl) {
-      errorEl.textContent = err.message;
-      errorEl.classList.remove('hidden');
-    }
-  }
-};
-
-window.signOutUser = async function() {
-  aslaProfile = null;
-  localStorage.removeItem('aslaProfile');
-  await auth.signOut();
-};
 
 /* -- Progress persistence ------------------------------------------------ */
 function getProgress() {
@@ -371,47 +315,66 @@ function saveExamResult(secNum, pct) {
   }
   progress[key].lastAttempt = new Date().toISOString();
   localStorage.setItem('lare-progress', JSON.stringify(progress));
-  if (currentUser) syncProgressToCloud(progress);
+  syncProgressToCloud(progress);
 }
 
 function clearProgress() {
   localStorage.removeItem('lare-progress');
-  if (currentUser) {
-    db.collection('progress').doc(currentUser.uid).delete().catch(() => {});
-  }
+  fetch(`${API_BASE}/progress`, {
+    method: 'DELETE',
+    headers: { 'X-Device-Id': getDeviceId() },
+  }).catch(() => {});
 }
 window.clearProgress = clearProgress;
 
+let pendingSyncTimer = null;
 async function syncProgressToCloud(progress) {
-  if (!currentUser) return;
-  try {
-    await db.collection('progress').doc(currentUser.uid).set(progress, { merge: true });
-  } catch (e) { /* silent */ }
+  /* Coalesce rapid writes (e.g. multi-question lesson completion) into one PUT */
+  clearTimeout(pendingSyncTimer);
+  pendingSyncTimer = setTimeout(async () => {
+    try {
+      await fetch(`${API_BASE}/progress`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Device-Id': getDeviceId(),
+        },
+        body: JSON.stringify(progress),
+      });
+    } catch (e) { /* offline-tolerant: localStorage is the source of truth */ }
+  }, 250);
 }
 
 async function syncProgressFromCloud() {
-  if (!currentUser) return;
   try {
-    const doc = await db.collection('progress').doc(currentUser.uid).get();
-    if (doc.exists) {
-      const cloud = doc.data();
-      const local = getProgress();
-      const merged = mergeProgress(local, cloud);
-      localStorage.setItem('lare-progress', JSON.stringify(merged));
-      if (currentView?.section === 'dashboard') renderDashboard(document.getElementById('app'));
-    } else {
-      const local = getProgress();
+    const res = await fetch(`${API_BASE}/progress`, {
+      headers: { 'X-Device-Id': getDeviceId() },
+    });
+    if (!res.ok) return;
+    const cloud = await res.json();
+    const local = getProgress();
+    if (!cloud || Object.keys(cloud).length === 0) {
       if (Object.keys(local).length) syncProgressToCloud(local);
+      return;
     }
-  } catch (e) { /* silent */ }
+    const merged = mergeProgress(local, cloud);
+    localStorage.setItem('lare-progress', JSON.stringify(merged));
+    if (currentView?.section === 'dashboard') renderDashboard(document.getElementById('app'));
+  } catch (e) { /* offline-tolerant */ }
 }
 
 function mergeProgress(a, b) {
   const result = { ...a };
   for (const key of Object.keys(b)) {
     if (!result[key]) { result[key] = b[key]; continue; }
+    /* Microlearning completion is stored as an array of lesson indices */
+    if (Array.isArray(result[key]) || Array.isArray(b[key])) {
+      const set = new Set([...(result[key] || []), ...(b[key] || [])]);
+      result[key] = Array.from(set);
+      continue;
+    }
     result[key] = {
-      examAttempts: Math.max(result[key].examAttempts || 0, b[key].examAttempts || 0),
+      examAttempts: (result[key].examAttempts || 0) + (b[key].examAttempts || 0),
       examBest: Math.max(result[key].examBest || 0, b[key].examBest || 0),
       lastAttempt: (result[key].lastAttempt || '') > (b[key].lastAttempt || '') ? result[key].lastAttempt : b[key].lastAttempt,
     };
@@ -836,7 +799,7 @@ window.completeLesson = function(secNum, lessonIdx) {
   if (!progress[mlKey].includes(lessonIdx)) {
     progress[mlKey].push(lessonIdx);
     localStorage.setItem('lare-progress', JSON.stringify(progress));
-    if (currentUser) syncProgressToCloud(progress);
+    syncProgressToCloud(progress);
   }
   location.hash = `#s${secNum}/learn`;
   route();
@@ -1283,7 +1246,7 @@ function renderDashboard(app) {
     <div class="page-header">
       <div class="container">
         <h1><strong>Dashboard</strong></h1>
-        <div class="subtitle">Track your exam preparation across all four sections${currentUser || aslaProfile ? ' — synced to your account' : ''}</div>
+        <div class="subtitle">Track your exam preparation across all four sections${aslaProfile ? ' — synced to your account' : ''}</div>
       </div>
     </div>
     <div class="container" style="padding-top:48px;padding-bottom:96px">
@@ -1307,7 +1270,7 @@ function renderDashboard(app) {
       </div>
       <div class="progress-grid">${cardsHtml}</div>
       <div style="margin-top:40px;text-align:center;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        ${!currentUser && !aslaProfile ? '<button class="btn btn-primary" onclick="openAuthModal()">Sign in to sync progress</button>' : ''}
+        ${!aslaProfile ? '<button class="btn btn-primary" onclick="openAuthModal()">Sign in with ASLA</button>' : ''}
         <button class="btn btn-secondary" onclick="if(confirm('Clear all progress data?')){clearProgress();route();}">Reset all progress</button>
       </div>
     </div>
