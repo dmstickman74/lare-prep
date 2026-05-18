@@ -509,6 +509,7 @@ function renderSection(app, secNum, tab) {
     <div class="content-tabs">
       <div class="content-tabs-inner">
         <button class="content-tab ${tab === 'book' ? 'active' : ''}" onclick="navigate('${key}/book')">Study Book</button>
+        <button class="content-tab ${tab === 'learn' ? 'active' : ''}" onclick="navigate('${key}/learn')">Microlearning</button>
         <button class="content-tab ${tab === 'exam' ? 'active' : ''}" onclick="navigate('${key}/exam')">Practice Exam</button>
         <button class="content-tab ${tab === 'flash' ? 'active' : ''}" onclick="navigate('${key}/flash')">Flashcards</button>
       </div>
@@ -528,6 +529,8 @@ function renderSection(app, secNum, tab) {
     renderExam(container, secNum);
   } else if (tab === 'flash') {
     renderFlashcards(container, secNum);
+  } else if (tab === 'learn') {
+    renderMicrolearning(container, secNum);
   } else {
     renderStudyContent(container, secNum, 'book');
   }
@@ -666,6 +669,160 @@ function setupTocClicks() {
     });
   });
 }
+
+/* -- Microlearning ------------------------------------------------------- */
+function buildLessons(secNum) {
+  const bookData = DATA[`s${secNum}_book`];
+  if (!bookData) return [];
+  const lessons = [];
+  let currentLesson = null;
+
+  for (const section of bookData) {
+    if (section.level === 'h1' && /^Chapter \d+:/.test(section.title) && !/Review|Exam Strategy/i.test(section.title)) {
+      if (currentLesson && currentLesson.slides.length > 0) lessons.push(currentLesson);
+      currentLesson = { title: section.title, intro: section.content, slides: [] };
+    } else if (section.level === 'h2' && currentLesson && !/Review Questions/i.test(section.title)) {
+      currentLesson.slides.push({ title: section.title, content: section.content });
+    }
+  }
+  if (currentLesson && currentLesson.slides.length > 0) lessons.push(currentLesson);
+  return lessons;
+}
+
+function renderMicrolearning(container, secNum) {
+  const lessons = buildLessons(secNum);
+  if (!lessons.length) { container.innerHTML = '<p class="container" style="padding:48px 24px">No lessons available yet.</p>'; return; }
+
+  const progress = getProgress();
+  const mlKey = `s${secNum}_microlearn`;
+  const completed = progress[mlKey] || [];
+
+  container.innerHTML = `
+    <div class="container" style="padding:48px 24px 96px">
+      <div class="ml-header">
+        <h2>Microlearning Modules</h2>
+        <p class="text-muted">Bite-sized interactive lessons — work through each chapter one slide at a time.</p>
+        <div class="ml-overall-progress">
+          <div class="ml-progress-text">${completed.length} of ${lessons.length} lessons completed</div>
+          <div class="ml-progress-bar-bg"><div class="ml-progress-bar-fill" style="width:${Math.round(completed.length/lessons.length*100)}%"></div></div>
+        </div>
+      </div>
+      <div class="ml-lessons-grid">
+        ${lessons.map((lesson, i) => {
+          const done = completed.includes(i);
+          const slideCount = lesson.slides.length;
+          return `
+            <div class="ml-lesson-card ${done ? 'ml-completed' : ''}" onclick="startLesson(${secNum}, ${i})">
+              <div class="ml-lesson-number">${String(i + 1).padStart(2, '0')}</div>
+              <div class="ml-lesson-info">
+                <h3>${escHtml(lesson.title)}</h3>
+                <div class="ml-lesson-meta">${slideCount} slides · ~${Math.max(2, Math.round(slideCount * 1.5))} min</div>
+              </div>
+              <div class="ml-lesson-status">${done ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--asla-green)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>' : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="10 8 16 12 10 16"/></svg>'}</div>
+            </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+
+window.startLesson = function(secNum, lessonIdx) {
+  const lessons = buildLessons(secNum);
+  const lesson = lessons[lessonIdx];
+  if (!lesson) return;
+
+  const state = { secNum, lessonIdx, slideIdx: 0, lesson, totalSlides: lesson.slides.length };
+  renderSlide(state);
+};
+
+function renderSlide(state) {
+  const container = document.getElementById('section-content');
+  const { lesson, slideIdx, totalSlides, secNum, lessonIdx } = state;
+  const slide = lesson.slides[slideIdx];
+  const pct = Math.round(((slideIdx + 1) / totalSlides) * 100);
+
+  let contentHtml = '';
+  let contentArr = slide.content;
+  if (typeof contentArr === 'string') {
+    try { contentArr = JSON.parse(contentArr.replace(/'/g, '"')); } catch(e) { contentArr = []; }
+  }
+  if (typeof contentArr === 'string') {
+    contentArr = [{ type: 'p', text: contentArr }];
+  }
+  if (!Array.isArray(contentArr)) contentArr = [];
+
+  let keyTakeaways = [];
+
+  for (const block of contentArr) {
+    if (block.type === 'p') {
+      const cls = block.bold ? ' class="ml-bold-point"' : '';
+      contentHtml += `<div${cls}>${escHtml(block.text)}</div>`;
+      if (block.bold) keyTakeaways.push(block.text.split(':')[0]);
+    } else if (block.type === 'bullet') {
+      contentHtml += `<div class="ml-bullet">${escHtml(block.text)}</div>`;
+    } else if (block.type === 'table') {
+      const hdr = (block.headers || []).map(h => `<th>${escHtml(h)}</th>`).join('');
+      const rows = (block.rows || []).map(r => '<tr>' + r.map(c => `<td>${escHtml(c)}</td>`).join('') + '</tr>').join('');
+      contentHtml += `<div class="table-wrap"><table class="data-table"><thead><tr>${hdr}</tr></thead><tbody>${rows}</tbody></table></div>`;
+    } else if (block.type === 'tip') {
+      contentHtml += `<div class="ml-callout ml-tip"><strong>💡 Exam Tip</strong><p>${escHtml(block.text.replace(/^EXAM TIP:\s*/i, ''))}</p></div>`;
+    } else if (block.type === 'memory') {
+      contentHtml += `<div class="ml-callout ml-memory"><strong>🧠 Memory Aid</strong><p>${escHtml(block.text.replace(/^MEMORY AID:\s*/i, ''))}</p></div>`;
+    } else if (block.type === 'example') {
+      contentHtml += `<div class="ml-callout ml-example"><strong>📋 Real-World Example</strong><p>${escHtml(block.text.replace(/^REAL-WORLD EXAMPLE:\s*/i, ''))}</p></div>`;
+    }
+  }
+
+  if (!contentHtml) {
+    contentHtml = '<p class="text-muted">This topic is covered in the study book — open the Study Book tab for the full text.</p>';
+  }
+
+  container.innerHTML = `
+    <div class="ml-player">
+      <div class="ml-player-header">
+        <button class="ml-back-btn" onclick="navigate('s${secNum}/learn')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          All Lessons
+        </button>
+        <div class="ml-lesson-title">${escHtml(lesson.title)}</div>
+      </div>
+      <div class="ml-progress-row">
+        <div class="ml-progress-bar-bg"><div class="ml-progress-bar-fill" style="width:${pct}%"></div></div>
+        <span class="ml-progress-label">${slideIdx + 1} / ${totalSlides}</span>
+      </div>
+      <div class="ml-slide fade-in" id="ml-current-slide">
+        <h2 class="ml-slide-title">${escHtml(slide.title)}</h2>
+        <div class="ml-slide-content">${contentHtml}</div>
+      </div>
+      <div class="ml-nav">
+        <button class="btn btn-secondary" ${slideIdx === 0 ? 'disabled' : ''} onclick="mlNav(${secNum},${lessonIdx},${slideIdx - 1})">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><polyline points="15 18 9 12 15 6"/></svg> Previous
+        </button>
+        ${slideIdx === totalSlides - 1
+          ? `<button class="btn btn-primary" onclick="completeLesson(${secNum},${lessonIdx})">Complete Lesson ✓</button>`
+          : `<button class="btn btn-primary" onclick="mlNav(${secNum},${lessonIdx},${slideIdx + 1})">Next <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px"><polyline points="9 18 15 12 9 6"/></svg></button>`
+        }
+      </div>
+    </div>`;
+}
+
+window.mlNav = function(secNum, lessonIdx, newSlideIdx) {
+  const lessons = buildLessons(secNum);
+  const lesson = lessons[lessonIdx];
+  if (!lesson || newSlideIdx < 0 || newSlideIdx >= lesson.slides.length) return;
+  renderSlide({ secNum, lessonIdx, slideIdx: newSlideIdx, lesson, totalSlides: lesson.slides.length });
+  document.getElementById('ml-current-slide')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+window.completeLesson = function(secNum, lessonIdx) {
+  const progress = getProgress();
+  const mlKey = `s${secNum}_microlearn`;
+  if (!progress[mlKey]) progress[mlKey] = [];
+  if (!progress[mlKey].includes(lessonIdx)) {
+    progress[mlKey].push(lessonIdx);
+    saveProgress(progress);
+  }
+  navigate(`s${secNum}/learn`);
+};
 
 /* -- Flashcards ---------------------------------------------------------- */
 function renderFlashcards(container, secNum) {
