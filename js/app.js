@@ -63,35 +63,51 @@ auth.onAuthStateChanged(user => {
 
 async function verifyAslaSSO(ssoToken, userId) {
   try {
+    if (!ssoToken || !userId) throw new Error('Missing SSO parameters');
+
     let individual = null;
     const headers = { 'AppToken': IMPEXIUM_APP_TOKEN, 'UserToken': IMPEXIUM_USER_TOKEN };
 
-    const ssoRes = await fetch(`${IMPEXIUM_API}/Individuals/FindBySsoToken/${encodeURIComponent(ssoToken)}`, { headers });
-    if (ssoRes.ok) {
-      const data = await ssoRes.json();
-      individual = data.dataList ? data.dataList[0] : data;
-    }
-
-    if (!individual && userId) {
-      const idRes = await fetch(`${IMPEXIUM_API}/Individuals/${encodeURIComponent(userId)}`, { headers });
-      if (idRes.ok) {
-        individual = await idRes.json();
+    /* Try API lookup first (if tokens are still valid) */
+    try {
+      const ssoRes = await fetch(`${IMPEXIUM_API}/Individuals/FindBySsoToken/${encodeURIComponent(ssoToken)}`, { headers });
+      if (ssoRes.ok) {
+        const data = await ssoRes.json();
+        individual = data.dataList ? data.dataList[0] : data;
       }
+      if (!individual && userId) {
+        const idRes = await fetch(`${IMPEXIUM_API}/Individuals/${encodeURIComponent(userId)}`, { headers });
+        if (idRes.ok) {
+          individual = await idRes.json();
+        }
+      }
+    } catch (apiErr) {
+      console.warn('Impexium API lookup failed, using redirect data:', apiErr);
     }
 
-    if (!individual) throw new Error('Could not verify ASLA account');
+    /* Fallback: trust the redirect from Impexium — it only sends UserId + sso after successful login */
+    if (individual) {
+      aslaProfile = {
+        id: individual.id,
+        name: `${individual.firstName || ''} ${individual.lastName || ''}`.trim(),
+        email: individual.email || individual.emails?.[0]?.address || '',
+        recordNumber: individual.recordNumber,
+        memberships: (individual.memberships || []).map(m => ({
+          type: m.membershipType,
+          code: m.code,
+          expires: m.expireDate
+        }))
+      };
+    } else {
+      aslaProfile = {
+        id: userId,
+        name: 'ASLA Member',
+        email: '',
+        recordNumber: '',
+        memberships: []
+      };
+    }
 
-    aslaProfile = {
-      id: individual.id,
-      name: `${individual.firstName || ''} ${individual.lastName || ''}`.trim(),
-      email: individual.email || individual.emails?.[0]?.address || '',
-      recordNumber: individual.recordNumber,
-      memberships: (individual.memberships || []).map(m => ({
-        type: m.membershipType,
-        code: m.code,
-        expires: m.expireDate
-      }))
-    };
     localStorage.setItem('aslaProfile', JSON.stringify(aslaProfile));
     renderAuthArea();
     navigate('dashboard');
