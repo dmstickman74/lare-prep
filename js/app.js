@@ -130,6 +130,15 @@ function navigate(path) {
   location.hash = '#' + path;
 }
 
+/* Keyboard activation for div[role=button] — Enter or Space fires the click handler */
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const target = e.target.closest('[role="button"]');
+  if (!target || target.tagName === 'BUTTON' || target.tagName === 'A') return;
+  e.preventDefault();
+  target.click();
+});
+
 window.addEventListener('hashchange', route);
 window.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -165,6 +174,10 @@ function route() {
   const app = document.getElementById('app');
   const oldView = currentView;
   currentView = r;
+
+  /* Clear per-view state so stray handlers from the previous view no-op */
+  window.__quizState = null;
+  window.__flashState = null;
 
   closeDropdown();
   closeMobileMenu();
@@ -271,15 +284,53 @@ function renderAuthArea() {
   }
 }
 
+let modalReturnFocus = null;
+
 window.openAuthModal = function() {
   const modal = document.getElementById('auth-modal');
+  modalReturnFocus = document.activeElement;
   modal.classList.remove('hidden');
+  modal.setAttribute('aria-hidden', 'false');
   renderAuthForm('signin');
+  /* Focus first interactive control inside the modal */
+  const first = modal.querySelector('button, [href], input, [tabindex]:not([tabindex="-1"])');
+  if (first) first.focus();
 };
 
 window.closeAuthModal = function() {
-  document.getElementById('auth-modal').classList.add('hidden');
+  const modal = document.getElementById('auth-modal');
+  modal.classList.add('hidden');
+  modal.setAttribute('aria-hidden', 'true');
+  if (modalReturnFocus && typeof modalReturnFocus.focus === 'function') {
+    modalReturnFocus.focus();
+  }
+  modalReturnFocus = null;
 };
+
+/* Esc closes the modal; Tab is trapped within it */
+document.addEventListener('keydown', (e) => {
+  const modal = document.getElementById('auth-modal');
+  if (!modal || modal.classList.contains('hidden')) return;
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    closeAuthModal();
+    return;
+  }
+  if (e.key !== 'Tab') return;
+  const focusables = modal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+});
 
 function renderAuthForm(mode) {
   const title = document.getElementById('auth-modal-title');
@@ -419,7 +470,7 @@ function renderHome(app) {
             const p = progress['s' + s.id] || {};
             const examPct = p.examBest != null ? p.examBest + '%' : '--';
             return `
-            <div class="section-card" onclick="navigate('s${s.id}/book')">
+            <div class="section-card" role="button" tabindex="0" aria-label="Open ${escHtml(s.short)}: ${escHtml(s.title)}" onclick="navigate('s${s.id}/book')">
               <div class="card-num">Section ${s.id}</div>
               <h3>${s.title}</h3>
               <p>${s.items} scored items on the exam. Study book, practice exam, and flashcards.</p>
@@ -691,7 +742,7 @@ function renderMicrolearning(container, secNum) {
           const done = completed.includes(i);
           const slideCount = lesson.slides.length;
           return `
-            <div class="ml-lesson-card ${done ? 'ml-completed' : ''}" onclick="startLesson(${secNum}, ${i})">
+            <div class="ml-lesson-card ${done ? 'ml-completed' : ''}" role="button" tabindex="0" aria-label="Start lesson: ${escHtml(lesson.title)}" onclick="startLesson(${secNum}, ${i})">
               <div class="ml-lesson-number">${String(i + 1).padStart(2, '0')}</div>
               <div class="ml-lesson-info">
                 <h3>${escHtml(lesson.title)}</h3>
@@ -720,28 +771,16 @@ function renderSlide(state) {
   const pct = Math.round(((slideIdx + 1) / totalSlides) * 100);
 
   let contentHtml = '';
-  let contentArr = slide.content;
-  if (typeof contentArr === 'string') {
-    try { contentArr = JSON.parse(contentArr.replace(/'/g, '"')); } catch(e) { contentArr = []; }
-  }
-  if (typeof contentArr === 'string') {
-    contentArr = [{ type: 'p', text: contentArr }];
-  }
-  if (!Array.isArray(contentArr)) contentArr = [];
-
-  let keyTakeaways = [];
+  const contentArr = Array.isArray(slide.content) ? slide.content : [];
 
   for (const block of contentArr) {
     if (block.type === 'p') {
       const cls = block.bold ? ' class="ml-bold-point"' : '';
       contentHtml += `<div${cls}>${escHtml(block.text)}</div>`;
-      if (block.bold) keyTakeaways.push(block.text.split(':')[0]);
     } else if (block.type === 'bullet') {
       contentHtml += `<div class="ml-bullet">${escHtml(block.text)}</div>`;
     } else if (block.type === 'table') {
-      const hdr = (block.headers || []).map(h => `<th>${escHtml(h)}</th>`).join('');
-      const rows = (block.rows || []).map(r => '<tr>' + r.map(c => `<td>${escHtml(c)}</td>`).join('') + '</tr>').join('');
-      contentHtml += `<div class="table-wrap"><table class="data-table"><thead><tr>${hdr}</tr></thead><tbody>${rows}</tbody></table></div>`;
+      contentHtml += renderTable(block);
     } else if (block.type === 'tip') {
       contentHtml += `<div class="ml-callout ml-tip"><strong>💡 Exam Tip</strong><p>${escHtml(block.text.replace(/^EXAM TIP:\s*/i, ''))}</p></div>`;
     } else if (block.type === 'memory') {
@@ -835,11 +874,11 @@ function renderFlashcard(container, state) {
         </div>
         <div style="display:flex;gap:8px">
           <button class="btn btn-sm btn-secondary" onclick="shuffleFlashcards()">${state.shuffled ? 'Unshuffle' : 'Shuffle'}</button>
-          <button class="btn btn-sm btn-secondary" onclick="printFlashcards(${state.secNum})">Print all</button>
+          <button class="btn btn-sm btn-secondary" onclick="printFlashcards()">Print all</button>
         </div>
       </div>
 
-      <div class="flashcard-wrapper" onclick="flipCard()">
+      <div class="flashcard-wrapper" role="button" tabindex="0" aria-label="Flip flashcard" onclick="flipCard()">
         <div class="flashcard ${flipped ? 'flipped' : ''}">
           <div class="flashcard-face flashcard-front">
             <div class="flashcard-label">Question</div>
@@ -875,30 +914,30 @@ function renderFlashcard(container, state) {
 
 window.flipCard = function() {
   const state = window.__flashState;
+  if (!state) return;
   state.flipped = !state.flipped;
   renderFlashcard(document.getElementById('section-content'), state);
 };
 
 window.prevFlashcard = function() {
   const state = window.__flashState;
-  if (state.current > 0) {
-    state.current--;
-    state.flipped = false;
-    renderFlashcard(document.getElementById('section-content'), state);
-  }
+  if (!state || state.current <= 0) return;
+  state.current--;
+  state.flipped = false;
+  renderFlashcard(document.getElementById('section-content'), state);
 };
 
 window.nextFlashcard = function() {
   const state = window.__flashState;
-  if (state.current < state.cards.length - 1) {
-    state.current++;
-    state.flipped = false;
-    renderFlashcard(document.getElementById('section-content'), state);
-  }
+  if (!state || state.current >= state.cards.length - 1) return;
+  state.current++;
+  state.flipped = false;
+  renderFlashcard(document.getElementById('section-content'), state);
 };
 
 window.shuffleFlashcards = function() {
   const state = window.__flashState;
+  if (!state) return;
   const key = `s${state.secNum}_flash`;
   if (state.shuffled) {
     state.cards = [...DATA[key]];
@@ -916,7 +955,9 @@ window.shuffleFlashcards = function() {
   renderFlashcard(document.getElementById('section-content'), state);
 };
 
-window.printFlashcards = function(secNum) {
+window.printFlashcards = function() {
+  /* Print CSS (style.css ~1464) hides the interactive UI and reveals .flash-print-grid,
+     which is rendered alongside the active card. No section arg needed. */
   window.print();
 };
 
@@ -969,7 +1010,9 @@ function renderQuestion(container, state) {
     } else {
       if (c.letter === selected) cls += ' selected';
     }
-    return '<div class="' + cls + '" onclick="selectChoice(\'' + c.letter + '\')">' +
+    const isDisabled = isRevealed;
+    const tabAttr = isDisabled ? 'tabindex="-1" aria-disabled="true"' : 'tabindex="0"';
+    return '<div class="' + cls + '" role="button" ' + tabAttr + ' onclick="selectChoice(\'' + c.letter + '\')">' +
       '<div class="choice-letter">' + c.letter + '</div>' +
       '<div>' + escHtml(c.text) + '</div></div>';
   }).join('');
@@ -1055,45 +1098,43 @@ function renderResults(container, state) {
 /* -- Quiz interaction functions ------------------------------------------ */
 window.selectChoice = function(letter) {
   const state = window.__quizState;
-  if (state.revealed[state.current] || state.submitted) return;
+  if (!state || state.revealed[state.current] || state.submitted) return;
   state.answers[state.current] = letter;
   renderQuestion(document.getElementById('section-content'), state);
 };
 
 window.checkAnswer = function() {
   const state = window.__quizState;
+  if (!state) return;
   state.revealed[state.current] = true;
   renderQuestion(document.getElementById('section-content'), state);
 };
 
 window.goToQuestion = function(i) {
   const state = window.__quizState;
+  if (!state) return;
   state.current = i;
-  const container = document.getElementById('section-content');
-  if (state.submitted) {
-    state.revealed[i] = true;
-  }
-  renderQuestion(container, state);
+  if (state.submitted) state.revealed[i] = true;
+  renderQuestion(document.getElementById('section-content'), state);
 };
 
 window.prevQuestion = function() {
   const state = window.__quizState;
-  if (state.current > 0) {
-    state.current--;
-    renderQuestion(document.getElementById('section-content'), state);
-  }
+  if (!state || state.current <= 0) return;
+  state.current--;
+  renderQuestion(document.getElementById('section-content'), state);
 };
 
 window.nextQuestion = function() {
   const state = window.__quizState;
-  if (state.current < state.questions.length - 1) {
-    state.current++;
-    renderQuestion(document.getElementById('section-content'), state);
-  }
+  if (!state || state.current >= state.questions.length - 1) return;
+  state.current++;
+  renderQuestion(document.getElementById('section-content'), state);
 };
 
 window.submitExam = function() {
   const state = window.__quizState;
+  if (!state) return;
   state.submitted = true;
   state.revealed = state.revealed.map(() => true);
   renderResults(document.getElementById('section-content'), state);
@@ -1101,6 +1142,7 @@ window.submitExam = function() {
 
 window.reviewExam = function() {
   const state = window.__quizState;
+  if (!state) return;
   state.current = 0;
   state.revealed = state.revealed.map(() => true);
   renderQuestion(document.getElementById('section-content'), state);
@@ -1108,6 +1150,7 @@ window.reviewExam = function() {
 
 window.retakeExam = function() {
   const state = window.__quizState;
+  if (!state) return;
   state.current = 0;
   state.answers = new Array(state.questions.length).fill(null);
   state.revealed = new Array(state.questions.length).fill(false);
@@ -1117,6 +1160,7 @@ window.retakeExam = function() {
 
 window.setExamMode = function(mode) {
   const state = window.__quizState;
+  if (!state) return;
   if (mode === 'review') {
     state.submitted = true;
     state.revealed = state.revealed.map(() => true);
@@ -1169,9 +1213,9 @@ function renderResourceLanding(app, type) {
     else meta = flashCount + ' cards';
 
     return `
-      <div class="section-card" onclick="navigate('s${s.id}/${c.tab}')">
+      <div class="section-card" role="button" tabindex="0" aria-label="Open Section ${s.id}: ${escHtml(s.title)}" onclick="navigate('s${s.id}/${c.tab}')">
         <div class="card-num">Section ${s.id}</div>
-        <h3>${s.title}</h3>
+        <h3>${escHtml(s.title)}</h3>
         <p>${s.items} scored items on the LARE</p>
         <div class="card-meta">
           <span>${meta}</span>
@@ -1179,16 +1223,17 @@ function renderResourceLanding(app, type) {
       </div>`;
   }).join('');
 
+  /* c.icon is intentional raw SVG from the hardcoded config — all other fields escaped */
   app.innerHTML = `
     <div class="page-header">
       <div class="container">
         <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;color:var(--asla-green)">${c.icon}</div>
-        <h1><strong>${c.title}</strong></h1>
-        <div class="subtitle">${c.subtitle}</div>
+        <h1><strong>${escHtml(c.title)}</strong></h1>
+        <div class="subtitle">${escHtml(c.subtitle)}</div>
       </div>
     </div>
     <div class="container" style="padding-top:48px;padding-bottom:96px">
-      <p style="max-width:680px;margin-bottom:40px;color:var(--dark-gray);line-height:1.7">${c.description}</p>
+      <p style="max-width:680px;margin-bottom:40px;color:var(--dark-gray);line-height:1.7">${escHtml(c.description)}</p>
       <div class="sections-grid">${cardsHtml}</div>
     </div>
   `;
@@ -1278,13 +1323,36 @@ function renderDashboard(app) {
 }
 
 /* -- PDF Generation ------------------------------------------------------ */
-window.generateStudyGuidePDF = function(secNum) {
+let jspdfLoadPromise = null;
+function loadJsPdf() {
+  if (window.jspdf?.jsPDF) return Promise.resolve();
+  if (jspdfLoadPromise) return jspdfLoadPromise;
+  const load = (src) => new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = () => reject(new Error('failed to load ' + src));
+    document.head.appendChild(s);
+  });
+  jspdfLoadPromise = load('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js')
+    .then(() => load('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js'));
+  return jspdfLoadPromise;
+}
+
+window.generateStudyGuidePDF = async function(secNum) {
   const key = `s${secNum}_guide`;
   const sections = DATA[key];
   const sec = SECTIONS[secNum - 1];
 
   if (!sections || !sections.length) {
     alert('Study guide content not available.');
+    return;
+  }
+
+  try {
+    await loadJsPdf();
+  } catch (e) {
+    alert('Could not load PDF library. Please check your connection and try again.');
     return;
   }
 

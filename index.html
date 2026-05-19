@@ -8,8 +8,6 @@
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="assets/logos/asla-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
 
@@ -17,7 +15,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a href="#home" style="display:flex;align-items:center;gap:10px;text-decoration:none">
-        <img src="assets/logos/asla-mark-green-black.png" alt="ASLA" class="header-logo">
+        <img src="assets/logos/asla-mark-green-black.png" alt="ASLA" class="header-logo" width="27" height="38">
         <span style="font-weight:600;font-size:16px;color:var(--asla-teal);letter-spacing:-.01em">ASLA LARE Prep</span>
       </a>
       <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Menu">
@@ -55,7 +53,7 @@
     <div class="footer-inner">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="assets/logos/asla-full-white.png" alt="ASLA">
+          <img src="assets/logos/asla-full-white.png" alt="ASLA" width="148" height="38">
           <p>LARE exam preparation materials. Study guides, textbooks, and practice exams for all four sections of the Landscape Architect Registration Examination.</p>
         </div>
         <div class="footer-col">
@@ -95,9 +93,9 @@
   </footer>
 
   <!-- Auth Modal -->
-  <div class="modal-overlay hidden" id="auth-modal">
+  <div class="modal-overlay hidden" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title" aria-hidden="true">
     <div class="modal-card">
-      <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+      <button class="modal-close" onclick="closeAuthModal()" aria-label="Close sign-in dialog">&times;</button>
       <h2 id="auth-modal-title">Sign In</h2>
       <p class="text-muted" style="margin-bottom:24px">Save your progress across devices</p>
       <div id="auth-modal-body"></div>

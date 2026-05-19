@@ -1553,6 +1553,12 @@ img { max-width: 100%; height: auto; }
 }
 .collapsible-body.open { max-height: 10000px; }
 
+/* -- Keyboard focus ring for role=button divs ---------------------------- */
+[role="button"]:focus-visible {
+  outline: 2px solid var(--asla-teal);
+  outline-offset: 2px;
+}
+
 /* -- Print --------------------------------------------------------------- */
 @media print {
   .site-header, .explore-bar, .content-tabs, .site-footer, .toc, .quiz-nav, .btn { display: none; }
