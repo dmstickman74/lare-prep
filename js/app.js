@@ -11,112 +11,24 @@ const SECTIONS = [
 
 let DATA = null;
 let currentView = null;
-let aslaProfile = null;
+let currentUser = null;
 
-/* -- Impexium SSO -------------------------------------------------------- */
-const IMPEXIUM_API = 'https://asla.mpxapi.com/api/v1';
-const IMPEXIUM_APP_TOKEN = 'a42a8800-fc03-46c6-9049-08deb0a1c0c9';
-const IMPEXIUM_USER_TOKEN = 'fc8aadb0-d5e7-4c37-b576-08deb0a1c148';
-const ASLA_LOGIN_URL = 'https://your.asla.org/account/login.aspx';
-
-/* -- Progress API -------------------------------------------------------- */
 const API_BASE = '/api';
 
-function getDeviceId() {
-  let id = localStorage.getItem('lare-device-id');
-  if (!id) {
-    id = (crypto.randomUUID && crypto.randomUUID()) ||
-      'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-        const r = Math.random() * 16 | 0;
-        return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
-      });
-    localStorage.setItem('lare-device-id', id);
-  }
-  return id;
-}
-
-(function checkSsoCallback() {
-  const params = new URLSearchParams(window.location.search);
-  const ssoToken = params.get('sso') || params.get('ssoToken') || params.get('SSOToken');
-  const userId = params.get('UserId');
-  if (!ssoToken) {
-    const stored = localStorage.getItem('aslaProfile');
-    if (stored) {
-      try { aslaProfile = JSON.parse(stored); } catch(e) { localStorage.removeItem('aslaProfile'); }
-    }
-    return;
-  }
-  window.history.replaceState({}, '', window.location.pathname + window.location.hash);
-  verifyAslaSSO(ssoToken, userId);
-})();
-
-async function verifyAslaSSO(ssoToken, userId) {
+async function loadCurrentUser() {
   try {
-    if (!ssoToken || !userId) throw new Error('Missing SSO parameters');
-
-    let individual = null;
-    const headers = { 'AppToken': IMPEXIUM_APP_TOKEN, 'UserToken': IMPEXIUM_USER_TOKEN };
-
-    /* Try API lookup first (if tokens are still valid) */
-    try {
-      const ssoRes = await fetch(`${IMPEXIUM_API}/Individuals/FindBySsoToken/${encodeURIComponent(ssoToken)}`, { headers });
-      if (ssoRes.ok) {
-        const data = await ssoRes.json();
-        individual = data.dataList ? data.dataList[0] : data;
-      }
-      if (!individual && userId) {
-        const idRes = await fetch(`${IMPEXIUM_API}/Individuals/${encodeURIComponent(userId)}`, { headers });
-        if (idRes.ok) {
-          individual = await idRes.json();
-        }
-      }
-    } catch (apiErr) {
-      console.warn('Impexium API lookup failed, using redirect data:', apiErr);
-    }
-
-    /* Fallback: trust the redirect from Impexium — it only sends UserId + sso after successful login */
-    if (individual) {
-      aslaProfile = {
-        id: individual.id,
-        name: `${individual.firstName || ''} ${individual.lastName || ''}`.trim(),
-        email: individual.email || individual.emails?.[0]?.address || '',
-        recordNumber: individual.recordNumber,
-        memberships: (individual.memberships || []).map(m => ({
-          type: m.membershipType,
-          code: m.code,
-          expires: m.expireDate
-        }))
-      };
-    } else {
-      aslaProfile = {
-        id: userId,
-        name: 'ASLA Member',
-        email: '',
-        recordNumber: '',
-        memberships: []
-      };
-    }
-
-    localStorage.setItem('aslaProfile', JSON.stringify(aslaProfile));
-    renderAuthArea();
-    navigate('dashboard');
-  } catch (err) {
-    console.error('ASLA SSO verification failed:', err);
-    alert('ASLA sign-in failed. Please try again.');
+    const res = await fetch(`${API_BASE}/auth/me`, { credentials: 'same-origin' });
+    if (!res.ok) return;
+    const body = await res.json();
+    currentUser = body.authenticated ? body.user : null;
+  } catch (e) {
+    currentUser = null;
   }
 }
-
-window.signInWithASLA = function() {
-  const callbackUrl = window.location.origin + window.location.pathname;
-  const loginUrl = `${ASLA_LOGIN_URL}?RedirectUrl=${encodeURIComponent(callbackUrl)}`;
-  window.location.href = loginUrl;
-};
 
 window.signOutASLA = function() {
-  aslaProfile = null;
-  localStorage.removeItem('aslaProfile');
-  renderAuthArea();
-  navigate('home');
+  /* Cookie-based session — server clears it and redirects */
+  window.location.href = '/api/auth/logout';
 };
 
 /* -- Router -------------------------------------------------------------- */
@@ -141,6 +53,8 @@ document.addEventListener('keydown', (e) => {
 
 window.addEventListener('hashchange', route);
 window.addEventListener('DOMContentLoaded', async () => {
+  await loadCurrentUser();
+  renderAuthArea();
   try {
     await loadData();
   } catch (err) {
@@ -272,83 +186,17 @@ function renderAuthArea() {
   const area = document.getElementById('auth-area');
   if (!area) return;
 
-  if (aslaProfile) {
+  if (currentUser) {
+    const name = [currentUser.firstName, currentUser.lastName].filter(Boolean).join(' ') || 'ASLA Member';
     area.innerHTML = `
-      <span class="user-name">${escHtml(aslaProfile.name || 'ASLA Member')}</span>
+      <span class="user-name">${escHtml(name)}</span>
       <button class="auth-btn auth-btn-signout" onclick="signOutASLA()">Sign out</button>
     `;
   } else {
-    area.innerHTML = `
-      <button class="auth-btn auth-btn-signin" onclick="openAuthModal()">Sign in</button>
-    `;
+    /* Server gates the app — we shouldn't normally render the SPA without a user */
+    area.innerHTML = '';
   }
 }
-
-let modalReturnFocus = null;
-
-window.openAuthModal = function() {
-  const modal = document.getElementById('auth-modal');
-  modalReturnFocus = document.activeElement;
-  modal.classList.remove('hidden');
-  modal.setAttribute('aria-hidden', 'false');
-  renderAuthForm('signin');
-  /* Focus first interactive control inside the modal */
-  const first = modal.querySelector('button, [href], input, [tabindex]:not([tabindex="-1"])');
-  if (first) first.focus();
-};
-
-window.closeAuthModal = function() {
-  const modal = document.getElementById('auth-modal');
-  modal.classList.add('hidden');
-  modal.setAttribute('aria-hidden', 'true');
-  if (modalReturnFocus && typeof modalReturnFocus.focus === 'function') {
-    modalReturnFocus.focus();
-  }
-  modalReturnFocus = null;
-};
-
-/* Esc closes the modal; Tab is trapped within it */
-document.addEventListener('keydown', (e) => {
-  const modal = document.getElementById('auth-modal');
-  if (!modal || modal.classList.contains('hidden')) return;
-  if (e.key === 'Escape') {
-    e.preventDefault();
-    closeAuthModal();
-    return;
-  }
-  if (e.key !== 'Tab') return;
-  const focusables = modal.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  );
-  if (!focusables.length) return;
-  const first = focusables[0];
-  const last = focusables[focusables.length - 1];
-  if (e.shiftKey && document.activeElement === first) {
-    e.preventDefault();
-    last.focus();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    e.preventDefault();
-    first.focus();
-  }
-});
-
-function renderAuthForm(mode) {
-  const title = document.getElementById('auth-modal-title');
-  const body = document.getElementById('auth-modal-body');
-
-  title.textContent = 'Sign In';
-
-  body.innerHTML = `
-    <button class="asla-sso-btn" onclick="signInWithASLA()">
-      <img src="assets/logos/asla-mark-green-black.png" alt="ASLA" width="20" height="20">
-      Sign in with ASLA Account
-    </button>
-    <p class="text-muted" style="margin-top:16px;font-size:13px">
-      Your exam progress is saved on this device automatically. Sign in with your ASLA account to identify yourself across devices.
-    </p>
-  `;
-}
-window.renderAuthForm = renderAuthForm;
 
 /* -- Progress persistence ------------------------------------------------ */
 function getProgress() {
@@ -373,7 +221,7 @@ function clearProgress() {
   localStorage.removeItem('lare-progress');
   fetch(`${API_BASE}/progress`, {
     method: 'DELETE',
-    headers: { 'X-Device-Id': getDeviceId() },
+    credentials: 'same-origin',
   }).catch(() => {});
 }
 window.clearProgress = clearProgress;
@@ -386,10 +234,8 @@ async function syncProgressToCloud(progress) {
     try {
       await fetch(`${API_BASE}/progress`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Device-Id': getDeviceId(),
-        },
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(progress),
       });
     } catch (e) { /* offline-tolerant: localStorage is the source of truth */ }
@@ -398,9 +244,7 @@ async function syncProgressToCloud(progress) {
 
 async function syncProgressFromCloud() {
   try {
-    const res = await fetch(`${API_BASE}/progress`, {
-      headers: { 'X-Device-Id': getDeviceId() },
-    });
+    const res = await fetch(`${API_BASE}/progress`, { credentials: 'same-origin' });
     if (!res.ok) return;
     const cloud = await res.json();
     const local = getProgress();
@@ -1291,7 +1135,7 @@ function renderDashboard(app) {
     <div class="page-header">
       <div class="container">
         <h1><strong>Dashboard</strong></h1>
-        <div class="subtitle">Track your exam preparation across all four sections${aslaProfile ? ' — synced to your account' : ''}</div>
+        <div class="subtitle">Track your exam preparation across all four sections${currentUser ? ' — synced to your account' : ''}</div>
       </div>
     </div>
     <div class="container" style="padding-top:48px;padding-bottom:96px">
@@ -1315,7 +1159,7 @@ function renderDashboard(app) {
       </div>
       <div class="progress-grid">${cardsHtml}</div>
       <div style="margin-top:40px;text-align:center;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        ${!aslaProfile ? '<button class="btn btn-primary" onclick="openAuthModal()">Sign in with ASLA</button>' : ''}
+        ${''}
         <button class="btn btn-secondary" onclick="if(confirm('Clear all progress data?')){clearProgress();route();}">Reset all progress</button>
       </div>
     </div>

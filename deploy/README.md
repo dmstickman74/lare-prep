@@ -14,10 +14,12 @@ The host Caddy (on the shared `portainer-proxy_proxy` network) reverse-proxies t
 sudo git clone https://github.com/ASLA1899/lareprep.git /srv/lareprep
 cd /srv/lareprep
 
-# 2. Set the Postgres password
+# 2. Fill in .env (Postgres password, Impexium creds, JWT secret, APP_URL)
 sudo cp .env.example .env
-sudo $EDITOR .env       # set POSTGRES_PASSWORD
+sudo $EDITOR .env
 sudo chmod 600 .env
+# Generate a fresh JWT_SECRET if you haven't:
+#   openssl rand -base64 36
 
 # 3. Bring up the stack
 sudo docker compose up -d --build
@@ -32,6 +34,9 @@ sudo docker exec lareprep-api node -e \
 sudo cp deploy/Caddyfile.snippet /etc/caddy/conf.d/lareprep.caddy   # or paste into Caddyfile
 sudo caddy validate --config /etc/caddy/Caddyfile
 sudo systemctl reload caddy
+
+# 6. Register the SSO callback URL in the Impexium admin:
+#    https://lareprep.aslalabs.org/api/auth/callback
 ```
 
 > **DNS:** point `lareprep.aslalabs.org` at the VM before Caddy issues a cert, or it will fall back to internal TLS.
@@ -60,6 +65,16 @@ sudo docker exec -i lareprep-postgres psql -U lareprep -d lareprep < server/sche
 - Postgres data lives in the `lareprep-pgdata` named volume. To wipe it (will lose all progress): `docker compose down -v`.
 - The API process runs as the unprivileged `node` user (UID 1000) inside the container.
 
-## Identity model (for the SSO pass)
+## Identity model
 
-Progress is keyed by a random UUID the client generates on first visit and sends as `X-Device-Id`. When Impexium SSO is wired up, the API will switch to keying rows by the authenticated user ID, and existing device IDs will be linkable at first sign-in. No DB shape change needed — just a column addition.
+The API gates every request that isn't on the public allow-list (`/login`, `/api/auth/*`, static assets, `/healthz`) behind an HttpOnly session cookie (`asla_lareprep_session`). The cookie carries a signed JWT — Impexium customer ID, name, email, access level, and an 8h absolute lifetime / 2h sliding inactivity window. `/api/progress` reads `customerId` directly from the validated JWT; no client-supplied identity is trusted.
+
+Members with no active Impexium membership are blocked at the callback (`/login?error=no_membership`). "Paid for the product" is not yet enforced — when the entitlement source exists, add the check in `server/auth/impexium.js` `validateSsoCallback`.
+
+## Local development
+
+```bash
+docker compose up -d --build
+# Open http://localhost:4001/api/auth/dev-login → sets a fake member session
+# and lands on /. dev-login returns 403 when NODE_ENV=production.
+```

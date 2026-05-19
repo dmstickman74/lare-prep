@@ -20,6 +20,16 @@ services:
       HOST: 0.0.0.0
       PORT: 4001
       STATIC_ROOT: /app/public
+      NODE_ENV: ${NODE_ENV:-production}
+      APP_URL: ${APP_URL:?set APP_URL in .env, e.g. https://lareprep.aslalabs.org}
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env (48+ random chars, openssl rand -base64 36)}
+      IMPEXIUM_APP_NAME: ${IMPEXIUM_APP_NAME:?set IMPEXIUM_APP_NAME in .env}
+      IMPEXIUM_APP_KEY: ${IMPEXIUM_APP_KEY:?set IMPEXIUM_APP_KEY in .env}
+      IMPEXIUM_APP_ID: ${IMPEXIUM_APP_ID:?set IMPEXIUM_APP_ID in .env}
+      IMPEXIUM_APP_PASSWORD: ${IMPEXIUM_APP_PASSWORD:?set IMPEXIUM_APP_PASSWORD in .env}
+      IMPEXIUM_APP_USER_EMAIL: ${IMPEXIUM_APP_USER_EMAIL:?set IMPEXIUM_APP_USER_EMAIL in .env}
+      IMPEXIUM_APP_USER_PASSWORD: ${IMPEXIUM_APP_USER_PASSWORD:?set IMPEXIUM_APP_USER_PASSWORD in .env}
+      IMPEXIUM_CLIENT_URL: ${IMPEXIUM_CLIENT_URL:?set IMPEXIUM_CLIENT_URL in .env, e.g. https://my.asla.org}
     depends_on:
       postgres:
         condition: service_healthy
