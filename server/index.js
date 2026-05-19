@@ -1,10 +1,36 @@
 import http from 'node:http';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import pg from 'pg';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PORT = parseInt(process.env.PORT || '4001', 10);
 const HOST = process.env.HOST || '127.0.0.1';
+const STATIC_ROOT = process.env.STATIC_ROOT
+  ? path.resolve(process.env.STATIC_ROOT)
+  : null;
 const MAX_BODY_BYTES = 256 * 1024;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const MIME = {
+  '.html': 'text/html; charset=utf-8',
+  '.css':  'text/css; charset=utf-8',
+  '.js':   'application/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg':  'image/svg+xml',
+  '.png':  'image/png',
+  '.jpg':  'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.ico':  'image/x-icon',
+  '.woff': 'font/woff',
+  '.woff2':'font/woff2',
+  '.ttf':  'font/ttf',
+  '.txt':  'text/plain; charset=utf-8',
+  '.xml':  'application/xml; charset=utf-8',
+};
 
 const pool = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -80,6 +106,39 @@ async function deleteProgress(req, res, deviceId) {
   send(res, 204, null);
 }
 
+async function serveStatic(req, res) {
+  if (!STATIC_ROOT) return false;
+  if (req.method !== 'GET' && req.method !== 'HEAD') return false;
+
+  /* Strip query string, normalize, and resolve under STATIC_ROOT to defeat traversal */
+  const urlPath = decodeURIComponent((req.url.split('?')[0] || '/'));
+  let rel = urlPath === '/' ? 'index.html' : urlPath.replace(/^\/+/, '');
+  const resolved = path.resolve(STATIC_ROOT, rel);
+  if (!resolved.startsWith(STATIC_ROOT + path.sep) && resolved !== STATIC_ROOT) {
+    return false;
+  }
+
+  let stat;
+  try {
+    stat = await fs.stat(resolved);
+  } catch {
+    return false;
+  }
+  if (stat.isDirectory()) return false;
+
+  const ext = path.extname(resolved).toLowerCase();
+  const type = MIME[ext] || 'application/octet-stream';
+  const body = await fs.readFile(resolved);
+  const isHashed = /\/(assets|fonts|css|js)\//.test(urlPath) && ext !== '.html';
+  res.writeHead(200, {
+    'Content-Type': type,
+    'Content-Length': body.length,
+    'Cache-Control': isHashed ? 'public, max-age=604800' : 'no-cache',
+  });
+  res.end(req.method === 'HEAD' ? '' : body);
+  return true;
+}
+
 const server = http.createServer(async (req, res) => {
   try {
     if (req.url === '/healthz') {
@@ -87,7 +146,10 @@ const server = http.createServer(async (req, res) => {
       return send(res, 200, { ok: true });
     }
 
-    if (req.url !== '/api/progress' && req.url !== '/progress') {
+    const pathOnly = (req.url || '/').split('?')[0];
+
+    if (pathOnly !== '/api/progress' && pathOnly !== '/progress') {
+      if (await serveStatic(req, res)) return;
       return send(res, 404, { error: 'not found' });
     }
 

@@ -1,0 +1,59 @@
+# lareprep stack: API container (serves /api/* + static) + dedicated Postgres.
+# Host Caddy on the portainer-proxy_proxy network reverse-proxies to
+# lareprep-api:4001.
+#
+# IMPORTANT (per VM convention): always reference Postgres by container_name
+# (lareprep-postgres). Do NOT use the service name "postgres" in DATABASE_URL —
+# the shared portainer-proxy_proxy network has another stack's Postgres aliased
+# as bare "postgres" and Docker DNS will silently send you there.
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: lareprep-api:latest
+    container_name: lareprep-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://lareprep:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}@lareprep-postgres:5432/lareprep
+      HOST: 0.0.0.0
+      PORT: 4001
+      STATIC_ROOT: /app/public
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - internal
+      - proxy
+
+  postgres:
+    image: postgres:18-alpine
+    container_name: lareprep-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: lareprep
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: lareprep
+    volumes:
+      # Postgres 18+ wants the whole /var/lib/postgresql tree, not just /data,
+      # so it can put data under a version-named subdir for future pg_upgrade.
+      - lareprep-pgdata:/var/lib/postgresql
+      # Applied only on first-run when the data dir is empty
+      - ./server/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lareprep -d lareprep"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+volumes:
+  lareprep-pgdata:
+
+networks:
+  internal:
+  proxy:
+    name: portainer-proxy_proxy
+    external: true
