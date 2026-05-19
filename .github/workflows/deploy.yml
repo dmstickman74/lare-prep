@@ -1,0 +1,70 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Don't run two deploys in parallel — queue them so the second waits.
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - name: Install api deps
+        working-directory: server
+        run: npm ci
+
+      - name: Syntax-check JS
+        run: |
+          set -e
+          for f in server/index.js server/migrate.js server/auth/*.js; do
+            echo "--- $f"
+            node --check "$f"
+          done
+          echo "--- js/app.js"
+          node --check js/app.js
+
+      - name: Docker build smoke
+        run: docker build -t lareprep-api:gate .
+
+  deploy:
+    needs: gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p "$DEPLOY_PORT" "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          set -euo pipefail
+          ssh -p "$DEPLOY_PORT" -i ~/.ssh/id_ed25519 \
+              -o StrictHostKeyChecking=yes \
+              "$DEPLOY_USER@$DEPLOY_HOST" \
+              'bash -s' < deploy/deploy.sh

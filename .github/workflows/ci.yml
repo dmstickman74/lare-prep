@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches-ignore: [main]
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - name: Install api deps
+        working-directory: server
+        run: npm ci
+
+      - name: Syntax-check JS
+        run: |
+          set -e
+          for f in server/index.js server/migrate.js server/auth/*.js; do
+            echo "--- $f"
+            node --check "$f"
+          done
+          echo "--- js/app.js"
+          node --check js/app.js
+
+      - name: Docker build smoke
+        run: docker build -t lareprep-api:ci .

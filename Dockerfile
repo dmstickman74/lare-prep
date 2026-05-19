@@ -19,8 +19,9 @@ ENV NODE_ENV=production \
 USER node
 
 COPY --chown=node:node --from=deps /app/node_modules ./node_modules
-COPY --chown=node:node server/index.js server/migrate.js server/schema.sql server/package.json ./
+COPY --chown=node:node server/index.js server/migrate.js server/package.json ./
 COPY --chown=node:node server/auth ./auth
+COPY --chown=node:node server/migrations ./migrations
 COPY --chown=node:node index.html ./public/index.html
 COPY --chown=node:node login.html ./public/login.html
 COPY --chown=node:node robots.txt ./public/robots.txt
