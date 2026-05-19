@@ -96,7 +96,11 @@
   <script>
     (function () {
       const params = new URLSearchParams(location.search);
-      const redirect = params.get('redirect') || '/';
+      /* Only accept same-origin redirects expressed as an absolute path.
+         Rejects http://evil, //evil, javascript:, etc. Server also validates,
+         but client-side check prevents phishing-grade visual confusion. */
+      const raw = params.get('redirect') || '/';
+      const redirect = /^\/(?!\/)/.test(raw) ? raw : '/';
       const errorMap = {
         missing_token:   'Sign-in was missing a token. Please try again.',
         invalid_token:   'Your sign-in link was invalid or has expired. Please try again.',

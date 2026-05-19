@@ -1,4 +1,4 @@
-import { signToken, verifyToken, refreshToken, isInactivityTimeout } from './jwt.js';
+import { signToken, verifyToken, refreshToken, isInactivityTimeout, isAbsoluteTimeout } from './jwt.js';
 
 export const SESSION_COOKIE_NAME = 'asla_lareprep_session';
 
@@ -73,6 +73,7 @@ export async function getSession(req) {
   const payload = await verifyToken(token);
   if (!payload) return null;
   if (isInactivityTimeout(payload)) return null;
+  if (isAbsoluteTimeout(payload)) return null;
   return payload;
 }
 

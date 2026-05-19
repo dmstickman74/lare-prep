@@ -55,8 +55,11 @@ function determineAccessLevel(profile) {
   return hasActive ? 'member' : 'public';
 }
 
-function transformToSessionUser(profile, ssoToken) {
+function transformToSessionUser(profile) {
   const primary = (profile.memberships || [])[0];
+  /* impexiumSsoToken intentionally NOT included — we don't make Impexium
+     writes from this app, and JWTs are base64 (not encrypted), so anyone
+     who can read the cookie value would see a live Impexium SSO token. */
   return {
     customerId: profile.id,
     recordNumber: profile.recordNumber,
@@ -65,7 +68,6 @@ function transformToSessionUser(profile, ssoToken) {
     lastName: profile.lastName,
     accessLevel: determineAccessLevel(profile),
     membershipType: primary?.membershipType,
-    impexiumSsoToken: ssoToken,
   };
 }
 
@@ -199,7 +201,7 @@ class ImpexiumClient {
     const profile = await this.findBySsoToken(ssoToken);
     if (profile.id !== userId) throw new ImpexiumAuthError('user id mismatch');
     if (!profile.user?.isApproved) throw new ImpexiumAuthError('account not approved');
-    const sessionUser = transformToSessionUser(profile, ssoToken);
+    const sessionUser = transformToSessionUser(profile);
     if (sessionUser.accessLevel === 'public') {
       throw new ImpexiumAuthError('no active membership');
     }

@@ -21,6 +21,7 @@ services:
       PORT: 4001
       STATIC_ROOT: /app/public
       NODE_ENV: ${NODE_ENV:-production}
+      DEV_LOGIN_ENABLED: ${DEV_LOGIN_ENABLED:-false}
       APP_URL: ${APP_URL:?set APP_URL in .env, e.g. https://lareprep.aslalabs.org}
       JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env (48+ random chars, openssl rand -base64 36)}
       IMPEXIUM_APP_NAME: ${IMPEXIUM_APP_NAME:?set IMPEXIUM_APP_NAME in .env}

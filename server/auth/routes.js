@@ -11,11 +11,15 @@ import {
 
 const SAFE_REDIRECT_DEFAULT = '/';
 
-function baseUrlFromRequest(req) {
-  if (process.env.APP_URL) return process.env.APP_URL.replace(/\/+$/, '');
-  const proto = (req.headers['x-forwarded-proto'] || 'http').toString().split(',')[0].trim();
-  const host = (req.headers['x-forwarded-host'] || req.headers.host || 'localhost').toString();
-  return `${proto}://${host}`;
+/**
+ * Canonical app origin — used for callback URL construction AND for the
+ * same-origin check in sanitizeRedirect. Must NOT come from request headers
+ * (X-Forwarded-Host can be spoofed by anything on the internal docker
+ * network), so we require APP_URL at boot.
+ */
+function appBaseUrl() {
+  if (!process.env.APP_URL) throw new Error('APP_URL is not set');
+  return process.env.APP_URL.replace(/\/+$/, '');
 }
 
 function sendRedirect(res, location, status = 302) {
@@ -47,7 +51,7 @@ function sendJson(res, status, body) {
 /** GET /api/auth/login?redirect=/some/path → bounce to Impexium hosted login */
 async function handleLogin(req, res, url) {
   try {
-    const base = baseUrlFromRequest(req);
+    const base = appBaseUrl();
     const redirect = sanitizeRedirect(url.searchParams.get('redirect'), base);
     const callback = new URL('/api/auth/callback', base);
     callback.searchParams.set('redirect', redirect);
@@ -61,7 +65,7 @@ async function handleLogin(req, res, url) {
 
 /** GET /api/auth/callback?UserId=...&sso=...&redirect=... */
 async function handleCallback(req, res, url) {
-  const base = baseUrlFromRequest(req);
+  const base = appBaseUrl();
   const userId = url.searchParams.get('UserId');
   const ssoToken = url.searchParams.get('sso') || url.searchParams.get('ssoToken') || url.searchParams.get('SSOToken');
   const redirect = sanitizeRedirect(url.searchParams.get('redirect'), base);
@@ -101,10 +105,15 @@ async function handleLogout(req, res) {
   sendRedirect(res, '/login');
 }
 
-/** GET /api/auth/dev-login — only available outside production. Fakes a session. */
+/**
+ * GET /api/auth/dev-login — fakes a session for local testing without hitting
+ * Impexium. Requires BOTH NODE_ENV != production AND DEV_LOGIN_ENABLED=true.
+ * Belt + suspenders: the route isn't even registered unless both hold, so a
+ * misconfigured NODE_ENV alone won't expose it.
+ */
 async function handleDevLogin(req, res, url) {
-  if (process.env.NODE_ENV === 'production') {
-    return sendJson(res, 403, { error: 'dev-login disabled in production' });
+  if (!devLoginEnabled()) {
+    return sendJson(res, 403, { error: 'dev-login disabled' });
   }
   const customerId = url.searchParams.get('id') || 'dev-user-1';
   const user = {
@@ -115,11 +124,14 @@ async function handleDevLogin(req, res, url) {
     lastName: 'User',
     accessLevel: 'member',
     membershipType: 'DEV',
-    impexiumSsoToken: 'dev-token',
   };
   const token = await createSession(user);
   setSessionCookie(req, res, token);
   sendRedirect(res, '/');
+}
+
+function devLoginEnabled() {
+  return process.env.NODE_ENV !== 'production' && process.env.DEV_LOGIN_ENABLED === 'true';
 }
 
 const ROUTES = {
@@ -127,8 +139,10 @@ const ROUTES = {
   '/api/auth/callback': handleCallback,
   '/api/auth/me': handleMe,
   '/api/auth/logout': handleLogout,
-  '/api/auth/dev-login': handleDevLogin,
 };
+if (devLoginEnabled()) {
+  ROUTES['/api/auth/dev-login'] = handleDevLogin;
+}
 
 /**
  * Try to handle an auth route. Returns true if handled, false otherwise so
