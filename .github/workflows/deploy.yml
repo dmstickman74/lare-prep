@@ -45,6 +45,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Bring the runner onto the ASLA Tailscale tailnet for this job. The VM's
+      # SSH port is closed to the public internet (NSG IP allowlist) but open to
+      # tagged tailnet peers. The OAuth client mints a short-lived auth key
+      # tagged tag:ci; ACLs let tag:ci reach tag:vm-asla (the VM).
+      - name: Join Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+          version: latest
+
       - name: Set up SSH
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
@@ -55,7 +67,9 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -p "$DEPLOY_PORT" "$DEPLOY_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          # DEPLOY_HOST is the tailnet MagicDNS name (e.g. nan01). Tailscale's
+          # daemon resolves it to a 100.x.x.x address reachable over the tailnet.
+          ssh-keyscan -p "$DEPLOY_PORT" "$DEPLOY_HOST" >> ~/.ssh/known_hosts
 
       - name: Deploy
         env:
