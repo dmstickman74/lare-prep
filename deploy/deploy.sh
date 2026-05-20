@@ -5,11 +5,16 @@
 # Assumes:
 #   * /opt/lareprep is a git clone owned by the deploy user
 #   * /opt/lareprep/.env exists with all required values
-#   * /etc/sudoers.d/lareprep-deploy grants NOPASSWD docker compose on this path
+#   * /etc/sudoers.d/lareprep-deploy grants NOPASSWD docker compose
+#     scoped to the explicit path used in COMPOSE below.
 
 set -euo pipefail
 
 APP=/opt/lareprep
+# Scoped sudoers entry requires the explicit -f path. Don't drop the flag
+# or sudo will prompt for a password and fail (no TTY).
+COMPOSE="sudo docker compose -f ${APP}/docker-compose.yml"
+
 cd "$APP"
 
 echo "==> [$(date -Iseconds)] updating source"
@@ -24,19 +29,19 @@ git reset --hard "$NEW"
 echo "    $OLD → $NEW"
 
 echo "==> building image"
-sudo docker compose build api
+$COMPOSE build api
 
 echo "==> ensuring postgres is up"
-sudo docker compose up -d postgres
+$COMPOSE up -d postgres
 
 echo "==> running migrations"
-sudo docker compose run --rm api node migrate.js
+$COMPOSE run --rm api node migrate.js
 
 echo "==> bringing up app"
-sudo docker compose up -d
+$COMPOSE up -d
 
 echo "==> pruning dangling images"
 sudo docker image prune -f
 
 echo "==> done"
-sudo docker compose ps
+$COMPOSE ps
